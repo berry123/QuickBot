@@ -17,15 +17,15 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
   6 .debug_abbrev 00000187  00000000  00000000  00004978  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   000001c9  00000000  00000000  00004aff  2**0
+  7 .debug_line   000001cc  00000000  00000000  00004aff  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_frame  000001e0  00000000  00000000  00004cc8  2**2
+  8 .debug_frame  000001e0  00000000  00000000  00004ccc  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    00000568  00000000  00000000  00004ea8  2**0
+  9 .debug_str    00000568  00000000  00000000  00004eac  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    000005d0  00000000  00000000  00005410  2**0
+ 10 .debug_loc    000005d0  00000000  00000000  00005414  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 00000028  00000000  00000000  000059e0  2**0
+ 11 .debug_ranges 00000028  00000000  00000000  000059e4  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -4453,11 +4453,11 @@ Disassembly of section .text:
     2a06:	08 95       	ret
 
 00002a08 <moveSquare>:
-			LCD_clear();
-		}
+		// Keeps running.
     }
 }
 
+// This function makes the robot move in a square path.
 void moveSquare(void){
     2a08:	5f 92       	push	r5
     2a0a:	6f 92       	push	r6
@@ -4474,12 +4474,15 @@ void moveSquare(void){
     2a20:	1f 93       	push	r17
     2a22:	cf 93       	push	r28
     2a24:	df 93       	push	r29
-	unsigned char i;
+	
+	// Performs the same error detection procedure for the Stepper subsystem as it was performed with ATTINY.
 	SUBSYS_OPENSTAT openStepper;
 	
+	// Stepper subsystem is opened.
 	openStepper = STEPPER_open();
     2a26:	0e 94 25 06 	call	0xc4a	; 0xc4a <STEPPER_open>
 	
+	// Displays an error message if the returned value for the opened stepper subsystem is unexpected.
 	if (openStepper.state != SUBSYS_OPEN){
     2a2a:	91 30       	cpi	r25, 0x01	; 1
     2a2c:	09 f4       	brne	.+2      	; 0x2a30 <moveSquare+0x28>
@@ -4493,9 +4496,10 @@ void moveSquare(void){
     2a3c:	0f 90       	pop	r0
     2a3e:	0f 90       	pop	r0
     2a40:	3b c0       	rjmp	.+118    	; 0x2ab8 <moveSquare+0xb0>
-	}
 	
-	for (i=0;i<4;i++){ // Runs the same routine twice in order to make the robot move in a square fashion.
+	// The for loop in this case is used to make the robot move straight and turn right 90 degrees 4 times.
+	for (i=0;i<4;i++){
+		
 		// Moving both wheels forward.
 		STEPPER_move_stwt(STEPPER_BOTH,
     2a42:	1f 92       	push	r1
@@ -4528,7 +4532,7 @@ void moveSquare(void){
 			STEPPER_FWD, 570, 200, 400, STEPPER_BRK_OFF,	//Left wheel
 			STEPPER_FWD, 570, 200, 400, STEPPER_BRK_OFF);	//Right wheel
 		
-		// Turning robot to the right.
+		// Turning robot to the right 90 degrees.
 		STEPPER_move_stwt(STEPPER_BOTH,
     2a7a:	1f 92       	push	r1
     2a7c:	1f 92       	push	r1
@@ -4547,12 +4551,12 @@ void moveSquare(void){
     2a96:	80 e0       	ldi	r24, 0x00	; 0
     2a98:	0e 94 7e 05 	call	0xafc	; 0xafc <STEPPER_move>
     2a9c:	da 94       	dec	r13
-	
 	if (openStepper.state != SUBSYS_OPEN){
 		LCD_printf("\nError when opening STEPPER subsystem!");
 	}
 	
-	for (i=0;i<4;i++){ // Runs the same routine twice in order to make the robot move in a square fashion.
+	// The for loop in this case is used to make the robot move straight and turn right 90 degrees 4 times.
+	for (i=0;i<4;i++){
     2a9e:	8d b7       	in	r24, 0x3d	; 61
     2aa0:	9e b7       	in	r25, 0x3e	; 62
     2aa2:	42 96       	adiw	r24, 0x12	; 18
@@ -4563,27 +4567,27 @@ void moveSquare(void){
     2aac:	8d bf       	out	0x3d, r24	; 61
     2aae:	d1 10       	cpse	r13, r1
     2ab0:	c8 cf       	rjmp	.-112    	; 0x2a42 <moveSquare+0x3a>
-		STEPPER_move_stwt(STEPPER_BOTH,
 			STEPPER_FWD, 120, 200, 400, STEPPER_BRK_OFF,	//Left wheel
 			STEPPER_REV, 120, 200, 400, STEPPER_BRK_OFF);	//Right wheel
 	}
 	
+	// The stepper subsystem is closed when not used anymore.
 	STEPPER_close();
     2ab2:	0e 94 b3 04 	call	0x966	; 0x966 <STEPPER_close>
     2ab6:	16 c0       	rjmp	.+44     	; 0x2ae4 <moveSquare+0xdc>
-			LCD_clear();
-		}
+		// Keeps running.
     }
 }
 
+// This function makes the robot move in a square path.
 void moveSquare(void){
     2ab8:	68 94       	set
     2aba:	dd 24       	eor	r13, r13
     2abc:	d2 f8       	bld	r13, 2
-		LCD_printf("\nError when opening STEPPER subsystem!");
-	}
 	
-	for (i=0;i<4;i++){ // Runs the same routine twice in order to make the robot move in a square fashion.
+	// The for loop in this case is used to make the robot move straight and turn right 90 degrees 4 times.
+	for (i=0;i<4;i++){
+		
 		// Moving both wheels forward.
 		STEPPER_move_stwt(STEPPER_BOTH,
     2abe:	d1 e0       	ldi	r29, 0x01	; 1
@@ -4603,17 +4607,17 @@ void moveSquare(void){
 			STEPPER_FWD, 570, 200, 400, STEPPER_BRK_OFF,	//Left wheel
 			STEPPER_FWD, 570, 200, 400, STEPPER_BRK_OFF);	//Right wheel
 		
-		// Turning robot to the right.
+		// Turning robot to the right 90 degrees.
 		STEPPER_move_stwt(STEPPER_BOTH,
     2ada:	0f 2e       	mov	r0, r31
     2adc:	f8 e7       	ldi	r31, 0x78	; 120
     2ade:	6f 2e       	mov	r6, r31
     2ae0:	f0 2d       	mov	r31, r0
     2ae2:	af cf       	rjmp	.-162    	; 0x2a42 <moveSquare+0x3a>
-			STEPPER_FWD, 120, 200, 400, STEPPER_BRK_OFF,	//Left wheel
 			STEPPER_REV, 120, 200, 400, STEPPER_BRK_OFF);	//Right wheel
 	}
 	
+	// The stepper subsystem is closed when not used anymore.
 	STEPPER_close();
 }
     2ae4:	df 91       	pop	r29
@@ -4635,6 +4639,7 @@ void moveSquare(void){
 
 00002b04 <moveCircle>:
 
+// This function makes the robot move in a square path.
 void moveCircle(void){
     2b04:	8f 92       	push	r8
     2b06:	af 92       	push	r10
@@ -4644,11 +4649,15 @@ void moveCircle(void){
     2b0e:	ff 92       	push	r15
     2b10:	0f 93       	push	r16
     2b12:	1f 93       	push	r17
+	
+	// Performs the same error detection procedure for the Stepper subsystem as it was performed with ATTINY.
 	SUBSYS_OPENSTAT openStepper;
 	
+	// Stepper subsystem is opened.
 	openStepper = STEPPER_open();
     2b14:	0e 94 25 06 	call	0xc4a	; 0xc4a <STEPPER_open>
 	
+	// Displays an error message if the returned value for the opened stepper subsystem is unexpected.
 	if (openStepper.state != SUBSYS_OPEN){
     2b18:	91 30       	cpi	r25, 0x01	; 1
     2b1a:	41 f0       	breq	.+16     	; 0x2b2c <moveCircle+0x28>
@@ -4662,6 +4671,7 @@ void moveCircle(void){
     2b2a:	0f 90       	pop	r0
 	}
 	
+	// Robot performs the circular CW path.
 	STEPPER_move_stwt(STEPPER_BOTH,
     2b2c:	1f 92       	push	r1
     2b2e:	1f 92       	push	r1
@@ -4698,6 +4708,7 @@ void moveCircle(void){
 		STEPPER_FWD, 2050, 205, 400, STEPPER_BRK_OFF,		//Left wheel
 		STEPPER_FWD, 1100, 110, 400, STEPPER_BRK_OFF);	//Right wheel
 	
+	// The stepper subsystem is closed when not used anymore.
 	STEPPER_close();
     2b6e:	0e 94 b3 04 	call	0x966	; 0x966 <STEPPER_close>
     2b72:	8d b7       	in	r24, 0x3d	; 61
@@ -4721,6 +4732,7 @@ void moveCircle(void){
 
 00002b94 <moveEight>:
 
+// This function makes the robot move in an eight-shaped path.
 void moveEight(void){
     2b94:	8f 92       	push	r8
     2b96:	af 92       	push	r10
@@ -4732,11 +4744,15 @@ void moveEight(void){
     2ba2:	1f 93       	push	r17
     2ba4:	cf 93       	push	r28
     2ba6:	df 93       	push	r29
+	
+	// Performs the same error detection procedure for the Stepper subsystem as it was performed with ATTINY.
 	SUBSYS_OPENSTAT openStepper;
 	
+	// Stepper subsystem is opened.
 	openStepper = STEPPER_open();
     2ba8:	0e 94 25 06 	call	0xc4a	; 0xc4a <STEPPER_open>
 	
+	// Displays an error message if the returned value for the opened stepper subsystem is unexpected.
 	if (openStepper.state != SUBSYS_OPEN){
     2bac:	91 30       	cpi	r25, 0x01	; 1
     2bae:	41 f0       	breq	.+16     	; 0x2bc0 <moveEight+0x2c>
@@ -4750,6 +4766,7 @@ void moveEight(void){
     2bbe:	0f 90       	pop	r0
 	}
 	
+	// Robot performs the circular CW path.
 	STEPPER_move_stwt(STEPPER_BOTH,
     2bc0:	1f 92       	push	r1
     2bc2:	1f 92       	push	r1
@@ -4786,11 +4803,13 @@ void moveEight(void){
 		STEPPER_FWD, 2050, 205, 400, STEPPER_BRK_OFF,		//Left wheel
 		STEPPER_FWD, 1100, 110, 400, STEPPER_BRK_OFF);	//Right wheel
 		
+	// The delay here is used to let the robot lose its momentum. - 2 seconds delay or 2000ms.
 	TMRSRVC_delay(2000);
     2c02:	80 ed       	ldi	r24, 0xD0	; 208
     2c04:	97 e0       	ldi	r25, 0x07	; 7
     2c06:	0e 94 07 09 	call	0x120e	; 0x120e <TMRSRVC_delay>
 	
+	// Robot performs the circular CCW path.
 	STEPPER_move_stwt(STEPPER_BOTH,
     2c0a:	1f 92       	push	r1
     2c0c:	1f 92       	push	r1
@@ -4815,6 +4834,7 @@ void moveEight(void){
 		STEPPER_FWD, 1100, 110, 400, STEPPER_BRK_OFF,		//Left wheel
 		STEPPER_FWD, 2050, 205, 400, STEPPER_BRK_OFF);	//Right wheel
 		
+	// The stepper subsystem is closed when not used anymore.
 	STEPPER_close();
     2c34:	0e 94 b3 04 	call	0x966	; 0x966 <STEPPER_close>
     2c38:	8d b7       	in	r24, 0x3d	; 61
@@ -4838,13 +4858,15 @@ void moveEight(void){
     2c5c:	08 95       	ret
 
 00002c5e <CBOT_main>:
-void moveEight(void);
 
+// Main function
 void CBOT_main(void)
 {
-	//unsigned char flag = 0;
-	LCD_open(); // Opening LCD Subsystem management.
+	// Opening LCD subsystem management.
+	LCD_open();
     2c5e:	0e 94 76 03 	call	0x6ec	; 0x6ec <LCD_open>
+	
+	// This information is printed on the LCD display in case this initial setup takes longer.
 	LCD_printf("Setting up...");
     2c62:	89 e4       	ldi	r24, 0x49	; 73
     2c64:	91 e0       	ldi	r25, 0x01	; 1
@@ -4852,18 +4874,22 @@ void CBOT_main(void)
     2c68:	8f 93       	push	r24
     2c6a:	0e 94 31 20 	call	0x4062	; 0x4062 <printf>
 	
-	SUBSYS_OPENSTAT openTiny; // Here you can add multiple variables as you open subsystems.
+	// Subsystem open state variable information.
+	SUBSYS_OPENSTAT openTiny;
 	
+	// Opening ATTINY subsystem management and storing returning value in openTiny that is associated to the struct SUBSYS_OPENSTAT_TYPE.
 	openTiny = ATTINY_open();
     2c6e:	0e 94 b8 08 	call	0x1170	; 0x1170 <ATTINY_open>
 	
-	if (openTiny.state != SUBSYS_OPEN){ // state comes from the struct SUBSYS_OPENSTAT_TYPE
+	// If the state struct from openTiny is different from the expected value, an error occurs.
+	if (openTiny.state != SUBSYS_OPEN){
     2c72:	0f 90       	pop	r0
     2c74:	0f 90       	pop	r0
     2c76:	91 30       	cpi	r25, 0x01	; 1
     2c78:	51 f0       	breq	.+20     	; 0x2c8e <CBOT_main+0x30>
 		LCD_clear();
     2c7a:	0e 94 59 03 	call	0x6b2	; 0x6b2 <LCD_clear>
+		// The error is then displayed.
 		LCD_printf("Error when opening ATTINY!");
     2c7e:	87 e5       	ldi	r24, 0x57	; 87
     2c80:	91 e0       	ldi	r25, 0x01	; 1
@@ -4873,6 +4899,8 @@ void CBOT_main(void)
     2c8a:	0f 90       	pop	r0
     2c8c:	0f 90       	pop	r0
 	}
+	
+	// After the initial setup, a "Ready!" message is displayed on the second line of the LCD display.
 	LCD_printf("\nReady!");
     2c8e:	82 e7       	ldi	r24, 0x72	; 114
     2c90:	91 e0       	ldi	r25, 0x01	; 1
@@ -4881,9 +4909,9 @@ void CBOT_main(void)
     2c96:	0e 94 31 20 	call	0x4062	; 0x4062 <printf>
     2c9a:	0f 90       	pop	r0
     2c9c:	0f 90       	pop	r0
-			moveCircle();
 			LCD_clear();
 		}
+		// If the S5 button is pressed "Eight path." is displayed and the robot performs the action.
 		else if (ATTINY_get_SW_state(ATTINY_SW5)){
 			LCD_clear();
 			LCD_printf("Eight path.");
@@ -4893,27 +4921,27 @@ void CBOT_main(void)
     2ca4:	f1 e0       	ldi	r31, 0x01	; 1
     2ca6:	ff 2e       	mov	r15, r31
     2ca8:	f0 2d       	mov	r31, r0
-			moveSquare();
 			LCD_clear();
 		}
+		// If the S4 button is pressed "Circle path." is displayed and the robot performs the action.
 		else if (ATTINY_get_SW_state(ATTINY_SW4)){
 			LCD_clear();
 			LCD_printf("Circle path.");
     2caa:	07 e8       	ldi	r16, 0x87	; 135
     2cac:	11 e0       	ldi	r17, 0x01	; 1
-		
-		LCD_printf("SW3 - Square path.\nSW4 - Circle path.\nSW5 - Eight path.");*/
-        
+    while(1)
+    {
+		// If the S3 button is pressed "Square path." is displayed and the robot performs the action.
 		if (ATTINY_get_SW_state(ATTINY_SW3)){
 			LCD_clear();
 			LCD_printf("Square path.");
     2cae:	ca e7       	ldi	r28, 0x7A	; 122
     2cb0:	d1 e0       	ldi	r29, 0x01	; 1
-			flag = 1;
-		}
-		
-		LCD_printf("SW3 - Square path.\nSW4 - Circle path.\nSW5 - Eight path.");*/
-        
+	
+	// While loop that keeps the microcontroller running begins here:
+    while(1)
+    {
+		// If the S3 button is pressed "Square path." is displayed and the robot performs the action.
 		if (ATTINY_get_SW_state(ATTINY_SW3)){
     2cb2:	80 e0       	ldi	r24, 0x00	; 0
     2cb4:	0e 94 6a 08 	call	0x10d4	; 0x10d4 <ATTINY_get_SW_state>
@@ -4933,6 +4961,7 @@ void CBOT_main(void)
     2cd2:	0f 90       	pop	r0
     2cd4:	ee cf       	rjmp	.-36     	; 0x2cb2 <CBOT_main+0x54>
 		}
+		// If the S4 button is pressed "Circle path." is displayed and the robot performs the action.
 		else if (ATTINY_get_SW_state(ATTINY_SW4)){
     2cd6:	81 e0       	ldi	r24, 0x01	; 1
     2cd8:	0e 94 6a 08 	call	0x10d4	; 0x10d4 <ATTINY_get_SW_state>
@@ -4952,6 +4981,7 @@ void CBOT_main(void)
     2cf6:	0f 90       	pop	r0
     2cf8:	dc cf       	rjmp	.-72     	; 0x2cb2 <CBOT_main+0x54>
 		}
+		// If the S5 button is pressed "Eight path." is displayed and the robot performs the action.
 		else if (ATTINY_get_SW_state(ATTINY_SW5)){
     2cfa:	82 e0       	ldi	r24, 0x02	; 2
     2cfc:	0e 94 6a 08 	call	0x10d4	; 0x10d4 <ATTINY_get_SW_state>
