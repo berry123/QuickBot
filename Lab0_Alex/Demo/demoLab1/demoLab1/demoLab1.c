@@ -93,8 +93,8 @@ void moveSquare(void){
 		
 		// Turning robot to the right 90 degrees.
 		STEPPER_move_stwt(STEPPER_BOTH,
-			STEPPER_FWD, 120, 200, 400, STEPPER_BRK_OFF,	//Left wheel
-			STEPPER_REV, 120, 200, 400, STEPPER_BRK_OFF);	//Right wheel
+			STEPPER_REV, 120, 200, 400, STEPPER_BRK_OFF,	//Left wheel
+			STEPPER_FWD, 120, 200, 400, STEPPER_BRK_OFF);	//Right wheel
 	}
 	
 	// The stepper subsystem is closed when not used anymore.
