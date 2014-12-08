@@ -4523,14 +4523,14 @@ void moveSquare(void){
     2a66:	f0 2d       	mov	r31, r0
     2a68:	08 ec       	ldi	r16, 0xC8	; 200
     2a6a:	10 e0       	ldi	r17, 0x00	; 0
-    2a6c:	2a e3       	ldi	r18, 0x3A	; 58
+    2a6c:	2c e2       	ldi	r18, 0x2C	; 44
     2a6e:	32 e0       	ldi	r19, 0x02	; 2
     2a70:	40 e0       	ldi	r20, 0x00	; 0
     2a72:	6c 2f       	mov	r22, r28
     2a74:	80 e0       	ldi	r24, 0x00	; 0
     2a76:	0e 94 7e 05 	call	0xafc	; 0xafc <STEPPER_move>
-			STEPPER_FWD, 570, 200, 400, STEPPER_BRK_OFF,	//Left wheel
-			STEPPER_FWD, 570, 200, 400, STEPPER_BRK_OFF);	//Right wheel
+			STEPPER_FWD, 570*0.9770, 200, 400, STEPPER_BRK_OFF,	//Left wheel
+			STEPPER_FWD, 570*0.9770, 200, 400, STEPPER_BRK_OFF);	//Right wheel
 		
 		// Turning robot to the right 90 degrees.
 		STEPPER_move_stwt(STEPPER_BOTH,
@@ -4543,7 +4543,7 @@ void moveSquare(void){
     2a86:	9f 92       	push	r9
     2a88:	1f 92       	push	r1
     2a8a:	6f 92       	push	r6
-    2a8c:	28 e7       	ldi	r18, 0x78	; 120
+    2a8c:	26 e7       	ldi	r18, 0x76	; 118
     2a8e:	30 e0       	ldi	r19, 0x00	; 0
     2a90:	4d 2f       	mov	r20, r29
     2a92:	6c 2f       	mov	r22, r28
@@ -4566,8 +4566,8 @@ void moveSquare(void){
     2aaa:	8d bf       	out	0x3d, r24	; 61
     2aac:	d1 10       	cpse	r13, r1
     2aae:	c9 cf       	rjmp	.-110    	; 0x2a42 <moveSquare+0x3a>
-			STEPPER_REV, 120, 200, 400, STEPPER_BRK_OFF,	//Left wheel
-			STEPPER_FWD, 120, 200, 400, STEPPER_BRK_OFF);	//Right wheel
+			STEPPER_REV, 120*0.9906, 200, 400, STEPPER_BRK_OFF,	//Left wheel
+			STEPPER_FWD, 120*1.0094, 200, 400, STEPPER_BRK_OFF);	//Right wheel
 	}
 	
 	// The stepper subsystem is closed when not used anymore.
@@ -4600,20 +4600,20 @@ void moveSquare(void){
     2acc:	f0 2d       	mov	r31, r0
     2ace:	c2 e0       	ldi	r28, 0x02	; 2
     2ad0:	0f 2e       	mov	r0, r31
-    2ad2:	fa e3       	ldi	r31, 0x3A	; 58
+    2ad2:	fc e2       	ldi	r31, 0x2C	; 44
     2ad4:	5f 2e       	mov	r5, r31
     2ad6:	f0 2d       	mov	r31, r0
-			STEPPER_FWD, 570, 200, 400, STEPPER_BRK_OFF,	//Left wheel
-			STEPPER_FWD, 570, 200, 400, STEPPER_BRK_OFF);	//Right wheel
+			STEPPER_FWD, 570*0.9770, 200, 400, STEPPER_BRK_OFF,	//Left wheel
+			STEPPER_FWD, 570*0.9770, 200, 400, STEPPER_BRK_OFF);	//Right wheel
 		
 		// Turning robot to the right 90 degrees.
 		STEPPER_move_stwt(STEPPER_BOTH,
     2ad8:	0f 2e       	mov	r0, r31
-    2ada:	f8 e7       	ldi	r31, 0x78	; 120
+    2ada:	f9 e7       	ldi	r31, 0x79	; 121
     2adc:	6f 2e       	mov	r6, r31
     2ade:	f0 2d       	mov	r31, r0
     2ae0:	b0 cf       	rjmp	.-160    	; 0x2a42 <moveSquare+0x3a>
-			STEPPER_FWD, 120, 200, 400, STEPPER_BRK_OFF);	//Right wheel
+			STEPPER_FWD, 120*1.0094, 200, 400, STEPPER_BRK_OFF);	//Right wheel
 	}
 	
 	// The stepper subsystem is closed when not used anymore.
