@@ -11,8 +11,12 @@ clear all
 close all
 
 %% Variables:
+<<<<<<< HEAD
 D = 30; %in inches
 B = 8.5; %in inches
+=======
+D = 3.375;
+>>>>>>> b13d6a553ab2ae20750f835388b38dceda95237d
 CWxoff = [2.5, -0.5, -2, 3, 0];
 CWyoff = [3.5, 4.5, 4, 3.5, 3.5];
 CCWxoff = [-2.5, -4.5, -4, -4.5, -4];
