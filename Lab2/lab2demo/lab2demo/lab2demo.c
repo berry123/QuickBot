@@ -9,6 +9,12 @@
 #include <math.h>
 #include "capi324v221.h"
 
+// Global variables:
+//Permanent variables:
+char xo = 0;
+char yo = 0;
+short thetao = 0;
+
 // Used function prototypes.
 void moveForward(int);
 //float distance(float, float);
@@ -20,11 +26,6 @@ void CBOT_main(void)
 {
 	// Temporary variables:
 	double dist;
-	
-	//Permanent variables:
-	xo = 0;
-	yo = 0;
-	thetao = 0;
 	
 	// Opening LCD subsystem management.
 	LCD_open();
@@ -56,7 +57,7 @@ void CBOT_main(void)
 			LCD_clear();
 			dist = atan2(4,4) * (180/M_PI); // This works!
 			LCD_printf("Robot is moving at %f.", dist);
-			//go2Point();
+			go2Point(1,1);
 			//moveForward(570);
 			//go2Angle(332);
 			
@@ -138,16 +139,29 @@ void go2Angle(short angle){
 	STEPPER_close();
 }
 
-void go2Point(char x, char y){
-	float deltax, deltay;
+void go2Point(char x, char y){ //input in foot
+	float deltax, deltay, distance, steps;
 	short theta, deltaTheta;
+
+	x = x*12;
+	y = y*12;
 	
 	deltax = x - xo;
 	deltay = y - xo;
 	theta = atan2(deltay,deltax) * (180/M_PI);
 	deltaTheta = theta - thetao;
 	
+	distance = hypot(deltax, deltay);
+	
+	steps = distance/0.108;
+	
 	go2Angle(deltaTheta);
+	TMRSRVC_delay(500);
+	moveForward(steps);
+	
+	xo = deltax;
+	yo = deltay;
+	thetao = deltaTheta;
 }
 
 /*// This function makes the robot move in a square path.
