@@ -5,13 +5,14 @@
 // December 3, 2014
 
 #include <avr/io.h>
+#include <stdio.h>
 #include <math.h>
 #include "capi324v221.h"
 
 // Used function prototypes.
 void moveForward(int);
 //float distance(float, float);
-void go2Angle(double);
+void go2Angle(short);
 void go2Point(char, char);
 
 // Main function
@@ -19,6 +20,11 @@ void CBOT_main(void)
 {
 	// Temporary variables:
 	double dist;
+	
+	//Permanent variables:
+	xo = 0;
+	yo = 0;
+	thetao = 0;
 	
 	// Opening LCD subsystem management.
 	LCD_open();
@@ -48,10 +54,12 @@ void CBOT_main(void)
 		// If the S3 button is pressed "Square path." is displayed and the robot performs the action.
 		if (ATTINY_get_SW_state(ATTINY_SW3)){
 			LCD_clear();
-			dist = atan2(4,4) * (180/pi); // This work!
+			dist = atan2(4,4) * (180/M_PI); // This works!
 			LCD_printf("Robot is moving at %f.", dist);
 			//go2Point();
 			//moveForward(570);
+			//go2Angle(332);
+			
 			LCD_clear();
 		}
 		/*// If the S4 button is pressed "Circle path." is displayed and the robot performs the action.
@@ -90,9 +98,12 @@ void moveForward(int steps){
 		STEPPER_FWD, steps, 200, 400, STEPPER_BRK_OFF);	//Right wheel
 }
 
-void go2Angle(double angle){
+void go2Angle(short angle){
 	int steps;
-	double newAngle;
+	//short newAngle;
+	
+	LCD_clear();
+	LCD_printf("%d", angle);
 	
 	// Performs the same error detection procedure for the Stepper subsystem as it was performed with ATTINY.
 	SUBSYS_OPENSTAT openStepper;
@@ -106,20 +117,37 @@ void go2Angle(double angle){
 	}
 	
 	// Calculation of steps to turn:
-	newAngle = angle * (-1);
-	steps = (4/3) * newAngle;
+	//newAngle = angle * (-1);
+	//steps = (4/3) * newAngle;
 	
 	if (angle > 0){
+		steps = angle*130/90;
 		STEPPER_move_stwt(STEPPER_BOTH,
-			STEPPER_REV, steps, 200, 400, STEPPER_BRK_OFF,	//Left wheel
-			STEPPER_FWD, steps, 200, 400, STEPPER_BRK_OFF);	//Right wheel
+			STEPPER_REV, steps, 400, 800, STEPPER_BRK_ON,	//Left wheel
+			STEPPER_FWD, steps, 400, 800, STEPPER_BRK_ON);	//Right wheel
 	}else if(angle < 0){
+		angle = angle * (-1);
+		steps = angle*130/90;
 		STEPPER_move_stwt(STEPPER_BOTH,
-			STEPPER_FWD, steps, 200, 400, STEPPER_BRK_OFF,	//Left wheel
-			STEPPER_REV, steps, 200, 400, STEPPER_BRK_OFF);	//Right wheel
+			STEPPER_FWD, steps, 400, 800, STEPPER_BRK_ON,	//Left wheel
+			STEPPER_REV, steps, 400, 800, STEPPER_BRK_ON);	//Right wheel
 	}else{
 		// does nothing
 	}
+	STEPPER_stop(STEPPER_BOTH, STEPPER_BRK_ON);
+	STEPPER_close();
+}
+
+void go2Point(char x, char y){
+	float deltax, deltay;
+	short theta, deltaTheta;
+	
+	deltax = x - xo;
+	deltay = y - xo;
+	theta = atan2(deltay,deltax) * (180/M_PI);
+	deltaTheta = theta - thetao;
+	
+	go2Angle(deltaTheta);
 }
 
 /*// This function makes the robot move in a square path.
