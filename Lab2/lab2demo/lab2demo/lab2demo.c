@@ -58,6 +58,8 @@ void CBOT_main(void)
 			dist = atan2(4,4) * (180/M_PI); // This works!
 			LCD_printf("Robot is moving at %f.", dist);
 			go2Point(1,1);
+			go2Point(1,2);
+			go2Point(2,2);
 			//moveForward(570);
 			//go2Angle(332);
 			
@@ -159,9 +161,9 @@ void go2Point(char x, char y){ //input in foot
 	TMRSRVC_delay(500);
 	moveForward(steps);
 	
-	xo = deltax;
-	yo = deltay;
-	thetao = deltaTheta;
+	xo = x;
+	yo = y;
+	thetao = theta;
 }
 
 /*// This function makes the robot move in a square path.
