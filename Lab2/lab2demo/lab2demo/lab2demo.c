@@ -59,9 +59,12 @@ void CBOT_main(void)
 	// While loop that keeps the micro controller running begins here:
     while(1)
     {
-		LCD_printf("SW3 - Angle | + ");
-		LCD_printf("SW4 - Go to Point | -");
-		LCD_printf("SW5 - Joke | Enter");
+		LCD_printf("SW3: Angle");
+		//LCD_clear();
+		LCD_printf("\nSW4: Point");
+		LCD_clear();
+		//LCD_printf("SW4 - Go to Point | -");
+		//LCD_printf("SW5 - Joke | Enter");
 		
 		// Press SW3 to select the angle function.
 		if (ATTINY_get_SW_state(ATTINY_SW3)){
@@ -69,6 +72,7 @@ void CBOT_main(void)
 			while(!ATTINY_get_SW_state(ATTINY_SW5)){
 				LCD_clear();
 				LCD_printf("Angle: %d", deg); // Displays the angle selection.
+				LCD_printf("\nSW3 + | SW4 -\nSW5 Enter");
 				// If SW3 is pressed, the angle selection is increments by 15 degrees.
 				if(ATTINY_get_SW_state(ATTINY_SW3)){
 					deg = deg + 15;
@@ -97,6 +101,7 @@ void CBOT_main(void)
 			while(!ATTINY_get_SW_state(ATTINY_SW5)){
 				LCD_clear();
 				LCD_printf("( %d , %d )", cox, coy); // Displays the angle selection.
+				LCD_printf("\nSW3 + | SW4 - \nSW5 To y");
 				// If SW3 is pressed, the coordinate x is incremented.
 				if(ATTINY_get_SW_state(ATTINY_SW3)){
 					cox++;
@@ -118,6 +123,7 @@ void CBOT_main(void)
 			while(!ATTINY_get_SW_state(ATTINY_SW5)){
 				LCD_clear();
 				LCD_printf("( %d , %d )", cox, coy);
+				LCD_printf("\nSW3 + | SW4 - \nSW5 Enter");
 				// If SW3 is pressed, the coordinate y is incremented.
 				if(ATTINY_get_SW_state(ATTINY_SW3)){
 					coy++;
