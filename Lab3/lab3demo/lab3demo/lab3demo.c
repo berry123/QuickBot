@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <math.h>
 #include "capi324v221.h"
+#include "Capek_Movements.h"
 
 // IR Channels mapped to ADC inputs
 #define IRRIGHT_CHAN ADC_CHAN3
@@ -26,6 +27,7 @@ short thetao = 0;
 
 // Used function prototypes.
 //void moveForward();
+void moveShy(char,char,char,char,char);
 //void sTurnLeft(int, int);
 //void sTurnRight(int, int);
 //void go2Angle(int);
@@ -86,10 +88,8 @@ void CBOT_main(void)
 		
 		// Press SW3 to select the angle function.
 		if (ATTINY_get_SW_state(ATTINY_SW3)){
-			aggressive();
-			//STEPPER_move_rn(STEPPER_BOTH,
-			//	STEPPER_FWD, 200, 400,	//Left
-			//	STEPPER_FWD, 200, 400);	//Right
+			//aggressive();
+			shy();
 		}
 		/*// Press SW4 to go to goal function.
 		else if (ATTINY_get_SW_state(ATTINY_SW4)){
@@ -189,7 +189,7 @@ void CBOT_main(void)
 }*/
 
 // Rotates the robot to the required functions.
-void go2Angle(int angle){
+/*void go2Angle(int angle){
 	
 	// If the angle is positive, rotate the robot in a certain angle that is converted in steps to the left.
 	if (angle > 0){
@@ -213,7 +213,7 @@ void go2Angle(int angle){
 	}else{
 		// does nothing
 	}
-}
+}*/
 
 // Guides the robot to the desired input point.
 /*void go2Point(signed char x, signed char y){ //input in feet
@@ -254,7 +254,7 @@ void go2Angle(int angle){
 }*/
 
 // Given an angle and a speed, this function makes the robot turn/spin to the left.
-void sTurnLeft(int angle, int speed){
+/*void sTurnLeft(int angle, int speed){
 	int steps;
 	
 	// Performs the same error detection procedure for the Stepper subsystem as it was performed with ATTINY.
@@ -274,10 +274,10 @@ void sTurnLeft(int angle, int speed){
 		STEPPER_FWD, steps, speed, 800, STEPPER_BRK_OFF);	//Right wheel
 		
 	//STEPPER_close();
-}
+}*/
 
 // Given an angle and a speed, this function makes the robot turn/spin to the right.
-void sTurnRight(int angle, int speed){
+/*void sTurnRight(int angle, int speed){
 	int steps;
 	
 	// Performs the same error detection procedure for the Stepper subsystem as it was performed with ATTINY.
@@ -297,7 +297,7 @@ void sTurnRight(int angle, int speed){
 		STEPPER_REV, steps, speed, 800, STEPPER_BRK_OFF);	//Right wheel
 		
 	//STEPPER_close();
-}
+}*/
 
 // getLeftIR() converts ADC voltage to inches
 float getLeftIR(){
@@ -439,63 +439,53 @@ void shy(){
 		LSS = (sensLimit < leftIR);
 
 		TS = FSS + BSS + RSS + LSS;
-		Movement_Selctor_Excecutor(FSS,BSS,RSS,LSS,TS)
-		}
 		
-<<<<<<< HEAD
-=======
+		moveShy(FSS,BSS,RSS,LSS,TS);
+	}
+}
 
-		
-	/*	if(frontIR <= sensLimit or backIR <= sensLimit or rightIR <= sensLimit or leftIR <= sensLimit){
-			TS = 1;
-		}else if((frontIR <= sensLimit and backIR <= sensLimit) or (frontIR <= sensLimit and rightIR <= sensLimit) or (frontIR <= sensLimit and leftIR <= sensLimit) or (backIR <= sensLimit and rightIR <= sens) or (backIR <= sensLimit and leftIR <= sensLimit) or (rightIR <= sensLimit and leftIR <= sensLimit)){
-			TS = 2;
+void moveShy(char FSS, char BSS, char RSS, char LSS, char TS){
+	switch(TS){
+		case 1: // If only one sensor is triggered
+		if ((FSS == 1) && (BSS == 0) && (RSS == 0) &&(LSS == 0)){
+			Backward_Move();
+			}else if ((FSS == 0) && (BSS == 1) && (RSS == 0) &&(LSS == 0)){
+			Forward_Move();
+			}else if ((FSS == 0) && (BSS == 0) && (RSS == 0) &&(LSS == 1)){
+			Soft_Forward_Right();
+			}else{
+			Soft_Forward_Left();
 		}
-		
->>>>>>> origin/master
-		switch(TS){
-			case 1: // If only one sensor is triggered
-				if ((FSS == 1) && (BSS == 0) && (RSS == 0) &&(LSS == 0)){
-					Backward_Move();
-				}else if ((FSS == 0) && (BSS == 1) && (RSS == 0) &&(LSS == 0)){
-					Forward_Move();
-				}else if ((FSS == 0) && (BSS == 0) && (RSS == 0) &&(LSS == 1)){
-					Soft_Forward_Right();
-				}else{
-					Soft_Forward_Left();
-				}
-				break;
-			case 2: // If two sensors are triggered
-				if ((FSS == 1) && (BSS == 0) && (RSS == 0) &&(LSS == 1)){
-					Soft_Backward_Right();
-				}else if ((FSS == 1) && (BSS == 0) && (RSS == 1) &&(LSS == 0)){
-					Soft_Backward_Left();
-				}else if ((FSS == 0) && (BSS == 1) && (RSS == 0) &&(LSS == 1)){
-					Soft_Forward_Right();
-				}else if ((FSS == 0) && (BSS == 1) && (RSS == 1) &&(LSS == 0)){
-					Soft_Forward_Left();
-				}else {
-					Forward_Move();
-				}
-				break;
-			case 3: // If three sensors are triggered
-				if ((FSS == 1) && (BSS == 1) && (RSS == 0) &&(LSS == 1)){
-					Hard_Right();
-				}else if ((FSS == 1) && (BSS == 1) && (RSS == 1) &&(LSS == 0)){
-					Hard_Left();
-				}else if ((FSS == 1) && (BSS == 0) && (RSS == 1) &&(LSS == 1)){
-					Backward_Move();
-				}else {
-					Forward_Move();
-				}			
-				break;
-			case 4: // If all four sensors are triggered
-				Cry();
-				break;
-			default: // If none of the sensors are triggered
-				// just stay and chill!
-				break;
+		break;
+		case 2: // If two sensors are triggered
+		if ((FSS == 1) && (BSS == 0) && (RSS == 0) &&(LSS == 1)){
+			Soft_Backward_Right();
+			}else if ((FSS == 1) && (BSS == 0) && (RSS == 1) &&(LSS == 0)){
+			Soft_Backward_Left();
+			}else if ((FSS == 0) && (BSS == 1) && (RSS == 0) &&(LSS == 1)){
+			Soft_Forward_Right();
+			}else if ((FSS == 0) && (BSS == 1) && (RSS == 1) &&(LSS == 0)){
+			Soft_Forward_Left();
+			}else {
+			Forward_Move();
 		}
-		
-	} */
+		break;
+		case 3: // If three sensors are triggered
+		if ((FSS == 1) && (BSS == 1) && (RSS == 0) &&(LSS == 1)){
+			Hard_Right();
+			}else if ((FSS == 1) && (BSS == 1) && (RSS == 1) &&(LSS == 0)){
+			Hard_Left();
+			}else if ((FSS == 1) && (BSS == 0) && (RSS == 1) &&(LSS == 1)){
+			Backward_Move();
+			}else {
+			Forward_Move();
+		}
+		break;
+		case 4: // If all four sensors are triggered
+		Cry();
+		break;
+		default: // If none of the sensors are triggered
+		// just stay and chill!
+		break;
+	}
 }
