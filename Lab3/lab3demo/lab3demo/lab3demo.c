@@ -433,6 +433,9 @@ void shy(){
 		rightIR = getRightIR();
 		leftIR = getLeftIR();
 
+		LCD_clear();
+		LCD_printf("%f, %f, %f, %f", frontIR, backIR, rightIR, leftIR);
+
 		FSS = (sensLimit > frontIR);
 		BSS = (sensLimit > backIR);
 		RSS = (sensLimit > rightIR);
