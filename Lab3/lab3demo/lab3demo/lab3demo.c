@@ -433,10 +433,10 @@ void shy(){
 		rightIR = getRightIR();
 		leftIR = getLeftIR();
 
-		FSS = (sensLimit < frontIR);
-		BSS = (sensLimit < backIR);
-		RSS = (sensLimit < rightIR);
-		LSS = (sensLimit < leftIR);
+		FSS = (sensLimit > frontIR);
+		BSS = (sensLimit > backIR);
+		RSS = (sensLimit > rightIR);
+		LSS = (sensLimit > leftIR);
 
 		TS = FSS + BSS + RSS + LSS;
 		
