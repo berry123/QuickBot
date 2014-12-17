@@ -77,3 +77,15 @@ void Soft_Backward_Left(){
 	TMRSRVC_delay(500); //5 Sec duration
 	STEPPER_stop(STEPPER_BOTH, STEPPER_BRK_OFF);
 	}
+
+void Cry(){
+	char count;
+	count = 0;
+	// Capek is confused and crys from frustration
+	while (count < 20){
+		SPKR_play_beep(250, 500, 50);//500 Hz for 250 ms
+		count++;
+		}
+	}
+	
+
