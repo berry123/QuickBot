@@ -421,14 +421,30 @@ void shy(){
 	float backIR = 0;
 	float rightIR = 0;
 	float leftIR = 0;
+	char FSS;
+	char BSS;
+	char RSS;
+	char LSS;
+	
 	
 	while(1){
 		frontIR = getFrontIR();
 		backIR = getBackIR();
 		rightIR = getRightIR();
 		leftIR = getLeftIR();
+
+		FSS = (sensLimit < frontIR);
+		BSS = (sensLimit < backIR);
+		RSS = (sensLimit < rightIR);
+		LSS = (sensLimit < leftIR);
+
+		TS = FSS + BSS + RSS + LSS;
+		Movement_Selctor_Excecutor(FSS,BSS,RSS,LSS,TS)
+		}
 		
-		if(frontIR <= sensLimit or backIR <= sensLimit or rightIR <= sensLimit or leftIR <= sensLimit){
+
+		
+	/*	if(frontIR <= sensLimit or backIR <= sensLimit or rightIR <= sensLimit or leftIR <= sensLimit){
 			TS = 1;
 		}else if((frontIR <= sensLimit and backIR <= sensLimit) or (frontIR <= sensLimit and rightIR <= sensLimit) or (frontIR <= sensLimit and leftIR <= sensLimit) or (backIR <= sensLimit and rightIR <= sens) or (backIR <= sensLimit and leftIR <= sensLimit) or (rightIR <= sensLimit and leftIR <= sensLimit)){
 			TS = 2;
@@ -478,5 +494,5 @@ void shy(){
 				break;
 		}
 		
-	}
+	} */
 }
