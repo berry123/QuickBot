@@ -35,6 +35,9 @@ void Movement_Selctor_Excecutor(signed char FSS, signed char BSS, signed char RS
 			else if ((FSS == 0) && (BSS == 1) && (RSS == 1) &&(LSS == 0)){
 				Soft_Forward_Left();
 				}
+			else if ((FSS == 1) && (BSS == 1) && (RSS == 0) &&(LSS == 0)){
+				Hard_Right();
+				}
 			else {
 				Forward_Move();
 				}
