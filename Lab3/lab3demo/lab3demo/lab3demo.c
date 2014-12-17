@@ -428,12 +428,6 @@ void shy(){
 		rightIR = getRightIR();
 		leftIR = getLeftIR();
 		
-		if(frontIR <= sensLimit or backIR <= sensLimit or rightIR <= sensLimit or leftIR <= sensLimit){
-			TS = 1;
-		}else if((frontIR <= sensLimit and backIR <= sensLimit) or (frontIR <= sensLimit and rightIR <= sensLimit) or (frontIR <= sensLimit and leftIR <= sensLimit) or (backIR <= sensLimit and rightIR <= sens) or (backIR <= sensLimit and leftIR <= sensLimit) or (rightIR <= sensLimit and leftIR <= sensLimit)){
-			TS = 2;
-		}
-		
 		switch(TS){
 			case 1: // If only one sensor is triggered
 				if ((FSS == 1) && (BSS == 0) && (RSS == 0) &&(LSS == 0)){
