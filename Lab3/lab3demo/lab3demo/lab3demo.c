@@ -25,7 +25,7 @@ char yo = 0;
 short thetao = 0;
 
 // Used function prototypes.
-void moveForward();
+//void moveForward();
 //void sTurnLeft(int, int);
 //void sTurnRight(int, int);
 //void go2Angle(int);
@@ -76,9 +76,9 @@ void CBOT_main(void)
 	// While loop that keeps the micro controller running begins here:
     while(1)
     {
-		LCD_printf("SW3: Angle");
+		LCD_printf("SW3: Kids");
 		//LCD_clear();
-		LCD_printf("\nSW4: Point");
+		LCD_printf("\nSW4: Other demos");
 		LCD_clear();
 		//LCD_printf("SW4 - Go to Point | -");
 		//LCD_printf("SW5 - Joke | Enter");
@@ -86,8 +86,11 @@ void CBOT_main(void)
 		// Press SW3 to select the angle function.
 		if (ATTINY_get_SW_state(ATTINY_SW3)){
 			aggressive();
+			//STEPPER_move_rn(STEPPER_BOTH,
+			//	STEPPER_FWD, 200, 400,	//Left
+			//	STEPPER_FWD, 200, 400);	//Right
 		}
-		// Press SW4 to go to goal function.
+		/*// Press SW4 to go to goal function.
 		else if (ATTINY_get_SW_state(ATTINY_SW4)){
 			// While SW5 is not pressed...
 			while(!ATTINY_get_SW_state(ATTINY_SW5)){
@@ -145,13 +148,13 @@ void CBOT_main(void)
 			LCD_printf("I'm useless...");
 			TMRSRVC_delay(500);
 			LCD_clear();
-		}
+		}*/
 		// Keeps running.
     }
 }
 
 // Moves the robot forward for a given number of steps.
-void moveForward(){
+/*void moveForward(){
 	// Performs the same error detection procedure for the Stepper subsystem as it was performed with ATTINY.
 	SUBSYS_OPENSTAT openStepper;
 	
@@ -163,20 +166,26 @@ void moveForward(){
 		LCD_printf("\nError when opening STEPPER subsystem!");
 	}
 	
-	STEPPER_set_mode(BOTH_STEPPERS,STEPPER_FREERUNNING);
+	//STEPPER_go(STEPPER_BOTH);
 	
-	STEPPER_set_dir(BOTH_STEPPERS, STEPPER_FWD);
+	//STEPPER_set_mode(BOTH_STEPPERS,STEPPER_FREERUNNING);
 	
-	STEPPER_set_accel(BOTH_STEPPERS,400);
+	//STEPPER_set_dir(BOTH_STEPPERS, STEPPER_FWD);
 	
-	STEPPER_set_speed(BOTH_STEPPERS,100);
+	//STEPPER_set_accel(BOTH_STEPPERS,400);
+	
+	//STEPPER_set_speed(BOTH_STEPPERS,100);
+	
+	STEPPER_move_rn(STEPPER_BOTH,
+		STEPPER_FWD, 200, 400,	//Left
+		STEPPER_FWD, 200, 400);	//Right
 	
 	// Moving both wheels forward.
 	//STEPPER_run(BOTH_STEPPERS,STEPPER_FWD,100);
 	//STEPPER_move_stwt(STEPPER_BOTH,
 	//	STEPPER_FWD, steps, speed, 400, STEPPER_BRK_OFF,	//Left wheel
 	//	STEPPER_FWD, steps, speed, 400, STEPPER_BRK_OFF);	//Right wheel
-}
+}*/
 
 // Rotates the robot to the required functions.
 /*void go2Angle(int angle){
@@ -389,11 +398,16 @@ void aggressive(){
 	
 		frontIR = getFrontIR();
 	
+		LCD_printf("%f", frontIR);
+		LCD_clear();
+	
 		if(frontIR >= 5){
-			moveForward();
+			STEPPER_move_rn(STEPPER_BOTH,
+				STEPPER_FWD, 200, 400,	//Left
+				STEPPER_FWD, 200, 400);	//Right
 			///TMRSRVC_delay(500);
 		}else{
-			STEPPER_stop(BOTH_STEPPERS, STEPPER_BRK_OFF);
+			STEPPER_stop(STEPPER_BOTH, STEPPER_BRK_OFF);
 		}
 	
 	}
