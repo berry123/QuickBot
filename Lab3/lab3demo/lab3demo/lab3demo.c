@@ -91,8 +91,8 @@ void CBOT_main(void)
 		// Press SW3 to select the angle function.
 		if (ATTINY_get_SW_state(ATTINY_SW3)){
 			//aggressive();
-			//shy();
-			Random_Wanderer();
+			shy();
+			//Random_Wanderer();
 		}
 		/*// Press SW4 to go to goal function.
 		else if (ATTINY_get_SW_state(ATTINY_SW4)){
