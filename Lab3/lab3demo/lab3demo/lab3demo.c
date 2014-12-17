@@ -31,6 +31,7 @@ short thetao = 0;
 //void go2Angle(int);
 //void go2Point(signed char, signed char);
 void aggressive();
+void shy();
 //IR functions
 float getLeftIR();
 float getRightIR();
@@ -405,10 +406,48 @@ void aggressive(){
 			STEPPER_move_rn(STEPPER_BOTH,
 				STEPPER_FWD, 200, 400,	//Left
 				STEPPER_FWD, 200, 400);	//Right
-			///TMRSRVC_delay(500);
 		}else{
 			STEPPER_stop(STEPPER_BOTH, STEPPER_BRK_OFF);
 		}
 	
+	}
+}
+
+void shy(){
+	char sensLimit = 7;
+	float frontIR = 0;
+	float backIR = 0;
+	float rightIR = 0;
+	float leftIR = 0;
+	
+	while(1){
+		frontIR = getFrontIR();
+		backIR = getBackIR();
+		rightIR = getRightIR();
+		leftIR = getLeftIR();
+		
+		if(frontIR <= sensLimit){
+			if(backIR <=){
+				if(rightIR <= sensLimit){
+					if(leftIR <= sensLimit){
+						//cry
+					}else{
+						
+					}
+				}else if (leftIR <= sensLimit){
+					
+				}else{
+					// random sharp turn
+				}
+			}else if(rightIR <= sensLimit){
+				
+			}else if(leftIR <= sensLimit){
+				
+			}else{
+				STEPPER_move_rn(STEPPER_BOTH,
+					STEPPER_FWD, 200, 400,	//Left
+					STEPPER_FWD, 200, 400);	//Right
+			}
+		}
 	}
 }
