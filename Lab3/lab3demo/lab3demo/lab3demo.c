@@ -414,7 +414,7 @@ void aggressive(){
 }
 
 void shy(){
-	char sensLimit = 7;
+	char sensLimit = 5;
 	char TS;
 	char genRand;
 	float frontIR = 0;
