@@ -1,4 +1,4 @@
-void Movement_Selctor_Excecutor(signed char FSS, signed char BSS, signed char RSS, signed char LSS, signed char TS){
+void Movement_Selector_Excecutor(signed char FSS, signed char BSS, signed char RSS, signed char LSS, signed char TS){
 /* where:
 	FSS = Forward Sensor State
 	BSS = Backward Sensor State
