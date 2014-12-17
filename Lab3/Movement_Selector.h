@@ -63,7 +63,3 @@ void Movement_Selctor_Excecutor(signed char FSS, signed char BSS, signed char RS
 			break;
 		}
 	}
-	
-
-
-
