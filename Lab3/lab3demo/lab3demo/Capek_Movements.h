@@ -79,11 +79,7 @@ void Soft_Backward_Left(){
 }
 
 void Cry(){
-	char count;
-	count = 0;
 	// Capek is confused and crys from frustration
-	while (count < 20){
-		SPKR_play_beep(250, 500, 50);//500 Hz for 250 ms
-		count++;
+	SPKR_play_beep(250, 500, 50);//500 Hz for 250 ms
 	}
 }
