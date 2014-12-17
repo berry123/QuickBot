@@ -415,6 +415,7 @@ void aggressive(){
 
 void shy(){
 	char sensLimit = 7;
+	char TS;
 	char genRand;
 	float frontIR = 0;
 	float backIR = 0;
@@ -427,10 +428,10 @@ void shy(){
 		rightIR = getRightIR();
 		leftIR = getLeftIR();
 		
-		if(frontIR >= sensLimit or backIR >= sensLimit or rightIR >= sensLimit or leftIR >= sensLimit){
+		if(frontIR <= sensLimit or backIR <= sensLimit or rightIR <= sensLimit or leftIR <= sensLimit){
 			TS = 1;
-		}else if(){
-			
+		}else if((frontIR <= sensLimit and backIR <= sensLimit) or (frontIR <= sensLimit and rightIR <= sensLimit) or (frontIR <= sensLimit and leftIR <= sensLimit) or (backIR <= sensLimit and rightIR <= sens) or (backIR <= sensLimit and leftIR <= sensLimit) or (rightIR <= sensLimit and leftIR <= sensLimit)){
+			TS = 2;
 		}
 		
 		switch(TS){
@@ -449,7 +450,7 @@ void shy(){
 				if ((FSS == 1) && (BSS == 0) && (RSS == 0) &&(LSS == 1)){
 					Soft_Backward_Right();
 				}else if ((FSS == 1) && (BSS == 0) && (RSS == 1) &&(LSS == 0)){
-					Soft_Backward_Left();;
+					Soft_Backward_Left();
 				}else if ((FSS == 0) && (BSS == 1) && (RSS == 0) &&(LSS == 1)){
 					Soft_Forward_Right();
 				}else if ((FSS == 0) && (BSS == 1) && (RSS == 1) &&(LSS == 0)){
