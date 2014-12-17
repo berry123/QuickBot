@@ -13,17 +13,29 @@
 #include <math.h>
 #include "capi324v221.h"
 
+// IR Channels mapped to ADC inputs
+#define IRRIGHT_CHAN ADC_CHAN3
+#define IRLEFT_CHAN ADC_CHAN4
+#define IRFRONT_CHAN ADC_CHAN7
+#define IRBACK_CHAN ADC_CHAN5
+
 // Global variables:
 char xo = 0;
 char yo = 0;
 short thetao = 0;
 
 // Used function prototypes.
-void moveForward(int, int);
-void sTurnLeft(int, int);
-void sTurnRight(int, int);
-void go2Angle(int);
-void go2Point(signed char, signed char);
+void moveForward();
+//void sTurnLeft(int, int);
+//void sTurnRight(int, int);
+//void go2Angle(int);
+//void go2Point(signed char, signed char);
+void aggressive();
+//IR functions
+float getLeftIR();
+float getRightIR();
+float getFrontIR();
+float getBackIR();
 
 // Main function
 void CBOT_main(void)
@@ -52,6 +64,11 @@ void CBOT_main(void)
 		LCD_printf("Error when opening ATTINY!");
 	}
 	
+	SPKR_open(SPKR_BEEP_MODE);//open the speaker in beep mode
+	ADC_open();//open the ADC module
+	ADC_set_VREF( ADC_VREF_AVCC );// Set the Voltage Reference first so VREF=5V.
+	STEPPER_open();
+	
 	// After the initial setup, a "Ready!" message is displayed on the second line of the LCD display.
 	LCD_printf("\nReady!");
 	LCD_clear();
@@ -68,7 +85,7 @@ void CBOT_main(void)
 		
 		// Press SW3 to select the angle function.
 		if (ATTINY_get_SW_state(ATTINY_SW3)){
-			moveForward(10000,200);
+			aggressive();
 		}
 		// Press SW4 to go to goal function.
 		else if (ATTINY_get_SW_state(ATTINY_SW4)){
@@ -116,7 +133,7 @@ void CBOT_main(void)
 				}
 			}
 			// Calls go to goal point function.
-			go2Point(cox,coy);
+			//go2Point(cox,coy);
 			// Clears the variables up.
 			cox = 0;
 			coy = 0;
@@ -134,7 +151,7 @@ void CBOT_main(void)
 }
 
 // Moves the robot forward for a given number of steps.
-void moveForward(int steps, int speed){
+void moveForward(){
 	// Performs the same error detection procedure for the Stepper subsystem as it was performed with ATTINY.
 	SUBSYS_OPENSTAT openStepper;
 	
@@ -146,14 +163,23 @@ void moveForward(int steps, int speed){
 		LCD_printf("\nError when opening STEPPER subsystem!");
 	}
 	
+	STEPPER_set_mode(BOTH_STEPPERS,STEPPER_FREERUNNING);
+	
+	STEPPER_set_dir(BOTH_STEPPERS, STEPPER_FWD);
+	
+	STEPPER_set_accel(BOTH_STEPPERS,400);
+	
+	STEPPER_set_speed(BOTH_STEPPERS,100);
+	
 	// Moving both wheels forward.
-	STEPPER_move_stwt(STEPPER_BOTH,
-		STEPPER_FWD, steps, speed, 400, STEPPER_BRK_OFF,	//Left wheel
-		STEPPER_FWD, steps, speed, 400, STEPPER_BRK_OFF);	//Right wheel
+	//STEPPER_run(BOTH_STEPPERS,STEPPER_FWD,100);
+	//STEPPER_move_stwt(STEPPER_BOTH,
+	//	STEPPER_FWD, steps, speed, 400, STEPPER_BRK_OFF,	//Left wheel
+	//	STEPPER_FWD, steps, speed, 400, STEPPER_BRK_OFF);	//Right wheel
 }
 
 // Rotates the robot to the required functions.
-void go2Angle(int angle){
+/*void go2Angle(int angle){
 	
 	// If the angle is positive, rotate the robot in a certain angle that is converted in steps to the left.
 	if (angle > 0){
@@ -177,10 +203,10 @@ void go2Angle(int angle){
 	}else{
 		// does nothing
 	}
-}
+}*/
 
 // Guides the robot to the desired input point.
-void go2Point(signed char x, signed char y){ //input in feet
+/*void go2Point(signed char x, signed char y){ //input in feet
 	float deltax, deltay, distance, steps;
 	int theta, deltaTheta;
 
@@ -215,10 +241,10 @@ void go2Point(signed char x, signed char y){ //input in feet
 	xo = x;
 	yo = y;
 	thetao = theta;
-}
+}*/
 
 // Given an angle and a speed, this function makes the robot turn/spin to the left.
-void sTurnLeft(int angle, int speed){
+/*void sTurnLeft(int angle, int speed){
 	int steps;
 	
 	// Performs the same error detection procedure for the Stepper subsystem as it was performed with ATTINY.
@@ -238,10 +264,10 @@ void sTurnLeft(int angle, int speed){
 		STEPPER_FWD, steps, speed, 800, STEPPER_BRK_OFF);	//Right wheel
 		
 	STEPPER_close();
-}
+}*/
 
 // Given an angle and a speed, this function makes the robot turn/spin to the right.
-void sTurnRight(int angle, int speed){
+/*void sTurnRight(int angle, int speed){
 	int steps;
 	
 	// Performs the same error detection procedure for the Stepper subsystem as it was performed with ATTINY.
@@ -261,4 +287,114 @@ void sTurnRight(int angle, int speed){
 		STEPPER_REV, steps, speed, 800, STEPPER_BRK_OFF);	//Right wheel
 		
 	STEPPER_close();
+}*/
+
+// getLeftIR() converts ADC voltage to inches
+float getLeftIR(){
+	//float voltage;//IR range -0.4 to 5.3 V
+	float distance;// (cm) 30 cm = 12 inches = 0.4 V
+	float dist;//distance in inches
+	ADC_SAMPLE adcsample;
+	// Set the Voltage Reference first so VREF=5V.
+	ADC_set_VREF( ADC_VREF_AVCC );
+	// Set the channel we will sample from.
+	ADC_set_channel( IRLEFT_CHAN );
+	// Now sample it!
+	adcsample = ADC_sample();
+	LCD_printf( "ADC: %i\n",adcsample);
+	// Convert to meaningful voltage value.
+	//voltage = adcsample * ( 5.0 / 1024 );
+	// Convert to distance in cm
+	distance = (2914/(adcsample+5.0))-1.0;
+	//Convert distance to inches
+	dist = distance*0.3937;
+	return dist;
+}
+
+// getRightIR() converts ADC voltage to inches
+float getRightIR(){
+	//float voltage;//IR range -0.4 to 5.3 V
+	float distance;// (cm) 30 cm = 12 inches = 0.4 V
+	float dist;//distance in inches
+	ADC_SAMPLE adcsample;
+	// Set the Voltage Reference first so VREF=5V.
+	ADC_set_VREF( ADC_VREF_AVCC );
+	// Set the channel we will sample from.
+	ADC_set_channel( IRRIGHT_CHAN );
+	// Now sample it!
+	adcsample = ADC_sample();
+	// Convert to meaningful voltage value.
+	//voltage = adcsample * ( 5.0 / 1024 );
+	// Convert to distance in cm
+	distance = (2914/(adcsample+5.0))-1.0;
+	//Convert distance to inches
+	dist = distance*0.3937;
+	return dist;
+}
+
+// getFrontIR() simply sets the ADC to the Front IR sensor
+// and returns the sampled voltage in inches. Short, nonblocking.
+float getFrontIR(){
+	//1 inch = 2.54 cm
+	//1 cm = 0.3937 inches
+	//float voltage;//IR range -0.4 to 5.3 V
+	float distance;// (cm) 30 cm = 12 inches = 0.4 V
+	float dist;//distance in inches
+	ADC_SAMPLE adcsample;
+	// Set the Voltage Reference first so VREF=5V.
+	ADC_set_VREF( ADC_VREF_AVCC );
+	// Set the channel we will sample from.
+	ADC_set_channel(IRFRONT_CHAN);
+	// Now sample it!
+	adcsample = ADC_sample();
+	// Convert to meaningful voltage value.
+	//voltage = adcsample * ( 5.0 / 1024 );
+	// Convert to distance in cm
+	distance = (2914/(adcsample+5.0))-1.0;
+	//Convert distance to inches
+	dist = distance*0.3937;
+	return dist;
+}
+
+// getBackIR() simply sets the ADC to the Back IR sensor
+// and returns the sampled voltage in inches. Short, nonblocking.
+float getBackIR(){
+	//1 inch = 2.54 cm
+	//1 cm = 0.3937 inches
+	//float voltage;//IR range -0.4 to 5.3 V
+	float distance;// (cm) 30 cm = 12 inches = 0.4 V
+	float dist;//distance in inches
+	ADC_SAMPLE adcsample;
+	// Set the Voltage Reference first so VREF=5V.
+	ADC_set_VREF( ADC_VREF_AVCC );
+	// Set the channel we will sample from.
+	ADC_set_channel(IRBACK_CHAN);
+	// Now sample it!
+	adcsample = ADC_sample();
+	// Convert to meaningful voltage value.
+	//voltage = adcsample * ( 5.0 / 1024 );
+	// Convert to distance in cm
+	distance = (2914/(adcsample+5.0))-1.0;
+	//Convert distance to inches
+	dist = distance*0.3937;
+	return dist;
+}
+
+
+void aggressive(){
+	
+	float frontIR = 0;
+	
+	while(1){
+	
+		frontIR = getFrontIR();
+	
+		if(frontIR >= 5){
+			moveForward();
+			///TMRSRVC_delay(500);
+		}else{
+			STEPPER_stop(BOTH_STEPPERS, STEPPER_BRK_OFF);
+		}
+	
+	}
 }
