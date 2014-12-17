@@ -8,7 +8,7 @@ void Movement_Selctor_Excecutor(signed char FSS, signed char BSS, signed char RS
 */
 
 	switch(TS){
-		case 1:
+		case 1: // If only one sensor is triggered
 			if ((FSS == 1) && (BSS == 0) && (RSS == 0) &&(LSS == 0)){
 				Backward_Move();
 				}
@@ -22,7 +22,7 @@ void Movement_Selctor_Excecutor(signed char FSS, signed char BSS, signed char RS
 				Soft_Forward_Left();
 				}
 			break;
-		case 2:
+		case 2: // If two sensors are triggered
 			if ((FSS == 1) && (BSS == 0) && (RSS == 0) &&(LSS == 1)){
 				Soft_Backward_Right();
 				}
@@ -40,7 +40,7 @@ void Movement_Selctor_Excecutor(signed char FSS, signed char BSS, signed char RS
 				}
 			
 			break;
-		case 3:
+		case 3: // If three sensors are triggered
 			if ((FSS == 1) && (BSS == 1) && (RSS == 0) &&(LSS == 1)){
 				Hard_Right();
 				}
@@ -55,10 +55,10 @@ void Movement_Selctor_Excecutor(signed char FSS, signed char BSS, signed char RS
 				}
 			
 			break;
-		case 4:
+		case 4: // If all four sensors are triggered
 			Cry();
 			break;
-		default:
+		default: // If none of the sensors are triggered
 			// just stay and chill!
 			break;
 	}
