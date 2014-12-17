@@ -13,6 +13,7 @@
 #include <math.h>
 #include "capi324v221.h"
 #include "Capek_Movements.h"
+#include "Movement_Selector.h"
 
 // IR Channels mapped to ADC inputs
 #define IRRIGHT_CHAN ADC_CHAN3
@@ -443,7 +444,8 @@ void shy(){
 
 		TS = FSS + BSS + RSS + LSS;
 		
-		moveShy(FSS,BSS,RSS,LSS,TS);
+		// moveShy(FSS,BSS,RSS,LSS,TS);
+		Movement_Selector_Excecutor(FSS, BSS, RSS, LSS, TS);
 	}
 }
 
