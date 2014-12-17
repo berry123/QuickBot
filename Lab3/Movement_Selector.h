@@ -61,8 +61,8 @@ void Movement_Selctor_Excecutor(signed char FSS, signed char BSS, signed char RS
 		default: // If none of the sensors are triggered
 			// just stay and chill!
 			break;
+		}
 	}
-}
 	
 
 
