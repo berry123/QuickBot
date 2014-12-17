@@ -482,10 +482,10 @@ void moveShy(char FSS, char BSS, char RSS, char LSS, char TS){
 		}
 		break;
 		case 4: // If all four sensors are triggered
-		Cry();
-		break;
+			Cry();
+			break;
 		default: // If none of the sensors are triggered
-		// just stay and chill!
-		break;
+			// just stay and chill!
+			break;
 	}
 }

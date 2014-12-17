@@ -5591,13 +5591,14 @@ void moveShy(char FSS, char BSS, char RSS, char LSS, char TS){
 		}
 		break;
 		case 4: // If all four sensors are triggered
-		Cry();
+			Cry();
     31aa:	0e 94 9f 17 	call	0x2f3e	; 0x2f3e <Cry>
-		break;
+			break;
 		default: // If none of the sensors are triggered
-		// just stay and chill!
-		break;
+			// just stay and chill!
+			break;
 	}
+}
     31ae:	0f 91       	pop	r16
     31b0:	08 95       	ret
 
@@ -5651,7 +5652,7 @@ void shy(){
     31e8:	23 2c       	mov	r2, r3
     31ea:	20 e0       	ldi	r18, 0x00	; 0
     31ec:	30 e0       	ldi	r19, 0x00	; 0
-    31ee:	40 ee       	ldi	r20, 0xE0	; 224
+    31ee:	40 ea       	ldi	r20, 0xA0	; 160
     31f0:	50 e4       	ldi	r21, 0x40	; 64
     31f2:	c3 01       	movw	r24, r6
     31f4:	b2 01       	movw	r22, r4
@@ -5663,7 +5664,7 @@ void shy(){
     3200:	73 2c       	mov	r7, r3
     3202:	20 e0       	ldi	r18, 0x00	; 0
     3204:	30 e0       	ldi	r19, 0x00	; 0
-    3206:	40 ee       	ldi	r20, 0xE0	; 224
+    3206:	40 ea       	ldi	r20, 0xA0	; 160
     3208:	50 e4       	ldi	r21, 0x40	; 64
     320a:	c5 01       	movw	r24, r10
     320c:	b4 01       	movw	r22, r8
@@ -5675,7 +5676,7 @@ void shy(){
     3218:	b3 2c       	mov	r11, r3
     321a:	20 e0       	ldi	r18, 0x00	; 0
     321c:	30 e0       	ldi	r19, 0x00	; 0
-    321e:	40 ee       	ldi	r20, 0xE0	; 224
+    321e:	40 ea       	ldi	r20, 0xA0	; 160
     3220:	50 e4       	ldi	r21, 0x40	; 64
     3222:	c7 01       	movw	r24, r14
     3224:	b6 01       	movw	r22, r12
@@ -5687,7 +5688,7 @@ void shy(){
     3230:	f3 2c       	mov	r15, r3
     3232:	20 e0       	ldi	r18, 0x00	; 0
     3234:	30 e0       	ldi	r19, 0x00	; 0
-    3236:	40 ee       	ldi	r20, 0xE0	; 224
+    3236:	40 ea       	ldi	r20, 0xA0	; 160
     3238:	50 e4       	ldi	r21, 0x40	; 64
     323a:	69 81       	ldd	r22, Y+1	; 0x01
     323c:	7a 81       	ldd	r23, Y+2	; 0x02
