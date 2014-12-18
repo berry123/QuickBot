@@ -88,7 +88,7 @@ void AvoidAndGo(signed char TarX, signed char TarY){
 		CurX = CurX + XDistance;
 		CurY = CurY + YDistance;
 		LCD_clear();
-		LCD_printf("%d, %d, %f\n %d, %d\n %f, %f", CurX, CurY, CurTheta, RightSpeed, LeftSpeed, XDistance, YDistance);
+		LCD_printf("%f\n%f", CurX, CurY);
 		if (indicator == 1){
 			RightSpeed = 100;
 			LeftSpeed = 100;
