@@ -3,8 +3,8 @@ void AvoidAndGo(unsigned char TarX, unsigned char TarY){
 	#define AngleThresh 3
 	#define ItterationTiming 0.05
 	#define WheelBase 8.25
+	#define Tollerance 2
 
-	char Tollerance = 2;
 	char oldRS = 100;
 	char oldLS = 100;
 	char Thresh = 5;
@@ -33,7 +33,10 @@ void AvoidAndGo(unsigned char TarX, unsigned char TarY){
 		DeltaLeftSensor = leftIR - oldLS;
 		DeltaRightSensor = rightIR - oldRS;
 
-		if (frontIR < Thresh) {
+		if ((CurX > (TarX - Tollerance)) && (CurX < (TarX + Tollerance)) && (CurY > (TarY - Tollerance)) && (CurY < (TarY + Tollerance))){
+			//Stay! Good Boy!
+			}
+		else if (frontIR < Thresh) {
 			LeftSpeed++;
 			RightSpeed--;
 			}
