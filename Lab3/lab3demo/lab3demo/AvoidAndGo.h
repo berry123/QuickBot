@@ -1,4 +1,4 @@
-void AvoidAndGo(unsigned char TarX, unsigned char TarY){
+void AvoidAndGo(signed char TarX, signed char TarY, float frontIR, float rightIR, float leftIR){
 	#define ResetSpeed 100	
 	#define AngleThresh 3
 	#define ItterationTiming 0.05
@@ -9,9 +9,9 @@ void AvoidAndGo(unsigned char TarX, unsigned char TarY){
 	char oldRS = 100;
 	char oldLS = 100;
 	char Thresh = 5;
-	char frontIR;
-	char rightIR;
-	char leftIR;
+	//float frontIR;
+	//float rightIR;
+	//float leftIR;
 	char RightSpeed = ResetSpeed;
 	char LeftSpeed = ResetSpeed;
 	char CurX = 0;
@@ -26,11 +26,13 @@ void AvoidAndGo(unsigned char TarX, unsigned char TarY){
 	char Distance;
 	char XDistance;
 	char YDistance;
+	char DeltaRightSensor;
+	char DeltaLeftSensor;
 
 	while (1){
-		frontIR = getFrontIR();
-		rightIR = getRightIR();
-		leftIR = getLeftIR();
+		//frontIR = getFrontIR();
+		//rightIR = getRightIR();
+		//leftIR = getLeftIR();
 		DeltaLeftSensor = leftIR - oldLS;
 		DeltaRightSensor = rightIR - oldRS;
 
@@ -41,10 +43,10 @@ void AvoidAndGo(unsigned char TarX, unsigned char TarY){
 			LeftSpeed++;
 			RightSpeed--;
 			}
-		else if ((DeltaLeftSensor > 0) && (leftIR < Thresh){
+		else if ((DeltaLeftSensor > 0) && (leftIR < Thresh)){
 			LeftSpeed++;
 			}
-		else if ((DeltaRightSensor > 0) && (rightIR < Thresh){
+		else if ((DeltaRightSensor > 0) && (rightIR < Thresh)){
 			RightSpeed++;
 			}
 		else  {

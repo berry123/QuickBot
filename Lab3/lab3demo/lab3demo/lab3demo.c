@@ -15,6 +15,7 @@
 #include "Capek_Movements.h"
 #include "Movement_Selector.h"
 #include "Random_Wanderer.h"
+#include "AvoidAndGo.h"
 
 // IR Channels mapped to ADC inputs
 #define IRRIGHT_CHAN ADC_CHAN3
@@ -31,6 +32,7 @@ short thetao = 0;
 void moveShy(char,char,char,char,char);
 void aggressive();
 void shy();
+void goToGoal(signed char, signed char);
 //IR functions
 float getLeftIR();
 float getRightIR();
@@ -85,11 +87,13 @@ void CBOT_main(void)
 		
 		// Press SW3 to select the angle function.
 		if (ATTINY_get_SW_state(ATTINY_SW3)){
+			//goToGoal(12,12);
 			while(1){
 				//aggressive();
 				//shy();
 				//Random_Wanderer();
-				Shy_Random_Wanderer();
+				//Shy_Random_Wanderer();
+				goToGoal(12,12);
 			}
 		}
 		/*// Press SW4 to go to goal function.
@@ -296,3 +300,15 @@ void shy(){
 	Movement_Selector_Excecutor(FSS, BSS, RSS, LSS, TS);
 }
 
+void goToGoal(signed char x, signed char y){
+	float frontIR = 0;
+	float rightIR = 0;
+	float leftIR = 0;
+	
+	frontIR = getFrontIR();
+	//backIR = getBackIR();
+	rightIR = getRightIR();
+	leftIR = getLeftIR();
+	
+	AvoidAndGo(x,y,frontIR,rightIR,leftIR);
+}
