@@ -16,10 +16,10 @@ void Movement_Selector_Excecutor(signed char FSS, signed char BSS, signed char R
 				Forward_Move();
 				}
 			else if ((FSS == 0) && (BSS == 0) && (RSS == 0) &&(LSS == 1)){
-				Soft_Forward_Right();
+				Soft_Backward_Right();
 				}
 			else {
-				Soft_Forward_Left();
+				Soft_Backward_Left();
 				}
 			break;
 		case 2: // If two sensors are triggered
