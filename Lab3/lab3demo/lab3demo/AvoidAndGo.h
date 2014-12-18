@@ -84,7 +84,7 @@ void AvoidAndGo(signed char TarX, signed char TarY){
 		RightDistance = RightSpeed*ItterationTiming*Steps2DistanceConversionFactor;
 		LeftDistance = LeftSpeed*ItterationTiming*Steps2DistanceConversionFactor;
 		Distance = (RightDistance + LeftDistance)/2;
-		CurTheta = CurTheta - atan2(LeftDistance-RightDistance,WheelBase);
+		CurTheta = CurTheta + atan2(LeftDistance-RightDistance,WheelBase);
 		XDistance = cos(CurTheta)*Distance;
 		YDistance = sin(CurTheta)*Distance;
 		CurX = CurX + XDistance;
