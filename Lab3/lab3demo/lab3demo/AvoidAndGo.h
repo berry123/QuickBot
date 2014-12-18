@@ -1,7 +1,7 @@
 
 void AvoidAndGo(signed char TarX, signed char TarY){
 
-	float AngleThresh = 3;
+	double AngleThresh = 3;
 	float ItterationTiming = 0.05;
 	float WheelBase = 8.25;
 	char Tollerance = 3;
@@ -17,11 +17,11 @@ void AvoidAndGo(signed char TarX, signed char TarY){
 	short LeftSpeed = 100;
 	float CurX = 0;
 	float CurY = 0;
-	float CurTheta = atan2(TarY,TarX);
+	double CurTheta = atan2(TarY,TarX);
 	float DeltaX;
 	float DeltaY;
-	float DeltaTheta;
-	float TarTheta;
+	double DeltaTheta;
+	double TarTheta;
 	float RightDistance;
 	float LeftDistance;
 	float Distance;
