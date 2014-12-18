@@ -73,6 +73,11 @@ void AvoidAndGo(signed char TarX, signed char TarY, float frontIR, float rightIR
 				LeftSpeed = 100;
 				}
 			}
+		// Forward Movement
+		STEPPER_move_rn(STEPPER_BOTH,
+			STEPPER_FWD, LeftSpeed, 400,	//Left
+			STEPPER_FWD, RightSpeed, 400);	//Right
+		TMRSRVC_delay(50); //50 mSec duration
 		oldLS = leftIR;
 		oldRS = rightIR;
 		RightDistance = RightSpeed*ItterationTiming*Steps2DistanceConversionFactor;
