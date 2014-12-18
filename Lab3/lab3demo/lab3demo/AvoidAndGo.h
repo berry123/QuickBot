@@ -4,6 +4,7 @@ void AvoidAndGo(unsigned char TarX, unsigned char TarY){
 	#define ItterationTiming 0.05
 	#define WheelBase 8.25
 	#define Tollerance 2
+	#define Steps2DistanceConversionFactor 0.108
 
 	char oldRS = 100;
 	char oldLS = 100;
@@ -64,8 +65,8 @@ void AvoidAndGo(unsigned char TarX, unsigned char TarY){
 			}
 		oldLS = leftIR;
 		oldRS = rightIR;
-		RightDistance = RightSpeed*ItterationTiming;
-		LeftDistance = LeftSpeed*ItterationTiming;
+		RightDistance = RightSpeed*ItterationTiming*Steps2DistanceConversionFactor;
+		LeftDistance = LeftSpeed*ItterationTiming*Steps2DistanceConversionFactor;
 		Distance = (RightDistance + LeftDistance)/2;
 		CurTheta = CurTheta - atan2(LeftSpeed-RightSpeed,WheelBase);
 		XDistance = cos(CurTheta)*Distance;
