@@ -31,7 +31,7 @@ void AvoidAndGo(signed char TarX, signed char TarY){
 	float DeltaLeftSensor;
 	char indicator = 0;
 
-	while (CurX < TarX && CurY < TarY){
+	while ((CurX < TarX) && (CurY < TarY)){
 		frontIR = getFrontIR();
 		rightIR = getRightIR();
 		leftIR = getLeftIR();
@@ -39,6 +39,8 @@ void AvoidAndGo(signed char TarX, signed char TarY){
 		DeltaRightSensor = rightIR - oldRS;
 
 		if ((CurX > (TarX - Tollerance)) && (CurX < (TarX + Tollerance)) && (CurY > (TarY - Tollerance)) && (CurY < (TarY + Tollerance))){
+			LeftSpeed = 0;
+			RightSpeed = 0;
 			//Stay! Good Boy!
 			STEPPER_stop(STEPPER_BOTH, STEPPER_BRK_OFF);
 		}else if (frontIR < Thresh) {
