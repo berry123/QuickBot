@@ -28,12 +28,7 @@ char yo = 0;
 short thetao = 0;
 
 // Used function prototypes.
-//void moveForward();
 void moveShy(char,char,char,char,char);
-//void sTurnLeft(int, int);
-//void sTurnRight(int, int);
-//void go2Angle(int);
-//void go2Point(signed char, signed char);
 void aggressive();
 void shy();
 //IR functions
@@ -160,151 +155,6 @@ void CBOT_main(void)
     }
 }
 
-// Moves the robot forward for a given number of steps.
-/*void moveForward(){
-	// Performs the same error detection procedure for the Stepper subsystem as it was performed with ATTINY.
-	SUBSYS_OPENSTAT openStepper;
-	
-	// Stepper subsystem is opened.
-	openStepper = STEPPER_open();
-	
-	// Displays an error message if the returned value for the opened stepper subsystem is unexpected.
-	if (openStepper.state != SUBSYS_OPEN){
-		LCD_printf("\nError when opening STEPPER subsystem!");
-	}
-	
-	//STEPPER_go(STEPPER_BOTH);
-	
-	//STEPPER_set_mode(BOTH_STEPPERS,STEPPER_FREERUNNING);
-	
-	//STEPPER_set_dir(BOTH_STEPPERS, STEPPER_FWD);
-	
-	//STEPPER_set_accel(BOTH_STEPPERS,400);
-	
-	//STEPPER_set_speed(BOTH_STEPPERS,100);
-	
-	STEPPER_move_rn(STEPPER_BOTH,
-		STEPPER_FWD, 200, 400,	//Left
-		STEPPER_FWD, 200, 400);	//Right
-	
-	// Moving both wheels forward.
-	//STEPPER_run(BOTH_STEPPERS,STEPPER_FWD,100);
-	//STEPPER_move_stwt(STEPPER_BOTH,
-	//	STEPPER_FWD, steps, speed, 400, STEPPER_BRK_OFF,	//Left wheel
-	//	STEPPER_FWD, steps, speed, 400, STEPPER_BRK_OFF);	//Right wheel
-}*/
-
-// Rotates the robot to the required functions.
-/*void go2Angle(int angle){
-	
-	// If the angle is positive, rotate the robot in a certain angle that is converted in steps to the left.
-	if (angle > 0){
-		if (angle <= 180){
-			sTurnLeft(angle, 400);
-		}else if(angle > 180){
-			angle = angle/2;
-			sTurnLeft(angle, 400);
-			sTurnLeft(angle, 400);
-		}
-	// If the angle is negative, rotate the robot in a certain angle that is converted in steps to the right.
-	}else if(angle < 0){
-		angle = angle * (-1); //Make the angle positive to calculate the amount of steps.
-		if (angle <= 180){
-			sTurnRight(angle, 400);
-		}else if (angle > 180){
-			angle = angle/2;
-			sTurnRight(angle, 400);
-			sTurnRight(angle, 400);
-		}
-	}else{
-		// does nothing
-	}
-}*/
-
-// Guides the robot to the desired input point.
-/*void go2Point(signed char x, signed char y){ //input in feet
-	float deltax, deltay, distance, steps;
-	int theta, deltaTheta;
-
-	// Since the whole software was developed with an inches scale in mind, here the conversion to feet occurs.
-	x = x*12;
-	y = y*12;
-	
-	// Calculations:
-	deltax = x - xo;
-	deltay = y - yo;
-	// Obtaining the theta in degrees since the function from math.h returns in radians.
-	theta = atan2(deltay,deltax) * (180/M_PI);
-	deltaTheta = theta - thetao;
-	// This is for the sake of debugging:
-	//LCD_clear();
-	//LCD_printf("%d - %d = %d", theta, thetao, deltaTheta);
-	//LCD_printf("x = %d, y = %d",x,y);
-	
-	// Calculating the length of the vector.
-	distance = hypot(deltax, deltay);
-	
-	// Converting it into steps.
-	steps = distance/0.108;
-	
-	// Call for go to angle function.
-	go2Angle(deltaTheta);
-	TMRSRVC_delay(500); //0.5 seconds delay.
-	// Call for the go to goal point function.
-	moveForward(steps, 200);
-	
-	// Updating the original values.
-	xo = x;
-	yo = y;
-	thetao = theta;
-}*/
-
-// Given an angle and a speed, this function makes the robot turn/spin to the left.
-/*void sTurnLeft(int angle, int speed){
-	int steps;
-	
-	// Performs the same error detection procedure for the Stepper subsystem as it was performed with ATTINY.
-	SUBSYS_OPENSTAT openStepper;
-	
-	// Stepper subsystem is opened.
-	openStepper = STEPPER_open();
-	
-	// Displays an error message if the returned value for the opened stepper subsystem is unexpected.
-	if (openStepper.state != SUBSYS_OPEN){
-		LCD_printf("\nError when opening STEPPER subsystem!");
-	}
-	
-	steps = angle*130/90;
-	STEPPER_move_stwt(STEPPER_BOTH,
-		STEPPER_REV, steps, speed, 800, STEPPER_BRK_OFF,	//Left wheel
-		STEPPER_FWD, steps, speed, 800, STEPPER_BRK_OFF);	//Right wheel
-		
-	//STEPPER_close();
-}*/
-
-// Given an angle and a speed, this function makes the robot turn/spin to the right.
-/*void sTurnRight(int angle, int speed){
-	int steps;
-	
-	// Performs the same error detection procedure for the Stepper subsystem as it was performed with ATTINY.
-	SUBSYS_OPENSTAT openStepper;
-	
-	// Stepper subsystem is opened.
-	openStepper = STEPPER_open();
-	
-	// Displays an error message if the returned value for the opened stepper subsystem is unexpected.
-	if (openStepper.state != SUBSYS_OPEN){
-		LCD_printf("\nError when opening STEPPER subsystem!");
-	}
-	
-	steps = angle*130/90;
-	STEPPER_move_stwt(STEPPER_BOTH,
-		STEPPER_FWD, steps, speed, 800, STEPPER_BRK_OFF,	//Left wheel
-		STEPPER_REV, steps, speed, 800, STEPPER_BRK_OFF);	//Right wheel
-		
-	//STEPPER_close();
-}*/
-
 // getLeftIR() converts ADC voltage to inches
 float getLeftIR(){
 	//float voltage;//IR range -0.4 to 5.3 V
@@ -401,8 +251,6 @@ void aggressive(){
 	
 	float frontIR = 0;
 	
-	//while(1){
-	
 	frontIR = getFrontIR();
 	
 	LCD_printf("%f", frontIR);
@@ -415,8 +263,6 @@ void aggressive(){
 	}else{
 		STEPPER_stop(STEPPER_BOTH, STEPPER_BRK_OFF);
 	}
-	
-	//}
 }
 
 void shy(){
@@ -432,8 +278,6 @@ void shy(){
 	char RSS;
 	char LSS;
 	
-	
-	//while(1){
 	frontIR = getFrontIR();
 	backIR = getBackIR();
 	rightIR = getRightIR();
@@ -449,8 +293,6 @@ void shy(){
 
 	TS = FSS + BSS + RSS + LSS;
 		
-	// moveShy(FSS,BSS,RSS,LSS,TS);
 	Movement_Selector_Excecutor(FSS, BSS, RSS, LSS, TS);
-	//}
 }
 
