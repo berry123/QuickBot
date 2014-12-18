@@ -63,9 +63,7 @@ void AvoidAndGo(signed char TarX, signed char TarY){
 				LeftSpeed = 100;
 			}
 		}
-		// Forward Movement
-		
-		
+		// Forward Movement		
 		if (indicator == 1){
 			STEPPER_move_rn(STEPPER_BOTH,
 				STEPPER_FWD, 200, 400,	//Left
