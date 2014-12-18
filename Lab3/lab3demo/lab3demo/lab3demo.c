@@ -89,7 +89,7 @@ void CBOT_main(void)
 				//Random_Wanderer();
 				//Shy_Random_Wanderer();
 				//goToGoal(12,12);
-				AvoidAndGo(12,12);
+				AvoidAndGo(1,1);
 			}
 		}
 		/*// Press SW4 to go to goal function.

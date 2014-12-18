@@ -4,11 +4,12 @@ void AvoidAndGo(signed char TarX, signed char TarY){
 	float AngleThresh = 3;
 	float ItterationTiming = 0.05;
 	float WheelBase = 8.25;
-	char Tollerance = 2;
+	char Tollerance = 3;
 	float Steps2DistanceConversionFactor = 0.108;
 	float oldRS = 100;
 	float oldLS = 100;
-	float Thresh = 5;
+	char Thresh = 7;
+	char sideThresh = 5;
 	float frontIR;
 	float rightIR;
 	float leftIR;
@@ -38,22 +39,25 @@ void AvoidAndGo(signed char TarX, signed char TarY){
 
 		if ((CurX > (TarX - Tollerance)) && (CurX < (TarX + Tollerance)) && (CurY > (TarY - Tollerance)) && (CurY < (TarY + Tollerance))){
 			//Stay! Good Boy!
+			STEPPER_stop(STEPPER_BOTH, STEPPER_BRK_OFF);
 		}else if (frontIR < Thresh) {
-			LeftSpeed++;
-			RightSpeed--;
-		}else if ((DeltaLeftSensor > 0) && (leftIR < Thresh)){
-			LeftSpeed++;
-		}else if ((DeltaRightSensor > 0) && (rightIR < Thresh)){
-			RightSpeed++;
+			LeftSpeed = LeftSpeed + 15;
+			RightSpeed = RightSpeed - 15;
+		}else if ((DeltaLeftSensor > 0) && (leftIR < sideThresh)){
+			LeftSpeed = LeftSpeed + 5;
+			RightSpeed = RightSpeed - 5;
+		}else if ((DeltaRightSensor > 0) && (rightIR < sideThresh)){
+			RightSpeed = RightSpeed + 5;
+			LeftSpeed = LeftSpeed - 5;
 		}else{
 			DeltaX = TarX - CurX;
 			DeltaY = TarY - CurY;
 			TarTheta = atan2(DeltaY,DeltaX);
 			DeltaTheta = TarTheta - CurTheta;
 			if (DeltaTheta > AngleThresh){
-				LeftSpeed++;
+				LeftSpeed = LeftSpeed + 5;
 			}else if (DeltaTheta < -AngleThresh){
-				RightSpeed++;
+				RightSpeed = RightSpeed + 5;
 			}else{
 				RightSpeed = 100;
 				LeftSpeed = 100;
@@ -71,7 +75,7 @@ void AvoidAndGo(signed char TarX, signed char TarY){
 		RightDistance = RightSpeed*ItterationTiming*Steps2DistanceConversionFactor;
 		LeftDistance = LeftSpeed*ItterationTiming*Steps2DistanceConversionFactor;
 		Distance = (RightDistance + LeftDistance)/2;
-		CurTheta = CurTheta - atan2(LeftSpeed-RightSpeed,WheelBase);
+		CurTheta = CurTheta + atan2(LeftSpeed-RightSpeed,WheelBase);
 		XDistance = cos(CurTheta)*Distance;
 		YDistance = sin(CurTheta)*Distance;
 		CurX = CurX + XDistance;
