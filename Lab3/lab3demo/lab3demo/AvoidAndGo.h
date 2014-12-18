@@ -70,7 +70,6 @@ void AvoidAndGo(signed char TarX, signed char TarY){
 				STEPPER_REV, 200, 400);	//Right
 			LeftSpeed = 200;
 			RightSpeed = -200;
-			indicator = 0;
 			}
 		else {
 			STEPPER_move_rn(STEPPER_BOTH,
@@ -90,5 +89,10 @@ void AvoidAndGo(signed char TarX, signed char TarY){
 		CurY = CurY + YDistance;
 		LCD_clear();
 		LCD_printf("%d, %d, %f\n %d, %d\n %f, %f", CurX, CurY, CurTheta, RightSpeed, LeftSpeed, XDistance, YDistance);
+		if (indicator == 1){
+			RightSpeed = 100;
+			LeftSpeed = 100;
+			indicator =0;
+			}
 	}
 }
