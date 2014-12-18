@@ -65,7 +65,7 @@ void AvoidAndGo(signed char TarX, signed char TarY){
 		}
 		// Forward Movement
 		LCD_clear();
-		LCD_printf("%d, %d", LeftSpeed, RightSpeed);
+		LCD_printf("%d, %d, %f\n %d, %d\n %f, %f", CurX, CurY, CurTheta, RightSpeed, LeftSpeed, XDistance, YDistance);
 		STEPPER_move_rn(STEPPER_BOTH,
 			STEPPER_FWD, LeftSpeed, 400,	//Left
 			STEPPER_FWD, RightSpeed, 400);	//Right
