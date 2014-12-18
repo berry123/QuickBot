@@ -4909,7 +4909,7 @@ void Soft_Forward_Right(){
     2d54:	80 e9       	ldi	r24, 0x90	; 144
     2d56:	8f 93       	push	r24
     2d58:	1f 92       	push	r1
-    2d5a:	86 e9       	ldi	r24, 0x96	; 150
+    2d5a:	84 e6       	ldi	r24, 0x64	; 100
     2d5c:	8f 93       	push	r24
     2d5e:	1f 92       	push	r1
     2d60:	1f 92       	push	r1
@@ -4932,7 +4932,7 @@ void Soft_Forward_Right(){
     2d82:	82 e0       	ldi	r24, 0x02	; 2
     2d84:	0e 94 c8 06 	call	0xd90	; 0xd90 <STEPPER_move>
 		STEPPER_FWD, 200, 400,	//Left
-		STEPPER_FWD, 150, 400);	//Right
+		STEPPER_FWD, 100, 400);	//Right
 	TMRSRVC_delay(1000); //2 Sec duration
     2d88:	88 ee       	ldi	r24, 0xE8	; 232
     2d8a:	93 e0       	ldi	r25, 0x03	; 3
@@ -4995,7 +4995,7 @@ void Soft_Forward_Left(){
     2df0:	ff 24       	eor	r15, r15
     2df2:	f3 94       	inc	r15
     2df4:	f0 2d       	mov	r31, r0
-    2df6:	06 e9       	ldi	r16, 0x96	; 150
+    2df6:	04 e6       	ldi	r16, 0x64	; 100
     2df8:	10 e0       	ldi	r17, 0x00	; 0
     2dfa:	20 e0       	ldi	r18, 0x00	; 0
     2dfc:	30 e0       	ldi	r19, 0x00	; 0
@@ -5003,7 +5003,7 @@ void Soft_Forward_Left(){
     2e00:	62 e0       	ldi	r22, 0x02	; 2
     2e02:	82 e0       	ldi	r24, 0x02	; 2
     2e04:	0e 94 c8 06 	call	0xd90	; 0xd90 <STEPPER_move>
-		STEPPER_FWD, 150, 400,	//Left
+		STEPPER_FWD, 100, 400,	//Left
 		STEPPER_FWD, 200, 400);	//Right
 	TMRSRVC_delay(1000); //2 Sec duration
     2e08:	88 ee       	ldi	r24, 0xE8	; 232
@@ -5053,7 +5053,7 @@ void Soft_Backward_Right(){
     2e54:	80 e9       	ldi	r24, 0x90	; 144
     2e56:	8f 93       	push	r24
     2e58:	1f 92       	push	r1
-    2e5a:	86 e9       	ldi	r24, 0x96	; 150
+    2e5a:	84 e6       	ldi	r24, 0x64	; 100
     2e5c:	8f 93       	push	r24
     2e5e:	1f 92       	push	r1
     2e60:	1f 92       	push	r1
@@ -5077,7 +5077,7 @@ void Soft_Backward_Right(){
     2e84:	82 e0       	ldi	r24, 0x02	; 2
     2e86:	0e 94 c8 06 	call	0xd90	; 0xd90 <STEPPER_move>
 		STEPPER_REV, 200, 400,	//Left
-		STEPPER_REV, 150, 400);	//Right
+		STEPPER_REV, 100, 400);	//Right
 	TMRSRVC_delay(1000); //2 Sec duration
     2e8a:	88 ee       	ldi	r24, 0xE8	; 232
     2e8c:	93 e0       	ldi	r25, 0x03	; 3
@@ -5141,7 +5141,7 @@ void Soft_Backward_Left(){
     2ef4:	ff 24       	eor	r15, r15
     2ef6:	f3 94       	inc	r15
     2ef8:	f0 2d       	mov	r31, r0
-    2efa:	06 e9       	ldi	r16, 0x96	; 150
+    2efa:	04 e6       	ldi	r16, 0x64	; 100
     2efc:	10 e0       	ldi	r17, 0x00	; 0
     2efe:	20 e0       	ldi	r18, 0x00	; 0
     2f00:	30 e0       	ldi	r19, 0x00	; 0
@@ -5149,7 +5149,7 @@ void Soft_Backward_Left(){
     2f04:	62 e0       	ldi	r22, 0x02	; 2
     2f06:	82 e0       	ldi	r24, 0x02	; 2
     2f08:	0e 94 c8 06 	call	0xd90	; 0xd90 <STEPPER_move>
-		STEPPER_REV, 150, 400,	//Left
+		STEPPER_REV, 100, 400,	//Left
 		STEPPER_REV, 200, 400);	//Right
 	TMRSRVC_delay(1000); //2 Sec duration
     2f0c:	88 ee       	ldi	r24, 0xE8	; 232
