@@ -171,7 +171,7 @@ float getLeftIR(){
 	ADC_set_channel( IRLEFT_CHAN );
 	// Now sample it!
 	adcsample = ADC_sample();
-	LCD_printf( "ADC: %i\n",adcsample);
+	//LCD_printf( "ADC: %i\n",adcsample);
 	// Convert to meaningful voltage value.
 	//voltage = adcsample * ( 5.0 / 1024 );
 	// Convert to distance in cm

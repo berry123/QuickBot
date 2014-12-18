@@ -37,56 +37,52 @@ void AvoidAndGo(signed char TarX, signed char TarY, float frontIR, float rightIR
 	float DeltaRightSensor;
 	float DeltaLeftSensor;
 
-	while (1){
+	//while (1){
 		//frontIR = getFrontIR();
 		//rightIR = getRightIR();
 		//leftIR = getLeftIR();
-		DeltaLeftSensor = leftIR - oldLS;
-		DeltaRightSensor = rightIR - oldRS;
+	DeltaLeftSensor = leftIR - oldLS;
+	DeltaRightSensor = rightIR - oldRS;
 
-		if ((CurX > (TarX - Tollerance)) && (CurX < (TarX + Tollerance)) && (CurY > (TarY - Tollerance)) && (CurY < (TarY + Tollerance))){
-			//Stay! Good Boy!
-			}
-		else if (frontIR < Thresh) {
+	if ((CurX > (TarX - Tollerance)) && (CurX < (TarX + Tollerance)) && (CurY > (TarY - Tollerance)) && (CurY < (TarY + Tollerance))){
+		//Stay! Good Boy!
+	}else if (frontIR < Thresh) {
+		LeftSpeed++;
+		RightSpeed--;
+	}else if ((DeltaLeftSensor > 0) && (leftIR < Thresh)){
+		LeftSpeed++;
+	}else if ((DeltaRightSensor > 0) && (rightIR < Thresh)){
+		RightSpeed++;
+	}else{
+		DeltaX = TarX - CurX;
+		DeltaY = TarY - CurY;
+		TarTheta = atan2(DeltaY,DeltaX);
+		DeltaTheta = TarTheta - CurTheta;
+		if (DeltaTheta > AngleThresh){
 			LeftSpeed++;
-			RightSpeed--;
-			}
-		else if ((DeltaLeftSensor > 0) && (leftIR < Thresh)){
-			LeftSpeed++;
-			}
-		else if ((DeltaRightSensor > 0) && (rightIR < Thresh)){
+		}else if (DeltaTheta < -AngleThresh){
 			RightSpeed++;
-			}
-		else  {
-			DeltaX = TarX - CurX;
-			DeltaY = TarY - CurY;
-			TarTheta = atan2(DeltaY,DeltaX);
-			DeltaTheta = TarTheta - CurTheta;
-			if (DeltaTheta > AngleThresh){
-				LeftSpeed++;
-			}
-			else if (DeltaTheta < -AngleThresh){
-				RightSpeed++;
-			}
-			else {
-				RightSpeed = 100;
-				LeftSpeed = 100;
-				}
-			}
-		// Forward Movement
-		STEPPER_move_rn(STEPPER_BOTH,
-			STEPPER_FWD, LeftSpeed, 400,	//Left
-			STEPPER_FWD, RightSpeed, 400);	//Right
-		TMRSRVC_delay(50); //50 mSec duration
-		oldLS = leftIR;
-		oldRS = rightIR;
-		RightDistance = RightSpeed*ItterationTiming*Steps2DistanceConversionFactor;
-		LeftDistance = LeftSpeed*ItterationTiming*Steps2DistanceConversionFactor;
-		Distance = (RightDistance + LeftDistance)/2;
-		CurTheta = CurTheta - atan2(LeftSpeed-RightSpeed,WheelBase);
-		XDistance = cos(CurTheta)*Distance;
-		YDistance = sin(CurTheta)*Distance;
-		CurX = CurX + XDistance;
-		CurY = CurY + YDistance;
+		}else{
+			RightSpeed = 100;
+			LeftSpeed = 100;
 		}
+	}
+	// Forward Movement
+	LCD_clear();
+	LCD_printf("%d, %d", LeftSpeed, RightSpeed);
+	STEPPER_move_rn(STEPPER_BOTH,
+		STEPPER_FWD, LeftSpeed, 400,	//Left
+		STEPPER_FWD, RightSpeed, 400);	//Right
+	TMRSRVC_delay(50); //50 mSec duration
+	oldLS = leftIR;
+	oldRS = rightIR;
+	RightDistance = RightSpeed*ItterationTiming*Steps2DistanceConversionFactor;
+	LeftDistance = LeftSpeed*ItterationTiming*Steps2DistanceConversionFactor;
+	Distance = (RightDistance + LeftDistance)/2;
+	CurTheta = CurTheta - atan2(LeftSpeed-RightSpeed,WheelBase);
+	XDistance = cos(CurTheta)*Distance;
+	YDistance = sin(CurTheta)*Distance;
+	CurX = CurX + XDistance;
+	CurY = CurY + YDistance;
+		//}
 }
