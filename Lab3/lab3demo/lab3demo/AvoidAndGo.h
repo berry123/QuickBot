@@ -29,6 +29,7 @@ void AvoidAndGo(signed char TarX, signed char TarY){
 	float YDistance;
 	float DeltaRightSensor;
 	float DeltaLeftSensor;
+	char indicator = 0;
 
 	while (1){
 		frontIR = getFrontIR();
@@ -41,8 +42,7 @@ void AvoidAndGo(signed char TarX, signed char TarY){
 			//Stay! Good Boy!
 			STEPPER_stop(STEPPER_BOTH, STEPPER_BRK_OFF);
 		}else if (frontIR < Thresh) {
-			LeftSpeed = LeftSpeed + 15;
-			RightSpeed = RightSpeed - 15;
+			indicator = 1;
 		}else if ((DeltaLeftSensor > 0) && (leftIR < sideThresh)){
 			LeftSpeed = LeftSpeed + 15;
 			RightSpeed = RightSpeed - 15;
@@ -65,9 +65,20 @@ void AvoidAndGo(signed char TarX, signed char TarY){
 		}
 		// Forward Movement
 		
-		STEPPER_move_rn(STEPPER_BOTH,
-			STEPPER_FWD, LeftSpeed, 400,	//Left
-			STEPPER_FWD, 0, 400);	//Right
+		
+		if (indicator == 1){
+			STEPPER_move_rn(STEPPER_BOTH,
+				STEPPER_FWD, 200, 400,	//Left
+				STEPPER_REV, 200, 400);	//Right
+			LeftSpeed = 200;
+			RightSpeed = -200;
+			indicator = 0;
+			}
+		else {
+			STEPPER_move_rn(STEPPER_BOTH,
+				STEPPER_FWD, LeftSpeed, 400,	//Left
+				STEPPER_FWD, RightSpeed, 400);	//Right
+			}
 		TMRSRVC_delay(50); //50 mSec duration
 		oldLS = leftIR;
 		oldRS = rightIR;
