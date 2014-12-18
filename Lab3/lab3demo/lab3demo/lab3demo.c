@@ -90,9 +90,12 @@ void CBOT_main(void)
 		
 		// Press SW3 to select the angle function.
 		if (ATTINY_get_SW_state(ATTINY_SW3)){
-			//aggressive();
-			shy();
-			//Random_Wanderer();
+			while(1){
+				//aggressive();
+				//shy();
+				//Random_Wanderer();
+				Shy_Random_Wanderer();
+			}
 		}
 		/*// Press SW4 to go to goal function.
 		else if (ATTINY_get_SW_state(ATTINY_SW4)){
@@ -398,22 +401,22 @@ void aggressive(){
 	
 	float frontIR = 0;
 	
-	while(1){
+	//while(1){
 	
-		frontIR = getFrontIR();
+	frontIR = getFrontIR();
 	
-		LCD_printf("%f", frontIR);
-		LCD_clear();
+	LCD_printf("%f", frontIR);
+	LCD_clear();
 	
-		if(frontIR >= 5){
-			STEPPER_move_rn(STEPPER_BOTH,
-				STEPPER_FWD, 200, 400,	//Left
-				STEPPER_FWD, 200, 400);	//Right
-		}else{
-			STEPPER_stop(STEPPER_BOTH, STEPPER_BRK_OFF);
-		}
-	
+	if(frontIR >= 5){
+		STEPPER_move_rn(STEPPER_BOTH,
+			STEPPER_FWD, 200, 400,	//Left
+			STEPPER_FWD, 200, 400);	//Right
+	}else{
+		STEPPER_stop(STEPPER_BOTH, STEPPER_BRK_OFF);
 	}
+	
+	//}
 }
 
 void shy(){
@@ -430,69 +433,24 @@ void shy(){
 	char LSS;
 	
 	
-	while(1){
-		frontIR = getFrontIR();
-		backIR = getBackIR();
-		rightIR = getRightIR();
-		leftIR = getLeftIR();
+	//while(1){
+	frontIR = getFrontIR();
+	backIR = getBackIR();
+	rightIR = getRightIR();
+	leftIR = getLeftIR();
 
-		LCD_clear();
-		LCD_printf("%f, %f, %f, %f", frontIR, backIR, rightIR, leftIR);
+	LCD_clear();
+	LCD_printf("%f, %f, %f, %f", frontIR, backIR, rightIR, leftIR);
 
-		FSS = (sensLimit > frontIR);
-		BSS = (sensLimit > backIR);
-		RSS = (sensLimit > rightIR);
-		LSS = (sensLimit > leftIR);
+	FSS = (sensLimit > frontIR);
+	BSS = (sensLimit > backIR);
+	RSS = (sensLimit > rightIR);
+	LSS = (sensLimit > leftIR);
 
-		TS = FSS + BSS + RSS + LSS;
+	TS = FSS + BSS + RSS + LSS;
 		
-		// moveShy(FSS,BSS,RSS,LSS,TS);
-		Movement_Selector_Excecutor(FSS, BSS, RSS, LSS, TS);
-	}
+	// moveShy(FSS,BSS,RSS,LSS,TS);
+	Movement_Selector_Excecutor(FSS, BSS, RSS, LSS, TS);
+	//}
 }
 
-void moveShy(char FSS, char BSS, char RSS, char LSS, char TS){
-	switch(TS){
-		case 1: // If only one sensor is triggered
-		if ((FSS == 1) && (BSS == 0) && (RSS == 0) &&(LSS == 0)){
-			Backward_Move();
-			}else if ((FSS == 0) && (BSS == 1) && (RSS == 0) &&(LSS == 0)){
-			Forward_Move();
-			}else if ((FSS == 0) && (BSS == 0) && (RSS == 0) &&(LSS == 1)){
-			Soft_Forward_Right();
-			}else{
-			Soft_Forward_Left();
-		}
-		break;
-		case 2: // If two sensors are triggered
-		if ((FSS == 1) && (BSS == 0) && (RSS == 0) &&(LSS == 1)){
-			Soft_Backward_Right();
-			}else if ((FSS == 1) && (BSS == 0) && (RSS == 1) &&(LSS == 0)){
-			Soft_Backward_Left();
-			}else if ((FSS == 0) && (BSS == 1) && (RSS == 0) &&(LSS == 1)){
-			Soft_Forward_Right();
-			}else if ((FSS == 0) && (BSS == 1) && (RSS == 1) &&(LSS == 0)){
-			Soft_Forward_Left();
-			}else {
-			Forward_Move();
-		}
-		break;
-		case 3: // If three sensors are triggered
-		if ((FSS == 1) && (BSS == 1) && (RSS == 0) &&(LSS == 1)){
-			Hard_Right();
-			}else if ((FSS == 1) && (BSS == 1) && (RSS == 1) &&(LSS == 0)){
-			Hard_Left();
-			}else if ((FSS == 1) && (BSS == 0) && (RSS == 1) &&(LSS == 1)){
-			Backward_Move();
-			}else {
-			Forward_Move();
-		}
-		break;
-		case 4: // If all four sensors are triggered
-			Cry();
-			break;
-		default: // If none of the sensors are triggered
-			// just stay and chill!
-			break;
-	}
-}
