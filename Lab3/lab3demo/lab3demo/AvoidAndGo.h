@@ -31,6 +31,9 @@ void AvoidAndGo(signed char TarX, signed char TarY){
 	float DeltaLeftSensor;
 	char indicator = 0;
 
+	TarX = TarX*12;
+	TarY = TarY*12;
+
 	while (1){
 		frontIR = getFrontIR();
 		rightIR = getRightIR();

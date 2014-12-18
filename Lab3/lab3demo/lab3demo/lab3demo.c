@@ -75,25 +75,46 @@ void CBOT_main(void)
     {
 		LCD_printf("SW3: Kids");
 		//LCD_clear();
-		LCD_printf("\nSW4: Other demos");
+		LCD_printf("\nSW4: Randoms");
+		LCD_printf("\nSW5: Go to goal");
 		LCD_clear();
 		//LCD_printf("SW4 - Go to Point | -");
 		//LCD_printf("SW5 - Joke | Enter");
 		
 		// Press SW3 to select the angle function.
 		if (ATTINY_get_SW_state(ATTINY_SW3)){
-			//goToGoal(12,12);
-			//while(1){
-				//aggressive();
-				//shy();
-				//Random_Wanderer();
-				//Shy_Random_Wanderer();
-				//goToGoal(12,12);
-				AvoidAndGo(36,36);
-			//}
-		}
-		/*// Press SW4 to go to goal function.
-		else if (ATTINY_get_SW_state(ATTINY_SW4)){
+			while(!ATTINY_get_SW_state(ATTINY_SW5)){
+				LCD_clear();
+				LCD_printf("SW3: Aggressive");
+				LCD_printf("\nSW4: Shy");
+				LCD_printf("\nSW5: Back");
+				if(ATTINY_get_SW_state(ATTINY_SW3)){
+					while(1){
+						aggressive();
+					}
+				}else if(ATTINY_get_SW_state(ATTINY_SW4)){
+					while(1){
+						shy();
+					}
+				}
+			}
+		}else if(ATTINY_get_SW_state(ATTINY_SW4)){
+			LCD_clear();
+			LCD_printf("SW3: Random.");
+			LCD_printf("\nSW4: Subsumption.");
+			LCD_printf("\nSW5: Back");
+			while(!ATTINY_get_SW_state(ATTINY_SW5)){
+				if(ATTINY_get_SW_state(ATTINY_SW3)){
+					while(1){
+						Random_Wanderer();
+					}
+				}else if(ATTINY_get_SW_state(ATTINY_SW4)){
+					while(1){
+						Shy_Random_Wanderer();
+					}
+				}
+			}
+		}else if(ATTINY_get_SW_state(ATTINY_SW5)){
 			// While SW5 is not pressed...
 			while(!ATTINY_get_SW_state(ATTINY_SW5)){
 				LCD_clear();
@@ -106,8 +127,8 @@ void CBOT_main(void)
 					if (cox > 5){
 						cox = -5;
 					}
-				// If SW4 is pressed, the coordinate x is decremented.
-				}else if(ATTINY_get_SW_state(ATTINY_SW4)){
+					// If SW4 is pressed, the coordinate x is decremented.
+					}else if(ATTINY_get_SW_state(ATTINY_SW4)){
 					cox--;
 					// If the x value is < -5, it goes back to 5.
 					if(cox < -5){
@@ -129,7 +150,7 @@ void CBOT_main(void)
 						coy = -5;
 					}
 					// If SW4 is pressed, the coordinate y is decremented.
-				}else if(ATTINY_get_SW_state(ATTINY_SW4)){
+					}else if(ATTINY_get_SW_state(ATTINY_SW4)){
 					coy--;
 					// If the x value is < -5, it goes back to 5
 					if(coy < -5){
@@ -138,19 +159,12 @@ void CBOT_main(void)
 				}
 			}
 			// Calls go to goal point function.
-			//go2Point(cox,coy);
+			AvoidAndGo(cox,coy);
 			// Clears the variables up.
 			cox = 0;
 			coy = 0;
 			LCD_clear();
 		}
-		// If the SW5 button is pressed a silly message is displayed.
-		else if (ATTINY_get_SW_state(ATTINY_SW5)){
-			LCD_clear();
-			LCD_printf("I'm useless...");
-			TMRSRVC_delay(500);
-			LCD_clear();
-		}*/
 		// Keeps running.
     }
 }
@@ -204,16 +218,5 @@ void shy(){
 	Movement_Selector_Excecutor(FSS, BSS, RSS, LSS, TS);
 }
 
-/*void goToGoal(signed char x, signed char y){
-	float frontIR = 0;
-	float rightIR = 0;
-	float leftIR = 0;
-	
-	frontIR = getFrontIR();
-	//backIR = getBackIR();
-	rightIR = getRightIR();
-	leftIR = getLeftIR();
-	
-	AvoidAndGo(x,y,frontIR,rightIR,leftIR);
-}*/
+
 
