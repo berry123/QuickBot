@@ -46,7 +46,7 @@ void Soft_Forward_Right(){
 	// Forward Movement
 	STEPPER_move_rn(STEPPER_BOTH,
 		STEPPER_FWD, 200, 400,	//Left
-		STEPPER_FWD, 150, 400);	//Right
+		STEPPER_FWD, 100, 400);	//Right
 	TMRSRVC_delay(2000); //2 Sec duration
 	STEPPER_stop(STEPPER_BOTH, STEPPER_BRK_OFF);
 }
@@ -54,7 +54,7 @@ void Soft_Forward_Right(){
 void Soft_Forward_Left(){
 	// Forward Movement
 	STEPPER_move_rn(STEPPER_BOTH,
-		STEPPER_FWD, 150, 400,	//Left
+		STEPPER_FWD, 100, 400,	//Left
 		STEPPER_FWD, 200, 400);	//Right
 	TMRSRVC_delay(2000); //2 Sec duration
 	STEPPER_stop(STEPPER_BOTH, STEPPER_BRK_OFF);
@@ -64,7 +64,7 @@ void Soft_Backward_Right(){
 	// Forward Movement
 	STEPPER_move_rn(STEPPER_BOTH,
 		STEPPER_REV, 200, 400,	//Left
-		STEPPER_REV, 150, 400);	//Right
+		STEPPER_REV, 100, 400);	//Right
 	TMRSRVC_delay(2000); //2 Sec duration
 	STEPPER_stop(STEPPER_BOTH, STEPPER_BRK_OFF);
 }
@@ -72,7 +72,7 @@ void Soft_Backward_Right(){
 void Soft_Backward_Left(){
 	// Forward Movement
 	STEPPER_move_rn(STEPPER_BOTH,
-		STEPPER_REV, 150, 400,	//Left
+		STEPPER_REV, 100, 400,	//Left
 		STEPPER_REV, 200, 400);	//Right
 	TMRSRVC_delay(2000); //2 Sec duration
 	STEPPER_stop(STEPPER_BOTH, STEPPER_BRK_OFF);
