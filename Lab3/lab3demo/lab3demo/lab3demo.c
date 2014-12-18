@@ -312,3 +312,4 @@ void goToGoal(signed char x, signed char y){
 	
 	AvoidAndGo(x,y,frontIR,rightIR,leftIR);
 }
+

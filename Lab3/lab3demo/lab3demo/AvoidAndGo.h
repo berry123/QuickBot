@@ -1,33 +1,41 @@
-void AvoidAndGo(signed char TarX, signed char TarY, float frontIR, float rightIR, float leftIR){
-	#define ResetSpeed 100	
-	#define AngleThresh 3
-	#define ItterationTiming 0.05
-	#define WheelBase 8.25
-	#define Tollerance 2
-	#define Steps2DistanceConversionFactor 0.108
 
-	char oldRS = 100;
-	char oldLS = 100;
-	char Thresh = 5;
+//#define ResetSpeed 100
+//#define AngleThresh 3
+//#define ItterationTiming 0.05
+//#define WheelBase 8.25
+//#define Tollerance 2
+//#define Steps2DistanceConversionFactor 0.108
+
+
+void AvoidAndGo(signed char TarX, signed char TarY, float frontIR, float rightIR, float leftIR){
+
+	float AngleThresh = 3;
+	float ItterationTiming = 0.05;
+	float WheelBase = 8.25;
+	char Tollerance = 2;
+	float Steps2DistanceConversionFactor = 0.108;
+	float oldRS = 100;
+	float oldLS = 100;
+	float Thresh = 5;
 	//float frontIR;
 	//float rightIR;
 	//float leftIR;
-	char RightSpeed = ResetSpeed;
-	char LeftSpeed = ResetSpeed;
+	short RightSpeed = 100;
+	short LeftSpeed = 100;
 	char CurX = 0;
 	char CurY = 0;
-	char CurTheta = atan2(TarY,TarX);
-	char DeltaX;
-	char DeltaY;
-	char DeltaTheta;
-	char TarTheta;
-	char RightDistance;
-	char LeftDistance;
-	char Distance;
-	char XDistance;
-	char YDistance;
-	char DeltaRightSensor;
-	char DeltaLeftSensor;
+	float CurTheta = atan2(TarY,TarX);
+	float DeltaX;
+	float DeltaY;
+	float DeltaTheta;
+	float TarTheta;
+	float RightDistance;
+	float LeftDistance;
+	float Distance;
+	float XDistance;
+	float YDistance;
+	float DeltaRightSensor;
+	float DeltaLeftSensor;
 
 	while (1){
 		//frontIR = getFrontIR();
@@ -56,13 +64,13 @@ void AvoidAndGo(signed char TarX, signed char TarY, float frontIR, float rightIR
 			DeltaTheta = TarTheta - CurTheta;
 			if (DeltaTheta > AngleThresh){
 				LeftSpeed++;
-				}
+			}
 			else if (DeltaTheta < -AngleThresh){
 				RightSpeed++;
-				}
+			}
 			else {
-				RightSpeed = ResetSpeed;
-				LeftSpeed = ResetSpeed;
+				RightSpeed = 100;
+				LeftSpeed = 100;
 				}
 			}
 		oldLS = leftIR;
@@ -76,3 +84,4 @@ void AvoidAndGo(signed char TarX, signed char TarY, float frontIR, float rightIR
 		CurX = CurX + XDistance;
 		CurY = CurY + YDistance;
 		}
+}

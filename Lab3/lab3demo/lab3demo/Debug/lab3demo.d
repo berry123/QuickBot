@@ -41,7 +41,8 @@ lab3demo.d lab3demo.o: .././lab3demo.c \
  ../../../../../../Software/libraries/lib-includes/i2c324v221.h \
  ../../../../../../Software/libraries/lib-includes/cbot324v221.h \
  ../../../../../../Software/libraries/lib-includes/capi324v221.h \
- .././Capek_Movements.h .././Movement_Selector.h .././Random_Wanderer.h
+ .././Capek_Movements.h .././Movement_Selector.h .././Random_Wanderer.h \
+ .././AvoidAndGo.h
 
 c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\avr\io.h:
 
@@ -132,3 +133,5 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-g
 .././Movement_Selector.h:
 
 .././Random_Wanderer.h:
+
+.././AvoidAndGo.h:
