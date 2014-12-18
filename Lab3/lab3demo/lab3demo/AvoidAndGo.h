@@ -1,7 +1,7 @@
 
 void AvoidAndGo(signed char TarX, signed char TarY){
 
-	double AngleThresh = 3;
+	double AngleThresh = 3*PI_M/180;
 	float ItterationTiming = 0.05;
 	float WheelBase = 8.25;
 	char Tollerance = 2;
