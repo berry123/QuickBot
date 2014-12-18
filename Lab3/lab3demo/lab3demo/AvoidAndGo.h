@@ -58,8 +58,10 @@ void AvoidAndGo(signed char TarX, signed char TarY){
 			DeltaTheta = TarTheta - CurTheta;
 			if (DeltaTheta > AngleThresh){
 				LeftSpeed = LeftSpeed + 15;
+				RightSpeed = RightSpeed - 15;
 			}else if (DeltaTheta < -AngleThresh){
 				RightSpeed = RightSpeed + 15;
+				LeftSpeed = LeftSpeed - 15;
 			}else{
 				RightSpeed = 100;
 				LeftSpeed = 100;
