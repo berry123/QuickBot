@@ -1,3 +1,9 @@
+// IRlib.h
+/* This header file contains all the IR reading functions for each one of the sensors.*/
+// Alexandre van der Ven de Freitas
+// Peter Richard Olejnik
+// December 18, 2014
+
 
 // IR Channels mapped to ADC inputs
 #define IRRIGHT_CHAN ADC_CHAN3

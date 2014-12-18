@@ -1,11 +1,15 @@
-#include <stdio.h>
-#include <stdlib.h>
+// Random_Wanderer.h
+/* This header file contains functions for the random wanderer behavior and subsumption defined.*/
+// Alexandre van der Ven de Freitas
+// Peter Richard Olejnik
+// December 18, 2014
 
+// Random wanderer function
 void Random_Wanderer(){
 	char RightWheelSpeed;
 	char LeftWheelSpeed;
-	//while(1){
-		// Randomly select speed of wheels
+	
+	// Randomly select speed of wheels
 	RightWheelSpeed = rand() % 201;
 	LeftWheelSpeed = rand() % 201;
 
@@ -13,13 +17,13 @@ void Random_Wanderer(){
 		STEPPER_FWD, LeftWheelSpeed, 400,	//Left
 		STEPPER_FWD, RightWheelSpeed, 400);	//Right
 	TMRSRVC_delay(500); //5 Sec duration
-		//}
 	}
 
+// Subsumption function
 void Shy_Random_Wanderer(){
 	char RightWheelSpeed;
 	char LeftWheelSpeed;
-	//while(1){
+
 	// Randomly select speed of wheels
 	RightWheelSpeed = rand() % 201;
 	LeftWheelSpeed = rand() % 201;
@@ -29,5 +33,4 @@ void Shy_Random_Wanderer(){
 		STEPPER_FWD, RightWheelSpeed, 400);	//Right
 	TMRSRVC_delay(500); //5 Sec duration
 	shy();
-		//}
 }

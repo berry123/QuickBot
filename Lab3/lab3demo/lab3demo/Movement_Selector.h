@@ -1,3 +1,9 @@
+// Movement_Selector.h
+/* This header defines a function using switch case logic provided by the input in order to select what movement should the robot take when a given set of sensors detect barriers.*/
+// Alexandre van der Ven de Freitas
+// Peter Richard Olejnik
+// December 18, 2014
+
 void Movement_Selector_Excecutor(signed char FSS, signed char BSS, signed char RSS, signed char LSS, signed char TS){
 /* where:
 	FSS = Forward Sensor State
