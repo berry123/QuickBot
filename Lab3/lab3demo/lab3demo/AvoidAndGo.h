@@ -42,7 +42,8 @@ void AvoidAndGo(signed char TarX, signed char TarY){
 			STEPPER_stop(STEPPER_BOTH, STEPPER_BRK_OFF);
 		}else if (frontIR < Thresh) {
 			LeftSpeed = LeftSpeed + 15;
-			RightSpeed = RightSpeed - 15;
+			//RightSpeed = RightSpeed - 15;
+			RightSpeed = 0;
 		}else if ((DeltaLeftSensor > 0) && (leftIR < sideThresh)){
 			LeftSpeed = LeftSpeed + 15;
 			RightSpeed = RightSpeed - 15;
@@ -67,7 +68,7 @@ void AvoidAndGo(signed char TarX, signed char TarY){
 		
 		STEPPER_move_rn(STEPPER_BOTH,
 			STEPPER_FWD, LeftSpeed, 400,	//Left
-			STEPPER_FWD, 0, 400);	//Right
+			STEPPER_FWD, RightSpeed, 400);	//Right
 		TMRSRVC_delay(50); //50 mSec duration
 		oldLS = leftIR;
 		oldRS = rightIR;
