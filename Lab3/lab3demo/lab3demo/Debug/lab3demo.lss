@@ -4582,9 +4582,9 @@ void Forward_Move(){
     2b12:	0e 94 c8 06 	call	0xd90	; 0xd90 <STEPPER_move>
 		STEPPER_FWD, 200, 400,	//Left
 		STEPPER_FWD, 200, 400);	//Right
-	TMRSRVC_delay(2000); //2 Sec duration
-    2b16:	80 ed       	ldi	r24, 0xD0	; 208
-    2b18:	97 e0       	ldi	r25, 0x07	; 7
+	TMRSRVC_delay(1000); //2 Sec duration
+    2b16:	88 ee       	ldi	r24, 0xE8	; 232
+    2b18:	93 e0       	ldi	r25, 0x03	; 3
     2b1a:	0e 94 76 0a 	call	0x14ec	; 0x14ec <TMRSRVC_delay>
 	STEPPER_stop(STEPPER_BOTH, STEPPER_BRK_OFF);
     2b1e:	60 e0       	ldi	r22, 0x00	; 0
@@ -4655,9 +4655,9 @@ void Backward_Move(){
     2b94:	0e 94 c8 06 	call	0xd90	; 0xd90 <STEPPER_move>
 		STEPPER_REV, 200, 400,	//Left
 		STEPPER_REV, 200, 400);	//Right
-	TMRSRVC_delay(2000); //2 Sec duration
-    2b98:	80 ed       	ldi	r24, 0xD0	; 208
-    2b9a:	97 e0       	ldi	r25, 0x07	; 7
+	TMRSRVC_delay(1000); //2 Sec duration
+    2b98:	88 ee       	ldi	r24, 0xE8	; 232
+    2b9a:	93 e0       	ldi	r25, 0x03	; 3
     2b9c:	0e 94 76 0a 	call	0x14ec	; 0x14ec <TMRSRVC_delay>
 	STEPPER_stop(STEPPER_BOTH, STEPPER_BRK_OFF);
     2ba0:	60 e0       	ldi	r22, 0x00	; 0
@@ -4758,9 +4758,9 @@ void Hard_Right(){
     2c4c:	0e 94 c8 06 	call	0xd90	; 0xd90 <STEPPER_move>
 		STEPPER_FWD, 200, 400,	//Left
 		STEPPER_FWD, 200, 400);	//Right
-	TMRSRVC_delay(2000); //2 Sec duration
-    2c50:	80 ed       	ldi	r24, 0xD0	; 208
-    2c52:	97 e0       	ldi	r25, 0x07	; 7
+	TMRSRVC_delay(1000); //2 Sec duration
+    2c50:	88 ee       	ldi	r24, 0xE8	; 232
+    2c52:	93 e0       	ldi	r25, 0x03	; 3
     2c54:	0e 94 76 0a 	call	0x14ec	; 0x14ec <TMRSRVC_delay>
 	STEPPER_stop(STEPPER_BOTH, STEPPER_BRK_OFF);
     2c58:	60 e0       	ldi	r22, 0x00	; 0
@@ -4860,9 +4860,9 @@ void Hard_Left(){
     2d02:	0e 94 c8 06 	call	0xd90	; 0xd90 <STEPPER_move>
 		STEPPER_FWD, 200, 400,	//Left
 		STEPPER_FWD, 200, 400);	//Right
-	TMRSRVC_delay(2000); //2 Sec duration
-    2d06:	80 ed       	ldi	r24, 0xD0	; 208
-    2d08:	97 e0       	ldi	r25, 0x07	; 7
+	TMRSRVC_delay(1000); //2 Sec duration
+    2d06:	88 ee       	ldi	r24, 0xE8	; 232
+    2d08:	93 e0       	ldi	r25, 0x03	; 3
     2d0a:	0e 94 76 0a 	call	0x14ec	; 0x14ec <TMRSRVC_delay>
 	STEPPER_stop(STEPPER_BOTH, STEPPER_BRK_OFF);
     2d0e:	60 e0       	ldi	r22, 0x00	; 0
@@ -4933,9 +4933,9 @@ void Soft_Forward_Right(){
     2d84:	0e 94 c8 06 	call	0xd90	; 0xd90 <STEPPER_move>
 		STEPPER_FWD, 200, 400,	//Left
 		STEPPER_FWD, 150, 400);	//Right
-	TMRSRVC_delay(2000); //2 Sec duration
-    2d88:	80 ed       	ldi	r24, 0xD0	; 208
-    2d8a:	97 e0       	ldi	r25, 0x07	; 7
+	TMRSRVC_delay(1000); //2 Sec duration
+    2d88:	88 ee       	ldi	r24, 0xE8	; 232
+    2d8a:	93 e0       	ldi	r25, 0x03	; 3
     2d8c:	0e 94 76 0a 	call	0x14ec	; 0x14ec <TMRSRVC_delay>
 	STEPPER_stop(STEPPER_BOTH, STEPPER_BRK_OFF);
     2d90:	60 e0       	ldi	r22, 0x00	; 0
@@ -5005,9 +5005,9 @@ void Soft_Forward_Left(){
     2e04:	0e 94 c8 06 	call	0xd90	; 0xd90 <STEPPER_move>
 		STEPPER_FWD, 150, 400,	//Left
 		STEPPER_FWD, 200, 400);	//Right
-	TMRSRVC_delay(2000); //2 Sec duration
-    2e08:	80 ed       	ldi	r24, 0xD0	; 208
-    2e0a:	97 e0       	ldi	r25, 0x07	; 7
+	TMRSRVC_delay(1000); //2 Sec duration
+    2e08:	88 ee       	ldi	r24, 0xE8	; 232
+    2e0a:	93 e0       	ldi	r25, 0x03	; 3
     2e0c:	0e 94 76 0a 	call	0x14ec	; 0x14ec <TMRSRVC_delay>
 	STEPPER_stop(STEPPER_BOTH, STEPPER_BRK_OFF);
     2e10:	60 e0       	ldi	r22, 0x00	; 0
@@ -5078,9 +5078,9 @@ void Soft_Backward_Right(){
     2e86:	0e 94 c8 06 	call	0xd90	; 0xd90 <STEPPER_move>
 		STEPPER_REV, 200, 400,	//Left
 		STEPPER_REV, 150, 400);	//Right
-	TMRSRVC_delay(2000); //2 Sec duration
-    2e8a:	80 ed       	ldi	r24, 0xD0	; 208
-    2e8c:	97 e0       	ldi	r25, 0x07	; 7
+	TMRSRVC_delay(1000); //2 Sec duration
+    2e8a:	88 ee       	ldi	r24, 0xE8	; 232
+    2e8c:	93 e0       	ldi	r25, 0x03	; 3
     2e8e:	0e 94 76 0a 	call	0x14ec	; 0x14ec <TMRSRVC_delay>
 	STEPPER_stop(STEPPER_BOTH, STEPPER_BRK_OFF);
     2e92:	60 e0       	ldi	r22, 0x00	; 0
@@ -5151,9 +5151,9 @@ void Soft_Backward_Left(){
     2f08:	0e 94 c8 06 	call	0xd90	; 0xd90 <STEPPER_move>
 		STEPPER_REV, 150, 400,	//Left
 		STEPPER_REV, 200, 400);	//Right
-	TMRSRVC_delay(2000); //2 Sec duration
-    2f0c:	80 ed       	ldi	r24, 0xD0	; 208
-    2f0e:	97 e0       	ldi	r25, 0x07	; 7
+	TMRSRVC_delay(1000); //2 Sec duration
+    2f0c:	88 ee       	ldi	r24, 0xE8	; 232
+    2f0e:	93 e0       	ldi	r25, 0x03	; 3
     2f10:	0e 94 76 0a 	call	0x14ec	; 0x14ec <TMRSRVC_delay>
 	STEPPER_stop(STEPPER_BOTH, STEPPER_BRK_OFF);
     2f14:	60 e0       	ldi	r22, 0x00	; 0
@@ -5250,13 +5250,13 @@ void Movement_Selector_Excecutor(signed char FSS, signed char BSS, signed char R
     2fa2:	05 c0       	rjmp	.+10     	; 0x2fae <Movement_Selector_Excecutor+0x5a>
     2fa4:	21 30       	cpi	r18, 0x01	; 1
     2fa6:	19 f4       	brne	.+6      	; 0x2fae <Movement_Selector_Excecutor+0x5a>
-				Soft_Forward_Right();
-    2fa8:	0e 94 9d 16 	call	0x2d3a	; 0x2d3a <Soft_Forward_Right>
+				Soft_Backward_Right();
+    2fa8:	0e 94 1d 17 	call	0x2e3a	; 0x2e3a <Soft_Backward_Right>
     2fac:	53 c0       	rjmp	.+166    	; 0x3054 <Movement_Selector_Excecutor+0x100>
 				}
 			else {
-				Soft_Forward_Left();
-    2fae:	0e 94 dd 16 	call	0x2dba	; 0x2dba <Soft_Forward_Left>
+				Soft_Backward_Left();
+    2fae:	0e 94 5e 17 	call	0x2ebc	; 0x2ebc <Soft_Backward_Left>
     2fb2:	50 c0       	rjmp	.+160    	; 0x3054 <Movement_Selector_Excecutor+0x100>
 				}
 			break;
