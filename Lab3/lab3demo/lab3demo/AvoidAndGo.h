@@ -15,8 +15,8 @@ void AvoidAndGo(signed char TarX, signed char TarY){
 	float leftIR;
 	short RightSpeed = 100;
 	short LeftSpeed = 100;
-	char CurX = 0;
-	char CurY = 0;
+	float CurX = 0;
+	float CurY = 0;
 	float CurTheta = atan2(TarY,TarX);
 	float DeltaX;
 	float DeltaY;
@@ -44,20 +44,20 @@ void AvoidAndGo(signed char TarX, signed char TarY){
 			LeftSpeed = LeftSpeed + 15;
 			RightSpeed = RightSpeed - 15;
 		}else if ((DeltaLeftSensor > 0) && (leftIR < sideThresh)){
-			LeftSpeed = LeftSpeed + 5;
-			RightSpeed = RightSpeed - 5;
+			LeftSpeed = LeftSpeed + 15;
+			RightSpeed = RightSpeed - 15;
 		}else if ((DeltaRightSensor > 0) && (rightIR < sideThresh)){
-			RightSpeed = RightSpeed + 5;
-			LeftSpeed = LeftSpeed - 5;
+			RightSpeed = RightSpeed + 15;
+			LeftSpeed = LeftSpeed - 15;
 		}else{
 			DeltaX = TarX - CurX;
 			DeltaY = TarY - CurY;
 			TarTheta = atan2(DeltaY,DeltaX);
 			DeltaTheta = TarTheta - CurTheta;
 			if (DeltaTheta > AngleThresh){
-				LeftSpeed = LeftSpeed + 5;
+				LeftSpeed = LeftSpeed + 15;
 			}else if (DeltaTheta < -AngleThresh){
-				RightSpeed = RightSpeed + 5;
+				RightSpeed = RightSpeed + 15;
 			}else{
 				RightSpeed = 100;
 				LeftSpeed = 100;
@@ -67,7 +67,7 @@ void AvoidAndGo(signed char TarX, signed char TarY){
 		
 		STEPPER_move_rn(STEPPER_BOTH,
 			STEPPER_FWD, LeftSpeed, 400,	//Left
-			STEPPER_FWD, RightSpeed, 400);	//Right
+			STEPPER_FWD, 0, 400);	//Right
 		TMRSRVC_delay(50); //50 mSec duration
 		oldLS = leftIR;
 		oldRS = rightIR;

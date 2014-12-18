@@ -83,14 +83,14 @@ void CBOT_main(void)
 		// Press SW3 to select the angle function.
 		if (ATTINY_get_SW_state(ATTINY_SW3)){
 			//goToGoal(12,12);
-			while(1){
+			//while(1){
 				//aggressive();
 				//shy();
 				//Random_Wanderer();
 				//Shy_Random_Wanderer();
 				//goToGoal(12,12);
 				AvoidAndGo(12,12);
-			}
+			//}
 		}
 		/*// Press SW4 to go to goal function.
 		else if (ATTINY_get_SW_state(ATTINY_SW4)){
