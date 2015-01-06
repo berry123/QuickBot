@@ -2,7 +2,7 @@ void wallFollower(){
 	float frontIR, rightIR, leftIR;
 	char lowerLimit = 4;
 	char higherLimit = 6;
-	char FOL, BTW, SLR, SLL, FRD, WTL;
+	char BTW, SLR, SLL, FRD, WTL;
 	
 	frontIR = getFrontIR();
 	rightIR = getRightIR();
@@ -13,8 +13,6 @@ void wallFollower(){
 	FRD = (frontIR <= higherLimit);
 	SLR = (rightIR > higherLimit || leftIR < lowerLimit);
 	SLL = (leftIR > higherLimit || rightIR < lowerLimit);
-	
-	FOL = WTL + BTW;
 
 	if(FRD > 0){
 		//
