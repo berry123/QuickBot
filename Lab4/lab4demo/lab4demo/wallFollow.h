@@ -14,11 +14,8 @@ void wallFollower(){
 	SLR = (rightIR > higherLimit || leftIR < lowerLimit);
 	SLL = (leftIR > higherLimit || rightIR < lowerLimit);
 
-	if(FRD > 0){
-		//
-		// Stops the robot and decides where to turn to.
-		//
-	}else{
+	while(FRD == 0){
+
 		if(SLR > 0){
 		//
 		// Slight Right turn to follow wall
@@ -65,38 +62,27 @@ void wallFinder(){
 	switch(TS){
 		case 1: // If only one sensor is triggered
 			if ((FSS == 1) && (RSS == 0) &&(LSS == 0)){
-				//
-				// Turn 90 degrees and stick to the wall on the right
-				//
+				go2Angle(-90); // Turns the robot to the right as default.
+				wallFollower();
 				}
 			else if ((FSS == 0) && (RSS == 0) &&(LSS == 1)){
-				//
-				// Stick to the Left wall
-				//
+				wallFollower(); // Stick to the wall on the left.
 				}
-			else {
-				//
-				// Stick to the right wall
-				//
+			else if ((FSS == 0) && (RSS == 1) && (LSS == 0)){
+				wallFollower(); // Stick to the wall on the right.
 				}
 			break;
 		case 2: // If two sensors are triggered
 			if ((FSS == 1) && (RSS == 0) &&(LSS == 1)){
-				//
-				// Turn 90 degrees
-				// Stick to the wall on the left
-				//
+				go2Angle(90);
+				wallFollower(); // Stick to the wall on  the left.
 				}
 			else if ((FSS == 1) && (RSS == 1) &&(LSS == 0)){
-				//
-				// Turn 90 degrees
-				// Stick to the wall on the right
-				//
+				go2Angle(-90);
+				wallFollower(); // Stick to the wall on the right
 				}
-			else {
-				//
-				// Center wall following
-				//
+			else if ((FSS == 0) && (RSS == 1) && (LSS == 1)){
+				wallFollower(); // Center wall following
 				}
 			
 			break;
