@@ -1,0 +1,89 @@
+[System]
+Name='Lab4Fuzzy'
+Type='mamdani'
+Version=2.0
+NumInputs=3
+NumOutputs=2
+NumRules=25
+AndMethod='min'
+OrMethod='max'
+ImpMethod='prod'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='ForwardSensor'
+Range=[1 15]
+NumMFs=5
+MF1='Near':'trapmf',[0 0 3 5]
+MF2='Close':'trimf',[3 5 7]
+MF3='MidRange':'trimf',[5 7 9]
+MF4='Far':'trimf',[7 9 12]
+MF5='Distant':'trapmf',[9 12 15 15]
+
+[Input2]
+Name='RightSensor'
+Range=[1 15]
+NumMFs=5
+MF1='Near':'trapmf',[0 0 3 5]
+MF2='Close':'trimf',[3 5 7]
+MF3='MidRange':'trimf',[5 7 9]
+MF4='Far':'trimf',[7 9 12]
+MF5='Distant':'trapmf',[9 12 15 15]
+
+[Input3]
+Name='LeftSensor'
+Range=[1 15]
+NumMFs=5
+MF1='Near':'trapmf',[0 0 3 5]
+MF2='Close':'trimf',[3 5 7]
+MF3='MidRange':'trimf',[5 7 9]
+MF4='Far':'trimf',[7 9 12]
+MF5='Distant':'trapmf',[9 12 15 15]
+
+[Output1]
+Name='RightWheelSpeed'
+Range=[-200 200]
+NumMFs=5
+MF1='(--)':'trimf',[-10 -2 -1]
+MF2='(-)':'trimf',[-2 -1 0]
+MF3='(0)':'trimf',[-1 0 1]
+MF4='(+)':'trimf',[0 1 2]
+MF5='(++)':'trimf',[1 2 10]
+
+[Output2]
+Name='LeftWheelSpeed'
+Range=[-200 200]
+NumMFs=5
+MF1='(--)':'trimf',[-10 -2 -1]
+MF2='(-)':'trimf',[-2 -1 0]
+MF3='(0)':'trimf',[-1 0 1]
+MF4='(+)':'trimf',[0 1 2]
+MF5='(++)':'trimf',[1 2 10]
+
+[Rules]
+0 0 1 1, 1 (1) : 1
+0 0 1 2, 1 (1) : 1
+0 0 1 3, 1 (1) : 1
+0 0 1 4, 2 (1) : 1
+0 0 1 5, 3 (1) : 1
+0 0 2 1, 1 (1) : 1
+0 0 2 2, 1 (1) : 1
+0 0 2 3, 2 (1) : 1
+0 0 2 4, 3 (1) : 1
+0 0 2 5, 4 (1) : 1
+0 0 3 1, 1 (1) : 1
+0 0 3 2, 2 (1) : 1
+0 0 3 3, 3 (1) : 1
+0 0 3 4, 4 (1) : 1
+0 0 3 5, 5 (1) : 1
+0 0 4 1, 2 (1) : 1
+0 0 4 2, 3 (1) : 1
+0 0 4 3, 4 (1) : 1
+0 0 4 4, 5 (1) : 1
+0 0 4 5, 5 (1) : 1
+0 0 5 1, 3 (1) : 1
+0 0 5 2, 4 (1) : 1
+0 0 5 3, 5 (1) : 1
+0 0 5 4, 5 (1) : 1
+0 0 5 5, 5 (1) : 1
