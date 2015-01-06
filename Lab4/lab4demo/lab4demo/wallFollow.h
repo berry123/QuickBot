@@ -15,27 +15,47 @@ void wallFollower(){
 	SLL = (leftIR > higherLimit || rightIR < lowerLimit);
 
 	while(FRD == 0){
-
-		if(SLR > 0){
-		//
-		// Slight Right turn to follow wall
-		//
-		}else if(SLL > 0){
-			//
-			// Slight Left turn to follow wall
-			//
+		if(BTW > 0){
+			// Move forward keeping in the center.
+			if(rightIR > leftIR){
+				go2Angle(-18);
+				Forward_Move();
+			}else{
+				go2Angle(18);
+				Forward_Move();
+			}
+		}else if(WTL > 0){
+			Forward_Move();
 		}else{
-			if(WTL > 0){
-				//
-				// Move forward
-				//
-			}else if(BTW > 0){
-				//
-				// Move forward keeping in the center.
-				//
+			if(SLR > 0){
+				Soft_Forward_Right();
+			}else if(SLL > 0){
+				Soft_Forward_Left();
 			}
 		}
+	
 	}
+	
+	/*while(FRD == 0){
+		if(SLR > 0){
+			Soft_Forward_Right();
+		}else if(SLL > 0){
+			Soft_Forward_Left();
+		}else{
+			if(WTL > 0){
+				Forward_Move();
+			}else if(BTW > 0){
+				// Move forward keeping in the center.
+				if(rightIR > leftIR){
+					go2Angle(-18);
+					Forward_Move();
+				}else{
+					go2Angle(18);
+					Forward_Move();
+				}
+			}
+		}
+	}*/
 	
 }
 
