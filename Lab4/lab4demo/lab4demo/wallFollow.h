@@ -9,31 +9,51 @@ void wallFollower(){
 	leftIR = getLeftIR();
 	
 	WTL = (rightIR >= lowerLimit || rightIR <= higherLimit|| leftIR >= lowerLimit || leftIR <= higherLimit); // within limits of either sides of the walls
-	BTW = ((rightIR >= lowerLimit && leftIR >= lowerLimit) || (rightIR <= higherLimit && leftIR <= higherLimit) || (rightIR >= lowerLimit && leftIR <= higherLimit) || (rightIR <= higherLimit && leftIR >= lowerLimit));
-	FRD = (frontIR <= higherLimit);
+	/*BTW = (((rightIR >= lowerLimit && leftIR >= lowerLimit) && (rightIR <= higherLimit && leftIR <= higherLimit)) || 
+		((rightIR >= lowerLimit && leftIR <= higherLimit) && (rightIR <= higherLimit && leftIR >= lowerLimit)) || 
+		((rightIR >= lowerLimit && leftIR >= lowerLimit) && (rightIR >= lowerLimit && leftIR <= higherLimit)) || 
+		((rightIR >= lowerLimit && leftIR >= lowerLimit) && (rightIR >= lowerLimit && leftIR <= higherLimit)) || 
+		());*/
+	//FRD = (frontIR <= higherLimit);
 	SLR = (rightIR > higherLimit || leftIR < lowerLimit);
 	SLL = (leftIR > higherLimit || rightIR < lowerLimit);
 
-	while(FRD == 0){
-		if(BTW > 0){
-			// Move forward keeping in the center.
-			if(rightIR > leftIR){
-				go2Angle(-18);
-				Forward_Move();
-			}else{
-				go2Angle(18);
-				Forward_Move();
-			}
-		}else if(WTL > 0){
-			Forward_Move();
+	if(frontIR > higherLimit){
+		if(WTL > 0){
+			STEPPER_move_rn(STEPPER_BOTH,
+				STEPPER_FWD, 200, 400,	//Left
+				STEPPER_FWD, 200, 400);	//Right
+				
+			TMRSRVC_delay(1000);
+			
+			LCD_clear();
+			LCD_printf("Is following a wall");
+							
 		}else{
 			if(SLR > 0){
-				Soft_Forward_Right();
+				STEPPER_move_rn(STEPPER_BOTH,
+					STEPPER_FWD, 200, 400,	//Left
+					STEPPER_FWD, 100, 400);	//Right
+					
+				TMRSRVC_delay(500);
+				
+				LCD_clear();
+				LCD_printf("Slight right");
+
 			}else if(SLL > 0){
-				Soft_Forward_Left();
+				STEPPER_move_rn(STEPPER_BOTH,
+					STEPPER_FWD, 100, 400,	//Left
+					STEPPER_FWD, 200, 400);	//Right
+					
+				TMRSRVC_delay(500);
+				
+				LCD_clear();
+				LCD_printf("Slight Left");
 			}
 		}
 	
+	}else{
+		STEPPER_stop(STEPPER_BOTH, STEPPER_BRK_OFF);
 	}
 	
 	/*while(FRD == 0){
@@ -84,6 +104,7 @@ void wallFinder(){
 			if ((FSS == 1) && (RSS == 0) &&(LSS == 0)){
 				go2Angle(-90); // Turns the robot to the right as default.
 				wallFollower();
+				
 				}
 			else if ((FSS == 0) && (RSS == 0) &&(LSS == 1)){
 				wallFollower(); // Stick to the wall on the left.
