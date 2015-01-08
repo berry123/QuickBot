@@ -3,9 +3,9 @@ void rightFollow(void){
 	char higherLimit = 6;
 	char ICT = 9;
 	float LP, RP, LI, RI, LWS, RWS, frontIR, rightIR, leftIR;
-	char base = 100;
-	char KP = 10;
-	char KI = 1;
+	char base = 120;
+	char KP = 20;
+	char KI = 2;
 	while(1){
 		frontIR = getFrontIR();
 		rightIR = getRightIR();
@@ -70,6 +70,7 @@ void rightFollow(void){
 					STEPPER_FWD, 200, 400,	//Left
 					STEPPER_FWD, 200, 400);	//Right
 			while(!(rightIR < ICT)){
+				rightIR = getRightIR();
 				TMRSRVC_delay(100);
 			}
 			LP = 0;
@@ -85,7 +86,7 @@ void leftFollow(void){
 	char higherLimit = 6;
 	char ICT = 9;
 	float LP, RP, LI, RI, LWS, RWS, frontIR, rightIR, leftIR;
-	char base = 100;
+	char base = 120;
 	char KP = 10;
 	char KI = 1;
 	while(1){
@@ -152,6 +153,7 @@ void leftFollow(void){
 					STEPPER_FWD, 200, 400,	//Left
 					STEPPER_FWD, 200, 400);	//Right
 			while(!(leftIR < ICT)){
+				leftIR = getLeftIR();
 				TMRSRVC_delay(100);
 			}
 			LP = 0;
