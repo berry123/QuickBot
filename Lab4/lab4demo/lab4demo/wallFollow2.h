@@ -68,21 +68,24 @@ void rightFollow(void){
 			LCD_printf("Turning Right\n");
 
 			TMRSRVC_delay(2000);
-			STEPPER_move_rn(STEPPER_BOTH,
-					STEPPER_FWD, 200, 400,	//Left
-					STEPPER_REV, 200, 400);	//Right
-			TMRSRVC_delay(500);
-			STEPPER_move_rn(STEPPER_BOTH,
-					STEPPER_FWD, 200, 400,	//Left
-					STEPPER_FWD, 200, 400);	//Right
-			while(!(rightIR < ICT)){
-				rightIR = getRightIR();
-				TMRSRVC_delay(100);
+			rightIR = getRightIR();
+			if (!(frontIR < ICT) && !(rightIR < ICT)){
+				STEPPER_move_rn(STEPPER_BOTH,
+						STEPPER_FWD, 200, 400,	//Left
+						STEPPER_REV, 200, 400);	//Right
+				TMRSRVC_delay(500);
+				STEPPER_move_rn(STEPPER_BOTH,
+						STEPPER_FWD, 200, 400,	//Left
+						STEPPER_FWD, 200, 400);	//Right
+				while(!(rightIR < ICT)){
+					rightIR = getRightIR();
+					TMRSRVC_delay(100);
+				}
+				LP = 0;
+				RP = 0;
+				LI = 0;
+				RI = 0;	
 			}
-			LP = 0;
-			RP = 0;
-			LI = 0;
-			RI = 0;	
 		}
 	}
 }
@@ -157,21 +160,24 @@ void leftFollow(void){
 			LCD_printf("Turning Left\n");
 
 			TMRSRVC_delay(2000);
-			STEPPER_move_rn(STEPPER_BOTH,
-					STEPPER_REV, 200, 400,	//Left
-					STEPPER_FWD, 200, 400);	//Right
-			TMRSRVC_delay(500);
-			STEPPER_move_rn(STEPPER_BOTH,
-					STEPPER_FWD, 200, 400,	//Left
-					STEPPER_FWD, 200, 400);	//Right
-			while(!(leftIR < ICT)){
-				leftIR = getLeftIR();
-				TMRSRVC_delay(100);
+			leftIR = getLeftIR();
+			if (!(frontIR < ICT) && !(leftIR < ICT)){
+				STEPPER_move_rn(STEPPER_BOTH,
+						STEPPER_REV, 200, 400,	//Left
+						STEPPER_FWD, 200, 400);	//Right
+				TMRSRVC_delay(500);
+				STEPPER_move_rn(STEPPER_BOTH,
+						STEPPER_FWD, 200, 400,	//Left
+						STEPPER_FWD, 200, 400);	//Right
+				while(!(leftIR < ICT)){
+					leftIR = getLeftIR();
+					TMRSRVC_delay(100);
+				}
+				LP = 0;
+				RP = 0;
+				LI = 0;
+				RI = 0;	
 			}
-			LP = 0;
-			RP = 0;
-			LI = 0;
-			RI = 0;	
 		}
 	}
 }
