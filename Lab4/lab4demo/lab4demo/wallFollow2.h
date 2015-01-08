@@ -54,7 +54,10 @@ void rightFollow(void){
 			LCD_printf("Turning Left\n");
 
 			TMRSRVC_delay(2000);
-			go2Angle(90);
+			STEPPER_move_rn(STEPPER_BOTH,
+					STEPPER_BCK, 200, 400,	//Left
+					STEPPER_FWD, 200, 400);	//Right
+			TMRSRVC_delay(500);
 			LP = 0;
 			RP = 0;
 			LI = 0;
@@ -65,7 +68,10 @@ void rightFollow(void){
 			LCD_printf("Turning Right\n");
 
 			TMRSRVC_delay(2000);
-			go2Angle(-90);
+			STEPPER_move_rn(STEPPER_BOTH,
+					STEPPER_FWD, 200, 400,	//Left
+					STEPPER_BCK, 200, 400);	//Right
+			TMRSRVC_delay(500);
 			STEPPER_move_rn(STEPPER_BOTH,
 					STEPPER_FWD, 200, 400,	//Left
 					STEPPER_FWD, 200, 400);	//Right
@@ -137,7 +143,10 @@ void leftFollow(void){
 			LCD_printf("Turning Right\n");
 
 			TMRSRVC_delay(2000);
-			go2Angle(-90);
+			STEPPER_move_rn(STEPPER_BOTH,
+					STEPPER_FWD, 200, 400,	//Left
+					STEPPER_BCK, 200, 400);	//Right
+			TMRSRVC_delay(500);
 			LP = 0;
 			RP = 0;
 			LI = 0;
@@ -148,7 +157,10 @@ void leftFollow(void){
 			LCD_printf("Turning Left\n");
 
 			TMRSRVC_delay(2000);
-			go2Angle(90);
+			STEPPER_move_rn(STEPPER_BOTH,
+					STEPPER_BCK, 200, 400,	//Left
+					STEPPER_FWD, 200, 400);	//Right
+			TMRSRVC_delay(500);
 			STEPPER_move_rn(STEPPER_BOTH,
 					STEPPER_FWD, 200, 400,	//Left
 					STEPPER_FWD, 200, 400);	//Right
