@@ -1,7 +1,7 @@
 void rightFollow(void){
 	char lowerLimit = 4.75;
 	char higherLimit = 5.25;
-	char ICT = 10;
+	char ICT = 12;
 	float LP, RP, LI, RI, LWS, RWS, frontIR, rightIR, leftIR;
 	char base = 120;
 	char KP = 20;
@@ -181,5 +181,63 @@ void leftFollow(void){
 				RI = 0;	
 			}
 		}
+	}
+}
+void centerFollow(void){
+	char tollerance_band = 0.5;
+	float LP, RP, LI, RI, LWS, RWS, frontIR, rightIR, leftIR, avrageIR;
+	char base = 120;
+	char KP = 20;
+	char KI = 2;
+	rightIR = getRightIR();
+	leftIR = getLeftIR();
+	while ((leftIR < ICT) && (rightIR < ICT)){
+		rightIR = getRightIR();
+		leftIR = getLeftIR();
+		avrageIR = (rightIR + leftIR)/2;
+		if ((rightIR - avrageIR) > tollerance_band){
+		//means left of center
+			LCD_clear();
+			LCD_printf("Left of\n");
+			LCD_printf("Center\n");
+
+			LP = rightIR - avrageIR;
+			RP = 0;
+			LI = LI++;
+			RI = 0;
+		} else if ((rightIR - avrageIR) < (-tollerance_band)) {
+		//means right of center
+			LCD_clear();
+			LCD_printf("Right of\n");
+			LCD_printf("Center\n");
+
+			LP = 0;
+			RP = leftIR - avrageIR;
+			LI = 0;
+			RI = RI++;
+		} else {
+		//means center of center
+			LCD_clear();
+			LCD_printf("At Target\n");
+			LCD_printf("Center\n");
+
+			LP = 0;
+			RP = 0;
+			LI = 0;
+			RI = 0;
+			}
+		}
+		LWS = KP*LP + KI*LI + base;
+		RWS = KP*RP + KI*RI + base;
+		
+		// Forward Movement
+		STEPPER_move_rn(STEPPER_BOTH,
+			STEPPER_FWD, LWS, 400,	//Left
+			STEPPER_FWD, RWS, 400);	//Right
+	}
+	if (leftIR < ICT){
+		leftFollow();
+	} else if (rightIR < ICT){
+		rightFollow();
 	}
 }
