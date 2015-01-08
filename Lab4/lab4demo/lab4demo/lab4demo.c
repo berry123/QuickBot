@@ -74,7 +74,7 @@ void CBOT_main(void)
 				frontIR = getFrontIR();
 				rightIR = getRightIR();
 				leftIR = getLeftIR();
-				if (leftIR < ICT) && (rightIR < ICT) {
+				if ((leftIR < ICT) && (rightIR < ICT)) {
 					centerFollow();
 				} else if (rightIR < ICT){
 					rightFollow();
