@@ -93,16 +93,17 @@ void CBOT_main(void)
 					TMRSRVC_delay(500);
 					if (leftIR > rightIR){
 						//turn right
-						STEPPER_set_mode(STEPPER_BOTH,STEPPER_STEP_MODE);
-						go2angle(-90);
-						STEPPER_set_mode(STEPPER_BOTH,STEPPER_FREERUNNING_MODE);
+						STEPPER_move_rn(STEPPER_BOTH,
+							STEPPER_FWD, 200, 400,	//Left
+							STEPPER_REV, 200, 400);	//Right
+						TMRSRVC_delay(500);
 
 						leftFollow();
 					}else {
-						//turn left
-						STEPPER_set_mode(STEPPER_BOTH,STEPPER_STEP_MODE);
-						go2angle(90);
-						STEPPER_set_mode(STEPPER_BOTH,STEPPER_FREERUNNING_MODE);
+						STEPPER_move_rn(STEPPER_BOTH,
+							STEPPER_REV, 200, 400,	//Left
+							STEPPER_FWD, 200, 400);	//Right
+						TMRSRVC_delay(500);
 					
 						rightFollow();
 					}
