@@ -85,14 +85,14 @@ void CBOT_main(void)
 					TMRSRVC_delay(500);
 					if (leftIR > rightIR){
 						STEPPER_move_rn(STEPPER_BOTH,
-							STEPPER_REV, 200, 400,	//Left
-							STEPPER_FWD, 200, 400);	//Right
+							STEPPER_FWD, 200, 400,	//Left
+							STEPPER_REV, 200, 400);	//Right
 						TMRSRVC_delay(500);
 						leftFollow();
 					}else {
 						STEPPER_move_rn(STEPPER_BOTH,
-							STEPPER_FWD, 200, 400,	//Left
-							STEPPER_REV, 200, 400);	//Right
+							STEPPER_REV, 200, 400,	//Left
+							STEPPER_FWD, 200, 400);	//Right
 						TMRSRVC_delay(500);
 
 						rightFollow();
