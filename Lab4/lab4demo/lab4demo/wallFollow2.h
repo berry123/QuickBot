@@ -7,6 +7,9 @@ void rightFollow(void){
 	char KP = 10;
 	char KI = 1;
 	while(1){
+		frontIR = getFrontIR();
+		rightIR = getRightIR();
+		leftIR = getLeftIR();
 		if(!(frontIR < ICT) && (rightIR < ICT)){
 			if (rightIR < lowerLimit){
 				LCD_clear();
@@ -86,6 +89,9 @@ void leftFollow(void){
 	char KP = 10;
 	char KI = 1;
 	while(1){
+		frontIR = getFrontIR();
+		rightIR = getRightIR();
+		leftIR = getLeftIR();
 		if(!(frontIR < ICT) && (leftIR < ICT)){
 			if (leftIR < lowerLimit){
 				LCD_clear();
