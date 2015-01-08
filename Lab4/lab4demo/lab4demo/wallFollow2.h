@@ -189,6 +189,7 @@ void centerFollow(void){
 	char base = 120;
 	char KP = 20;
 	char KI = 2;
+	char ICT = 12;
 	rightIR = getRightIR();
 	leftIR = getLeftIR();
 	while ((leftIR < ICT) && (rightIR < ICT)){
@@ -234,10 +235,10 @@ void centerFollow(void){
 		STEPPER_move_rn(STEPPER_BOTH,
 			STEPPER_FWD, LWS, 400,	//Left
 			STEPPER_FWD, RWS, 400);	//Right
-	}
-	if (leftIR < ICT){
-		leftFollow();
-	} else if (rightIR < ICT){
-		rightFollow();
-	}
+	
+		if (leftIR < ICT){
+			leftFollow();
+		} else if (rightIR < ICT){
+			rightFollow();
+		}
 }
