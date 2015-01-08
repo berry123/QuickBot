@@ -1,6 +1,6 @@
 void rightFollow(void){
-	char lowerLimit = 4;
-	char higherLimit = 6;
+	char lowerLimit = 4.75;
+	char higherLimit = 5.25;
 	char ICT = 12;
 	float LP, RP, LI, RI, LWS, RWS, frontIR, rightIR, leftIR;
 	char base = 120;
@@ -91,13 +91,13 @@ void rightFollow(void){
 }
 
 void leftFollow(void){
-	char lowerLimit = 4;
-	char higherLimit = 6;
+	char lowerLimit = 4.75;
+	char higherLimit = 5.25;
 	char ICT = 12;
 	float LP, RP, LI, RI, LWS, RWS, frontIR, rightIR, leftIR;
 	char base = 120;
-	char KP = 10;
-	char KI = 1;
+	char KP = 20;
+	char KI = 2;
 	while(1){
 		frontIR = getFrontIR();
 		rightIR = getRightIR();
