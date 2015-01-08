@@ -205,7 +205,7 @@ void centerFollow(void){
 			RP = 0;
 			LI = LI++;
 			RI = 0;
-		} else if ((rightIR - avrageIR) < (-tollerance_band)) {
+		} else if ((avrageIR - rightIR) > (tollerance_band)) {
 		//means right of center
 			LCD_clear();
 			LCD_printf("Right of\n");
