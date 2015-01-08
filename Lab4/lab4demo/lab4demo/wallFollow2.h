@@ -15,6 +15,7 @@ void rightFollow(void){
 		if((frontIR > ICT) && (rightIR < ICT)){
 			if (rightIR < lowerLimit){
 				LCD_clear();
+				LCD_printf("Right Follow\n");
 				LCD_printf("Inside Target\n");
 				LCD_printf("Range\n");
 
@@ -24,6 +25,7 @@ void rightFollow(void){
 				RI = RI++;
 			}else if(rightIR > higherLimit){
 				LCD_clear();
+				LCD_printf("Right Follow\n");
 				LCD_printf("Outside Target\n");
 				LCD_printf("Range\n");
 
@@ -33,6 +35,7 @@ void rightFollow(void){
 				RI = 0;
 			}else{
 				LCD_clear();
+				LCD_printf("Right Follow\n");
 				LCD_printf("At Target\n");
 				LCD_printf("Range\n");
 
@@ -52,6 +55,7 @@ void rightFollow(void){
 		
 		}else if((frontIR < ICT) && (rightIR < ICT)){
 			LCD_clear();
+			LCD_printf("Right Follow\n");
 			LCD_printf("Wall in Front\n");
 			LCD_printf("Turning Left\n");
 
@@ -69,6 +73,7 @@ void rightFollow(void){
 			RI = 0;
 		}else if((frontIR > ICT) && (rightIR > ICT)){
 			LCD_clear();
+			LCD_printf("Right Follow\n");
 			LCD_printf("Lack of Wall\n");
 			LCD_printf("Turning Right\n");
 
@@ -116,6 +121,7 @@ void leftFollow(void){
 		if((frontIR > ICT) && (leftIR < ICT)){
 			if (leftIR < lowerLimit){
 				LCD_clear();
+				LCD_printf("Left Follow\n");
 				LCD_printf("Inside Target\n");
 				LCD_printf("Range\n");
 
@@ -125,6 +131,7 @@ void leftFollow(void){
 				RI = 0;
 			}else if(leftIR > higherLimit){
 				LCD_clear();
+				LCD_printf("Left Follow\n");
 				LCD_printf("Outside Target\n");
 				LCD_printf("Range\n");
 
@@ -134,6 +141,7 @@ void leftFollow(void){
 				RI = RI++;
 			}else{
 				LCD_clear();
+				LCD_printf("Left Follow\n");
 				LCD_printf("At Target\n");
 				LCD_printf("Range\n");
 
@@ -153,6 +161,7 @@ void leftFollow(void){
 		
 		}else if((frontIR < ICT) && (leftIR < ICT)){
 			LCD_clear();
+			LCD_printf("Left Follow\n");
 			LCD_printf("Wall in Front\n");
 			LCD_printf("Turning Right\n");
 			
@@ -170,6 +179,7 @@ void leftFollow(void){
 			RI = 0;	
 		}else if((frontIR > ICT) && (leftIR > ICT)){
 			LCD_clear();
+			LCD_printf("Left Follow\n");
 			LCD_printf("Lack of Wall\n");
 			LCD_printf("Turning Left\n");
 
@@ -217,6 +227,7 @@ void centerFollow(void){
 		if ((rightIR - avrageIR) > tollerance_band){
 		//means left of center
 			LCD_clear();
+			LCD_printf("Center Follow\n");
 			LCD_printf("Left of\n");
 			LCD_printf("Center\n");
 
@@ -227,6 +238,7 @@ void centerFollow(void){
 		} else if ((avrageIR - rightIR) > (tollerance_band)) {
 		//means right of center
 			LCD_clear();
+			LCD_printf("Center Follow\n");
 			LCD_printf("Right of\n");
 			LCD_printf("Center\n");
 

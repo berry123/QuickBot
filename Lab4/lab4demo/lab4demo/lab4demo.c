@@ -65,8 +65,8 @@ void CBOT_main(void)
 		// Main menu:
 		LCD_clear();
 		LCD_printf("SW3: Wall Follow\n");
-		LCD_printf("\nSW4: AvoidFollow\n");
-		LCD_printf("\nSW5: Target Follow");
+		LCD_printf("SW4: AvoidFollow\n");
+		LCD_printf("SW5: Target Follow\n");
 		
 		// Press SW3 to select one of the kids.
 		if (ATTINY_get_SW_state(ATTINY_SW3)){
@@ -82,8 +82,8 @@ void CBOT_main(void)
 					leftFollow();
 				} else if (frontIR < ICT) {
 					LCD_clear();
-					LCD_printf("Forward,\n");
-					LCD_printf("then Follow\n");
+					LCD_printf("Forward,");
+					LCD_printf("\nthen Follow");
 
 					STEPPER_move_rn(STEPPER_BOTH,
 						STEPPER_FWD, 150, 400,	//Left
