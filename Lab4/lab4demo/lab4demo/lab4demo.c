@@ -68,7 +68,9 @@ void CBOT_main(void)
 		
 		// Press SW3 to select one of the kids.
 		if (ATTINY_get_SW_state(ATTINY_SW3)){
-			rightFollow();
+			while(1){
+				rightFollow();
+			}
 			//wallFinder();
 			/*while(!ATTINY_get_SW_state(ATTINY_SW5)){ // SW5 returns to main menu
 				LCD_clear();
@@ -88,7 +90,9 @@ void CBOT_main(void)
 				}
 			}*/
 		}else if(ATTINY_get_SW_state(ATTINY_SW4)){
-			leftFollow();
+			while(1){
+				leftFollow();
+			}
 
 			/*
 			LCD_clear();

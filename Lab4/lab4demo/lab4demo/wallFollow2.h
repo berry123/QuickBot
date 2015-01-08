@@ -55,7 +55,7 @@ void rightFollow(void){
 
 			TMRSRVC_delay(2000);
 			STEPPER_move_rn(STEPPER_BOTH,
-					STEPPER_BCK, 200, 400,	//Left
+					STEPPER_REV, 200, 400,	//Left
 					STEPPER_FWD, 200, 400);	//Right
 			TMRSRVC_delay(500);
 			LP = 0;
@@ -70,7 +70,7 @@ void rightFollow(void){
 			TMRSRVC_delay(2000);
 			STEPPER_move_rn(STEPPER_BOTH,
 					STEPPER_FWD, 200, 400,	//Left
-					STEPPER_BCK, 200, 400);	//Right
+					STEPPER_REV, 200, 400);	//Right
 			TMRSRVC_delay(500);
 			STEPPER_move_rn(STEPPER_BOTH,
 					STEPPER_FWD, 200, 400,	//Left
@@ -145,7 +145,7 @@ void leftFollow(void){
 			TMRSRVC_delay(2000);
 			STEPPER_move_rn(STEPPER_BOTH,
 					STEPPER_FWD, 200, 400,	//Left
-					STEPPER_BCK, 200, 400);	//Right
+					STEPPER_REV, 200, 400);	//Right
 			TMRSRVC_delay(500);
 			LP = 0;
 			RP = 0;
@@ -158,7 +158,7 @@ void leftFollow(void){
 
 			TMRSRVC_delay(2000);
 			STEPPER_move_rn(STEPPER_BOTH,
-					STEPPER_BCK, 200, 400,	//Left
+					STEPPER_REV, 200, 400,	//Left
 					STEPPER_FWD, 200, 400);	//Right
 			TMRSRVC_delay(500);
 			STEPPER_move_rn(STEPPER_BOTH,
