@@ -59,7 +59,7 @@ void CBOT_main(void)
 	LCD_printf("\nReady!");
 	LCD_clear();
 	
-	STEPPER_set_mode(STEPPER_BOTH,STEPPER_FREERUNNING_MODE);
+	STEPPER_set_mode(STEPPER_BOTH, STEPPER_NORMAL_MODE);
 
 	// While loop that keeps the micro controller running begins here:
     while(1)
@@ -94,15 +94,15 @@ void CBOT_main(void)
 					if (leftIR > rightIR){
 						//turn right
 						STEPPER_set_mode(STEPPER_BOTH,STEPPER_STEP_MODE);
-						go2angle(-90);
-						STEPPER_set_mode(STEPPER_BOTH,STEPPER_FREERUNNING_MODE);
+						go2Angle(-90);
+						STEPPER_set_mode(STEPPER_BOTH,STEPPER_NORMAL_MODE);
 
 						leftFollow();
 					}else {
 						//turn left
 						STEPPER_set_mode(STEPPER_BOTH,STEPPER_STEP_MODE);
-						go2angle(90);
-						STEPPER_set_mode(STEPPER_BOTH,STEPPER_FREERUNNING_MODE);
+						go2Angle(90);
+						STEPPER_set_mode(STEPPER_BOTH,STEPPER_NORMAL_MODE);
 					
 						rightFollow();
 					}
