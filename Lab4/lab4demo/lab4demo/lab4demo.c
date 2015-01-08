@@ -95,7 +95,7 @@ void CBOT_main(void)
 							STEPPER_FWD, 200, 400,	//Left
 							STEPPER_REV, 200, 400);	//Right
 						TMRSRVC_delay(500);*/
-						go2angle(-90);
+						go2Angle(-90);
 
 						leftFollow();
 					}else {
@@ -103,7 +103,7 @@ void CBOT_main(void)
 							STEPPER_REV, 200, 400,	//Left
 							STEPPER_FWD, 200, 400);	//Right
 						TMRSRVC_delay(500);*/
-						go2angle(90);
+						go2Angle(90);
 					
 						rightFollow();
 					}
