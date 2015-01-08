@@ -63,10 +63,7 @@ void rightFollow(void){
 				STEPPER_FWD, 150, 400,	//Left
 				STEPPER_FWD, 150, 400);	//Right
 			TMRSRVC_delay(500);
-			STEPPER_move_rn(STEPPER_BOTH,
-					STEPPER_REV, 200, 400,	//Left
-					STEPPER_FWD, 200, 400);	//Right
-			TMRSRVC_delay(500);
+			go2angle(90);
 			LP = 0;
 			RP = 0;
 			LI = 0;
@@ -83,10 +80,7 @@ void rightFollow(void){
 			TMRSRVC_delay(500);
 			rightIR = getRightIR();
 			if ((frontIR > ICT) && (rightIR > ICT)){
-				STEPPER_move_rn(STEPPER_BOTH,
-						STEPPER_FWD, 200, 400,	//Left
-						STEPPER_REV, 200, 400);	//Right
-				TMRSRVC_delay(500);
+				go2angle(-90);
 				STEPPER_move_rn(STEPPER_BOTH,
 						STEPPER_FWD, 150, 400,	//Left
 						STEPPER_FWD, 150, 400);	//Right
@@ -169,10 +163,7 @@ void leftFollow(void){
 				STEPPER_FWD, 150, 400,	//Left
 				STEPPER_FWD, 150, 400);	//Right
 			TMRSRVC_delay(500);
-			STEPPER_move_rn(STEPPER_BOTH,
-					STEPPER_FWD, 200, 400,	//Left
-					STEPPER_REV, 200, 400);	//Right
-			TMRSRVC_delay(500);
+			go2angle(-90);
 			LP = 0;
 			RP = 0;
 			LI = 0;
@@ -189,10 +180,7 @@ void leftFollow(void){
 			TMRSRVC_delay(500);
 			leftIR = getLeftIR();
 			if ((frontIR > ICT) && (leftIR > ICT)){
-				STEPPER_move_rn(STEPPER_BOTH,
-						STEPPER_REV, 200, 400,	//Left
-						STEPPER_FWD, 200, 400);	//Right
-				TMRSRVC_delay(500);
+				go2angle(90);
 				STEPPER_move_rn(STEPPER_BOTH,
 						STEPPER_FWD, 150, 400,	//Left
 						STEPPER_FWD, 150, 400);	//Right

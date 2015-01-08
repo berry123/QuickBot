@@ -29,6 +29,7 @@ void CBOT_main(void)
 	signed char cox = 0;
 	signed char coy = 0;
 	char ICT = 10;
+	char IsWall = 0;
 	float frontIR, rightIR, leftIR;
 	
 	// Opening LCD subsystem management.
@@ -91,22 +92,15 @@ void CBOT_main(void)
 						STEPPER_FWD, 150, 400,	//Left
 						STEPPER_FWD, 150, 400);	//Right
 					TMRSRVC_delay(500);
+					rightIR = getRightIR();
+					leftIR = getLeftIR();
 					if (leftIR > rightIR){
 						//turn right
-						STEPPER_move_rn(STEPPER_BOTH,
-							STEPPER_FWD, 200, 400,	//Left
-							STEPPER_REV, 200, 400);	//Right
-						TMRSRVC_delay(500);
-
+						go2angle(-90);
 						leftFollow();
 					}else {
 						//turn left
-						STEPPER_move_rn(STEPPER_BOTH,
-							STEPPER_REV, 200, 400,	//Left
-							STEPPER_FWD, 200, 400);	//Right
-						TMRSRVC_delay(500);
-
-					
+						go2angle(90);
 						rightFollow();
 					}
 				} else {
@@ -117,31 +111,58 @@ void CBOT_main(void)
 					Random_Wanderer();
 				}
 			}
-			//wallFinder();
-			/*while(!ATTINY_get_SW_state(ATTINY_SW5)){ // SW5 returns to main menu
-				LCD_clear();
-				LCD_printf("SW3: Aggressive");
-				LCD_printf("\nSW4: Shy");
-				LCD_printf("\nSW5: Back");
-				if(ATTINY_get_SW_state(ATTINY_SW3)){
-					while(1){
-						// Selects the aggressive kid
-						aggressive();
-					}
-				}else if(ATTINY_get_SW_state(ATTINY_SW4)){
-					while(1){
-						// Selects the shy kid
-						shy();
-					}
-				}
-			}*/
 		}else if(ATTINY_get_SW_state(ATTINY_SW4)){
 			while(1){
+				frontIR = getFrontIR();
 				rightIR = getRightIR();
 				leftIR = getLeftIR();
-				if ((leftIR < ICT) && (rightIR < ICT)){
+				if ((leftIR < ICT) && (rightIR < ICT)) {
 					centerFollow();
+				} else if (rightIR < ICT){
+					rightFollow();
+				} else if (leftIR < ICT) {
+					leftFollow();
+				} else if (frontIR < ICT) {
+					STEPPER_move_rn(STEPPER_BOTH,
+						STEPPER_FWD, 0, 400,	//Left
+						STEPPER_FWD, 0, 400);	//Right
+					go2angle(45);
+					frontIR = getFrontIR();
+					if (frontIR < ICT){
+					
+					}
+					go2angle(-90);
+					frontIR = getFrontIR();
+					if (frontIR < ICT){
+
+					}
+					if (IsWall > 0){
+						go2point(5,0);
+					} else {
+						LCD_clear();
+						LCD_printf("Forward,");
+						LCD_printf("\nthen Follow");
+
+						STEPPER_move_rn(STEPPER_BOTH,
+							STEPPER_FWD, 150, 400,	//Left
+							STEPPER_FWD, 150, 400);	//Right
+						TMRSRVC_delay(500);
+						rightIR = getRightIR();
+						leftIR = getLeftIR();
+						if (leftIR > rightIR){
+							//turn right
+							go2angle(-90);
+							leftFollow();
+						}else {
+							//turn left
+							go2angle(90);
+							rightFollow();
+						}					
 				} else {
+					LCD_clear();
+					LCD_printf("Random\n");
+					LCD_printf("Wanderer\n");
+
 					Random_Wanderer();
 				}
 			}
