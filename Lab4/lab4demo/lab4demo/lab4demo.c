@@ -16,6 +16,7 @@
 #include "IRlib.h"				// IR sensor reading functions.
 #include "goToPoint.h"			// Go to point functions.
 #include "wallFollow.h"
+#include "wallFollow2.h"
 
 // Used function prototypes.
 //void aggressive();
