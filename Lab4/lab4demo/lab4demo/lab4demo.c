@@ -90,17 +90,21 @@ void CBOT_main(void)
 						STEPPER_FWD, 150, 400);	//Right
 					TMRSRVC_delay(500);
 					if (leftIR > rightIR){
-						STEPPER_move_rn(STEPPER_BOTH,
+						//turn right
+						/*STEPPER_move_rn(STEPPER_BOTH,
 							STEPPER_FWD, 200, 400,	//Left
 							STEPPER_REV, 200, 400);	//Right
-						TMRSRVC_delay(500);
+						TMRSRVC_delay(500);*/
+						go2angle(-90);
+
 						leftFollow();
 					}else {
-						STEPPER_move_rn(STEPPER_BOTH,
+						/*STEPPER_move_rn(STEPPER_BOTH,
 							STEPPER_REV, 200, 400,	//Left
 							STEPPER_FWD, 200, 400);	//Right
-						TMRSRVC_delay(500);
-
+						TMRSRVC_delay(500);*/
+						go2angle(90);
+					
 						rightFollow();
 					}
 				} else {
