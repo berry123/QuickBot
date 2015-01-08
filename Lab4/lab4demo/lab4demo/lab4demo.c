@@ -93,6 +93,7 @@ void CBOT_main(void)
 					TMRSRVC_delay(500);
 					if (leftIR > rightIR){
 						//turn right
+<<<<<<< HEAD
 						STEPPER_set_mode(STEPPER_BOTH,STEPPER_STEP_MODE);
 						go2angle(-90);
 						STEPPER_set_mode(STEPPER_BOTH,STEPPER_FREERUNNING_MODE);
@@ -102,6 +103,7 @@ void CBOT_main(void)
 						STEPPER_set_mode(STEPPER_BOTH,STEPPER_STEP_MODE);
 						go2angle(90);
 						STEPPER_set_mode(STEPPER_BOTH,STEPPER_FREERUNNING_MODE);
+>>>>>>> 42341484d76c7a02b8f0a05cd62364cf145d4496
 					
 						rightFollow();
 					}
