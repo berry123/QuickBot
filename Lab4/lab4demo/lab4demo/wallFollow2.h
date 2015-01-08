@@ -48,7 +48,7 @@ void rightFollow(void){
 				STEPPER_FWD, LWS, 400,	//Left
 				STEPPER_FWD, RWS, 400);	//Right
 		
-		}else if(frontIR < ICT){
+		}else if((frontIR < ICT) && (rightIR < ICT)){
 			LCD_clear();
 			LCD_printf("Wall in Front\n");
 			LCD_printf("Turning Left\n");
@@ -59,7 +59,7 @@ void rightFollow(void){
 			RP = 0;
 			LI = 0;
 			RI = 0;
-		}else if(!(rightIR < ICT)){
+		}else if(!(frontIR < ICT) && !(rightIR < ICT)){
 			LCD_clear();
 			LCD_printf("Lack of Wall\n");
 			LCD_printf("Turning Right\n");
@@ -130,7 +130,7 @@ void leftFollow(void){
 				STEPPER_FWD, LWS, 400,	//Left
 				STEPPER_FWD, RWS, 400);	//Right
 		
-		}else if(frontIR < ICT){
+		}else if((frontIR < ICT) && (leftIR < ICT)){
 			LCD_clear();
 			LCD_printf("Wall in Front\n");
 			LCD_printf("Turning Right\n");
@@ -141,7 +141,7 @@ void leftFollow(void){
 			RP = 0;
 			LI = 0;
 			RI = 0;	
-		}else if(!(leftIR < ICT)){
+		}else if(!(frontIR < ICT) && !(leftIR < ICT)){
 			LCD_clear();
 			LCD_printf("Lack of Wall\n");
 			LCD_printf("Turning Left\n");
