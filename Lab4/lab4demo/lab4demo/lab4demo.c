@@ -188,7 +188,7 @@ void CBOT_main(void)
 			}
 		*/}else if(ATTINY_get_SW_state(ATTINY_SW5)){
 			// While SW5 is not pressed...
-			go2ContAngle(45, 100);
+			go2ContAngle(-45, 100);
 			/*while(!ATTINY_get_SW_state(ATTINY_SW5)){
 				LCD_clear();
 				LCD_printf("( %d , %d )", cox, coy); // Displays the angle selection.

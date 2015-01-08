@@ -185,10 +185,29 @@ void sTurnRight(int angle, int speed){
 	STEPPER_close();
 }
 
-void go2ContAngle(char angle, int speed){
-	STEPPER_move_rn(STEPPER_BOTH,
-		STEPPER_FWD, speed, 400,	//Left
-		STEPPER_REV, speed, 400);	//Right
-	TMRSRVC_delay(500);
+void go2ContAngle(float angle, short speed){
+	
+	if(angle > 0){
+		
+		//angle = angle * (-1);
+		angle = (1000*angle)/45;
+		LCD_clear();
+		LCD_printf("%f", angle);
+	
+		STEPPER_move_rn(STEPPER_BOTH,
+			STEPPER_FWD, speed, 400,	//Left
+			STEPPER_REV, speed, 400);	//Right
+		TMRSRVC_delay(angle);
+	}else{
+		angle = angle * (-1);
+		angle = (1000*angle)/45;
+		LCD_clear();
+		LCD_printf("%f", angle);
+	
+		STEPPER_move_rn(STEPPER_BOTH,
+			STEPPER_REV, speed, 400,	//Left
+			STEPPER_FWD, speed, 400);	//Right
+		TMRSRVC_delay(angle);
+	}
 	STEPPER_stop(STEPPER_BOTH, STEPPER_BRK_OFF);
 }
