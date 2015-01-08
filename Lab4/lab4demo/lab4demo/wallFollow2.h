@@ -227,14 +227,14 @@ void centerFollow(void){
 			LI = 0;
 			RI = 0;
 			}
-		}
-		LWS = KP*LP + KI*LI + base;
-		RWS = KP*RP + KI*RI + base;
+			LWS = KP*LP + KI*LI + base;
+			RWS = KP*RP + KI*RI + base;
 		
-		// Forward Movement
-		STEPPER_move_rn(STEPPER_BOTH,
-			STEPPER_FWD, LWS, 400,	//Left
-			STEPPER_FWD, RWS, 400);	//Right
+			// Forward Movement
+			STEPPER_move_rn(STEPPER_BOTH,
+				STEPPER_FWD, LWS, 400,	//Left
+				STEPPER_FWD, RWS, 400);	//Right
+		}
 	
 		if (leftIR < ICT){
 			leftFollow();
