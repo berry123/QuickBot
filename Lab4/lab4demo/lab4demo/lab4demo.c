@@ -185,9 +185,10 @@ void CBOT_main(void)
 					}
 				}
 			}
-		*/}/*else if(ATTINY_get_SW_state(ATTINY_SW5)){
+		*/}else if(ATTINY_get_SW_state(ATTINY_SW5)){
 			// While SW5 is not pressed...
-			while(!ATTINY_get_SW_state(ATTINY_SW5)){
+			go2ContAngle(45, 100);
+			/*while(!ATTINY_get_SW_state(ATTINY_SW5)){
 				LCD_clear();
 				LCD_printf("( %d , %d )", cox, coy); // Displays the angle selection.
 				LCD_printf("\nSW3 + | SW4 - \nSW5 To y");
@@ -234,8 +235,8 @@ void CBOT_main(void)
 			// Clears the variables up.
 			cox = 0;
 			coy = 0;
-			LCD_clear();
-		}*/
+			LCD_clear();*/
+		}
 		// Keeps running.
     }
 }
