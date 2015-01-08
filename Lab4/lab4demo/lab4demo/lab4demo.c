@@ -28,6 +28,7 @@ void CBOT_main(void)
 	// local main variables:
 	signed char cox = 0;
 	signed char coy = 0;
+	char ICT = 10;
 	
 	// Opening LCD subsystem management.
 	LCD_open();
@@ -69,7 +70,28 @@ void CBOT_main(void)
 		// Press SW3 to select one of the kids.
 		if (ATTINY_get_SW_state(ATTINY_SW3)){
 			while(1){
-				rightFollow();
+				frontIR = getFrontIR();
+				rightIR = getRightIR();
+				leftIR = getLeftIR();
+				if (rightIR < ICT){
+					rightFollow();
+				} else if (leftIR < ICT) {
+					leftFollow();
+				} else if (frontIR < ICT) {
+					STEPPER_move_rn(STEPPER_BOTH,
+						STEPPER_FWD, 150, 400,	//Left
+						STEPPER_FWD, 150, 400);	//Right
+					TMRSRVC_delay(500);
+					if (leftIR > rightIR){
+						go2angle(-90);
+						leftFollow();
+					} else {
+						go2angle(90);
+						rightFollow();
+					}
+				} else {
+					Random_Wanderer();
+				}
 			}
 			//wallFinder();
 			/*while(!ATTINY_get_SW_state(ATTINY_SW5)){ // SW5 returns to main menu
