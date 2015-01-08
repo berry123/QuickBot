@@ -53,7 +53,7 @@ void rightFollow(void){
 			LCD_printf("Wall in Front\n");
 			LCD_printf("Turning Left\n");
 
-			TMRSRVC_delay(2000);
+			TMRSRVC_delay(500);
 			STEPPER_move_rn(STEPPER_BOTH,
 					STEPPER_REV, 200, 400,	//Left
 					STEPPER_FWD, 200, 400);	//Right
@@ -67,7 +67,7 @@ void rightFollow(void){
 			LCD_printf("Lack of Wall\n");
 			LCD_printf("Turning Right\n");
 
-			TMRSRVC_delay(2000);
+			TMRSRVC_delay(500);
 			rightIR = getRightIR();
 			if (!(frontIR < ICT) && !(rightIR < ICT)){
 				STEPPER_move_rn(STEPPER_BOTH,
@@ -145,7 +145,7 @@ void leftFollow(void){
 			LCD_printf("Wall in Front\n");
 			LCD_printf("Turning Right\n");
 
-			TMRSRVC_delay(2000);
+			TMRSRVC_delay(500);
 			STEPPER_move_rn(STEPPER_BOTH,
 					STEPPER_FWD, 200, 400,	//Left
 					STEPPER_REV, 200, 400);	//Right
@@ -159,7 +159,7 @@ void leftFollow(void){
 			LCD_printf("Lack of Wall\n");
 			LCD_printf("Turning Left\n");
 
-			TMRSRVC_delay(2000);
+			TMRSRVC_delay(500);
 			leftIR = getLeftIR();
 			if (!(frontIR < ICT) && !(leftIR < ICT)){
 				STEPPER_move_rn(STEPPER_BOTH,
