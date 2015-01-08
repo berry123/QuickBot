@@ -10,7 +10,7 @@ void rightFollow(void){
 		frontIR = getFrontIR();
 		rightIR = getRightIR();
 		leftIR = getLeftIR();
-		if(!(frontIR < ICT) && (rightIR < ICT)){
+		if((frontIR > ICT) && (rightIR < ICT)){
 			if (rightIR < lowerLimit){
 				LCD_clear();
 				LCD_printf("Inside Target\n");
@@ -62,14 +62,14 @@ void rightFollow(void){
 			RP = 0;
 			LI = 0;
 			RI = 0;
-		}else if(!(frontIR < ICT) && !(rightIR < ICT)){
+		}else if((frontIR > ICT) && (rightIR > ICT)){
 			LCD_clear();
 			LCD_printf("Lack of Wall\n");
 			LCD_printf("Turning Right\n");
 
 			TMRSRVC_delay(500);
 			rightIR = getRightIR();
-			if (!(frontIR < ICT) && !(rightIR < ICT)){
+			if ((frontIR > ICT) && (rightIR > ICT)){
 				STEPPER_move_rn(STEPPER_BOTH,
 						STEPPER_FWD, 200, 400,	//Left
 						STEPPER_REV, 200, 400);	//Right
@@ -78,7 +78,7 @@ void rightFollow(void){
 						STEPPER_FWD, 150, 400,	//Left
 						STEPPER_FWD, 150, 400);	//Right
 				rightIR = getRightIR();
-				while(!(rightIR < ICT)){
+				while(rightIR > ICT){
 					TMRSRVC_delay(100);
 					rightIR = getRightIR();
 				}
@@ -103,7 +103,7 @@ void leftFollow(void){
 		frontIR = getFrontIR();
 		rightIR = getRightIR();
 		leftIR = getLeftIR();
-		if(!(frontIR < ICT) && (leftIR < ICT)){
+		if((frontIR > ICT) && (leftIR < ICT)){
 			if (leftIR < lowerLimit){
 				LCD_clear();
 				LCD_printf("Inside Target\n");
@@ -155,14 +155,14 @@ void leftFollow(void){
 			RP = 0;
 			LI = 0;
 			RI = 0;	
-		}else if(!(frontIR < ICT) && !(leftIR < ICT)){
+		}else if((frontIR > ICT) && (leftIR > ICT)){
 			LCD_clear();
 			LCD_printf("Lack of Wall\n");
 			LCD_printf("Turning Left\n");
 
 			TMRSRVC_delay(500);
 			leftIR = getLeftIR();
-			if (!(frontIR < ICT) && !(leftIR < ICT)){
+			if ((frontIR > ICT) && (leftIR > ICT)){
 				STEPPER_move_rn(STEPPER_BOTH,
 						STEPPER_REV, 200, 400,	//Left
 						STEPPER_FWD, 200, 400);	//Right
@@ -171,7 +171,7 @@ void leftFollow(void){
 						STEPPER_FWD, 150, 400,	//Left
 						STEPPER_FWD, 150, 400);	//Right
 				leftIR = getLeftIR();
-				while(!(leftIR < ICT)){
+				while(leftIR > ICT){
 					TMRSRVC_delay(100);
 					leftIR = getLeftIR();
 				}
