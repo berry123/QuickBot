@@ -29,6 +29,7 @@ void CBOT_main(void)
 	signed char cox = 0;
 	signed char coy = 0;
 	char ICT = 10;
+	float frontIR, rightIR, leftIR;
 	
 	// Opening LCD subsystem management.
 	LCD_open();
@@ -83,10 +84,10 @@ void CBOT_main(void)
 						STEPPER_FWD, 150, 400);	//Right
 					TMRSRVC_delay(500);
 					if (leftIR > rightIR){
-						go2angle(-90);
+						go2Angle(-90);
 						leftFollow();
 					} else {
-						go2angle(90);
+						go2Angle(90);
 						rightFollow();
 					}
 				} else {
