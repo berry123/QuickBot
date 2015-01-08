@@ -190,4 +190,5 @@ void go2ContAngle(char angle, int speed){
 		STEPPER_FWD, speed, 400,	//Left
 		STEPPER_REV, speed, 400);	//Right
 	TMRSRVC_delay(500);
+	STEPPER_stop(STEPPER_BOTH, STEPPER_BRK_OFF);
 }
