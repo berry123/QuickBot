@@ -2,7 +2,9 @@ void rightFollow(void){
 	char lowerLimit = 4.75;
 	char higherLimit = 5.25;
 	char ICT = 12;
-	float LP, RP, LI, RI, LWS, RWS, frontIR, rightIR, leftIR;
+	float LP, RP, LWS, RWS, frontIR, rightIR, leftIR;
+	float LI = 0;
+	float RI = 0;
 	char base = 120;
 	char KP = 20;
 	char KI = 2;
@@ -53,6 +55,9 @@ void rightFollow(void){
 			LCD_printf("Wall in Front\n");
 			LCD_printf("Turning Left\n");
 
+			STEPPER_move_rn(STEPPER_BOTH,
+				STEPPER_FWD, 150, 400,	//Left
+				STEPPER_FWD, 150, 400);	//Right
 			TMRSRVC_delay(500);
 			STEPPER_move_rn(STEPPER_BOTH,
 					STEPPER_REV, 200, 400,	//Left
@@ -67,6 +72,9 @@ void rightFollow(void){
 			LCD_printf("Lack of Wall\n");
 			LCD_printf("Turning Right\n");
 
+			STEPPER_move_rn(STEPPER_BOTH,
+				STEPPER_FWD, 150, 400,	//Left
+				STEPPER_FWD, 150, 400);	//Right
 			TMRSRVC_delay(500);
 			rightIR = getRightIR();
 			if ((frontIR > ICT) && (rightIR > ICT)){
@@ -95,7 +103,9 @@ void leftFollow(void){
 	char lowerLimit = 4.75;
 	char higherLimit = 5.25;
 	char ICT = 12;
-	float LP, RP, LI, RI, LWS, RWS, frontIR, rightIR, leftIR;
+	float LP, RP, LWS, RWS, frontIR, rightIR, leftIR;
+	float LI = 0;
+	float RI = 0;
 	char base = 120;
 	char KP = 20;
 	char KI = 2;
@@ -145,7 +155,10 @@ void leftFollow(void){
 			LCD_clear();
 			LCD_printf("Wall in Front\n");
 			LCD_printf("Turning Right\n");
-
+			
+			STEPPER_move_rn(STEPPER_BOTH,
+				STEPPER_FWD, 150, 400,	//Left
+				STEPPER_FWD, 150, 400);	//Right
 			TMRSRVC_delay(500);
 			STEPPER_move_rn(STEPPER_BOTH,
 					STEPPER_FWD, 200, 400,	//Left
@@ -160,6 +173,9 @@ void leftFollow(void){
 			LCD_printf("Lack of Wall\n");
 			LCD_printf("Turning Left\n");
 
+			STEPPER_move_rn(STEPPER_BOTH,
+				STEPPER_FWD, 150, 400,	//Left
+				STEPPER_FWD, 150, 400);	//Right
 			TMRSRVC_delay(500);
 			leftIR = getLeftIR();
 			if ((frontIR > ICT) && (leftIR > ICT)){
@@ -185,7 +201,9 @@ void leftFollow(void){
 }
 void centerFollow(void){
 	char tollerance_band = 0.5;
-	float LP, RP, LI, RI, LWS, RWS, frontIR, rightIR, leftIR, avrageIR;
+	float LP, RP, LWS, RWS, frontIR, rightIR, leftIR, avrageIR;
+	float LI = 0;
+	float RI = 0;
 	char base = 120;
 	char KP = 20;
 	char KI = 2;
@@ -219,26 +237,21 @@ void centerFollow(void){
 		} else {
 		//means center of center
 			LCD_clear();
-			LCD_printf("At Target\n");
-			LCD_printf("Center\n");
+			LCD_printf("I shall\n");
+			LCD_printf("fear no\n");
+			LCD_printf("evil\n");
 
 			LP = 0;
 			RP = 0;
 			LI = 0;
 			RI = 0;
-			}
-			LWS = KP*LP + KI*LI + base;
-			RWS = KP*RP + KI*RI + base;
+		}
+		LWS = KP*LP + KI*LI + base;
+		RWS = KP*RP + KI*RI + base;
 		
-			// Forward Movement
-			STEPPER_move_rn(STEPPER_BOTH,
-				STEPPER_FWD, LWS, 400,	//Left
-				STEPPER_FWD, RWS, 400);	//Right
-		}
-	
-		if (leftIR < ICT){
-			leftFollow();
-		} else if (rightIR < ICT){
-			rightFollow();
-		}
+		// Forward Movement
+		STEPPER_move_rn(STEPPER_BOTH,
+			STEPPER_FWD, LWS, 400,	//Left
+			STEPPER_FWD, RWS, 400);	//Right
+	}	
 }

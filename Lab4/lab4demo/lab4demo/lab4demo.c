@@ -63,10 +63,10 @@ void CBOT_main(void)
     while(1)
     {
 		// Main menu:
-		LCD_printf("SW3: Right Follow\n");
-		LCD_printf("\nSW4: Left Follow\n");
-		LCD_printf("\nSW5: ");
 		LCD_clear();
+		LCD_printf("SW3: Wall Follow\n");
+		LCD_printf("\nSW4: AvoidFollow\n");
+		LCD_printf("\nSW5: Target Follow");
 		
 		// Press SW3 to select one of the kids.
 		if (ATTINY_get_SW_state(ATTINY_SW3)){
@@ -74,11 +74,17 @@ void CBOT_main(void)
 				frontIR = getFrontIR();
 				rightIR = getRightIR();
 				leftIR = getLeftIR();
-				if (rightIR < ICT){
+				if (leftIR < ICT) && (rightIR < ICT) {
+					centerFollow();
+				} else if (rightIR < ICT){
 					rightFollow();
 				} else if (leftIR < ICT) {
 					leftFollow();
 				} else if (frontIR < ICT) {
+					LCD_clear();
+					LCD_printf("Forward,\n");
+					LCD_printf("then Follow\n");
+
 					STEPPER_move_rn(STEPPER_BOTH,
 						STEPPER_FWD, 150, 400,	//Left
 						STEPPER_FWD, 150, 400);	//Right
@@ -98,6 +104,10 @@ void CBOT_main(void)
 						rightFollow();
 					}
 				} else {
+					LCD_clear();
+					LCD_printf("Random\n");
+					LCD_printf("Wanderer\n");
+
 					Random_Wanderer();
 				}
 			}
