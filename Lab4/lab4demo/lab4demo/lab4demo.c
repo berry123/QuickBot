@@ -83,10 +83,16 @@ void CBOT_main(void)
 						STEPPER_FWD, 150, 400);	//Right
 					TMRSRVC_delay(500);
 					if (leftIR > rightIR){
-						go2angle(-90);
+						STEPPER_move_rn(STEPPER_BOTH,
+							STEPPER_REV, 200, 400,	//Left
+							STEPPER_FWD, 200, 400);	//Right
+						TMRSRVC_delay(500);
 						leftFollow();
 					} else {
-						go2angle(90);
+						STEPPER_move_rn(STEPPER_BOTH,
+							STEPPER_FWD, 200, 400,	//Left
+							STEPPER_REV, 200, 400);	//Right
+						TMRSRVC_delay(500);
 						rightFollow();
 					}
 				} else {
