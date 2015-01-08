@@ -121,7 +121,13 @@ void CBOT_main(void)
 			}*/
 		}else if(ATTINY_get_SW_state(ATTINY_SW4)){
 			while(1){
-				leftFollow();
+				rightIR = getRightIR();
+				leftIR = getLeftIR();
+				if ((leftIR < ICT) && (rightIR < ICT)){
+					centerFollow();
+				} else {
+					Random_Wanderer();
+				}
 			}
 
 			/*
