@@ -129,13 +129,14 @@ void CBOT_main(void)
 					go2angle(45);
 					frontIR = getFrontIR();
 					if (frontIR < ICT){
-					
+						IsWall = IsWall++;
 					}
 					go2angle(-90);
 					frontIR = getFrontIR();
 					if (frontIR < ICT){
-
+						IsWall = IsWall++;
 					}
+					go2angle(45);
 					if (IsWall > 0){
 						go2point(5,0);
 					} else {
