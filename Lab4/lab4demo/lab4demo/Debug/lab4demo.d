@@ -42,7 +42,7 @@ lab4demo.d lab4demo.o: .././lab4demo.c \
  ../../../../../../Software/libraries/lib-includes/cbot324v221.h \
  ../../../../../../Software/libraries/lib-includes/capi324v221.h \
  .././Capek_Movements.h .././Random_Wanderer.h .././IRlib.h \
- .././goToPoint.h .././wallFollow.h
+ .././goToPoint.h .././wallFollow2.h
 
 c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-gnu-toolchain\avr\include\avr\io.h:
 
@@ -136,4 +136,4 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\avr8\ gcc\native\3.4.1061\avr8-g
 
 .././goToPoint.h:
 
-.././wallFollow.h:
+.././wallFollow2.h:

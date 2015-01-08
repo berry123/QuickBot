@@ -2,7 +2,7 @@ void rightFollow(void){
 	char lowerLimit = 4;
 	char higherLimit = 6;
 	char ICT = 9;
-	float LP, RP, LI, RI, LWS, RWS;
+	float LP, RP, LI, RI, LWS, RWS, frontIR, rightIR, leftIR;
 	char base = 100;
 	char KP = 10;
 	char KI = 1;
@@ -84,7 +84,7 @@ void leftFollow(void){
 	char lowerLimit = 4;
 	char higherLimit = 6;
 	char ICT = 9;
-	float LP, RP, LI, RI, LWS, RWS;
+	float LP, RP, LI, RI, LWS, RWS, frontIR, rightIR, leftIR;
 	char base = 100;
 	char KP = 10;
 	char KI = 1;

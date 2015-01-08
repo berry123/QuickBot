@@ -15,7 +15,7 @@
 #include "Random_Wanderer.h"	// Where both the random wanderer and the random wanderer that is affected by sensor readings are defined.
 #include "IRlib.h"				// IR sensor reading functions.
 #include "goToPoint.h"			// Go to point functions.
-#include "wallFollow.h"
+//#include "wallFollow.h"
 #include "wallFollow2.h"
 
 // Used function prototypes.
@@ -69,7 +69,7 @@ void CBOT_main(void)
 		// Press SW3 to select one of the kids.
 		if (ATTINY_get_SW_state(ATTINY_SW3)){
 			while(1){
-				wallFinder();
+				;
 			}
 			//wallFinder();
 			/*while(!ATTINY_get_SW_state(ATTINY_SW5)){ // SW5 returns to main menu
