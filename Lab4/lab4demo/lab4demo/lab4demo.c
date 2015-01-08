@@ -61,16 +61,14 @@ void CBOT_main(void)
     while(1)
     {
 		// Main menu:
-		LCD_printf("SW3: Kids");
-		LCD_printf("\nSW4: Randoms");
-		LCD_printf("\nSW5: Go to goal");
+		LCD_printf("SW3: Right Follow\n");
+		LCD_printf("\nSW4: Left Follow\n");
+		LCD_printf("\nSW5: ");
 		LCD_clear();
 		
 		// Press SW3 to select one of the kids.
 		if (ATTINY_get_SW_state(ATTINY_SW3)){
-			while(1){
-				;
-			}
+			rightFollow();
 			//wallFinder();
 			/*while(!ATTINY_get_SW_state(ATTINY_SW5)){ // SW5 returns to main menu
 				LCD_clear();
@@ -89,7 +87,10 @@ void CBOT_main(void)
 					}
 				}
 			}*/
-		}/*else if(ATTINY_get_SW_state(ATTINY_SW4)){
+		}else if(ATTINY_get_SW_state(ATTINY_SW4)){
+			leftFollow();
+
+			/*
 			LCD_clear();
 			LCD_printf("SW3: Random.");
 			LCD_printf("\nSW4: Subsumption.");
@@ -107,7 +108,7 @@ void CBOT_main(void)
 					}
 				}
 			}
-		}else if(ATTINY_get_SW_state(ATTINY_SW5)){
+		*/}/*else if(ATTINY_get_SW_state(ATTINY_SW5)){
 			// While SW5 is not pressed...
 			while(!ATTINY_get_SW_state(ATTINY_SW5)){
 				LCD_clear();
