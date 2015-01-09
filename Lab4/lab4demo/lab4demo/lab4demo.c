@@ -123,15 +123,10 @@ void CBOT_main(void) {
 					leftFollow();
 				} else if (frontIR < ICT) {
 					STEPPER_move_rn(STEPPER_BOTH,
-<<<<<<< HEAD
 						STEPPER_FWD, 0, 400,	//Left
 						STEPPER_FWD, 0, 400);	//Right
 					go2ContAngle(45, 100);
-=======
-							STEPPER_FWD, 0, 400,	//Left
-							STEPPER_FWD, 0, 400);	//Right
-					go2angle(45);
->>>>>>> origin/master
+
 					frontIR = getFrontIR();
 					if (frontIR < ICT){
 						IsWall = IsWall++;
