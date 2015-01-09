@@ -123,8 +123,8 @@ void CBOT_main(void) {
 					leftFollow();
 				} else if (frontIR < ICT) {
 					STEPPER_move_rn(STEPPER_BOTH,
-						STEPPER_FWD, 0, 400,	//Left
-						STEPPER_FWD, 0, 400);	//Right
+							STEPPER_FWD, 0, 400,	//Left
+							STEPPER_FWD, 0, 400);	//Right
 					go2ContAngle(45, 100);
 
 					frontIR = getFrontIR();

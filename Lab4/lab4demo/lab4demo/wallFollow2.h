@@ -44,15 +44,15 @@ void rightFollow(void){
 				LI = 0;
 				RI = 0;
 			}
-		
+
 			LWS = KP*LP + KI*LI + base;
 			RWS = KP*RP + KI*RI + base;
-		
+
 			// Forward Movement
 			STEPPER_move_rn(STEPPER_BOTH,
-				STEPPER_FWD, LWS, 400,	//Left
-				STEPPER_FWD, RWS, 400);	//Right
-		
+					STEPPER_FWD, LWS, 400,	//Left
+					STEPPER_FWD, RWS, 400);	//Right
+
 		}else if((frontIR < ICT) && (rightIR < ICT)){
 			LCD_clear();
 			LCD_printf("Right Follow\n");
@@ -60,8 +60,8 @@ void rightFollow(void){
 			LCD_printf("Turning Left\n");
 
 			STEPPER_move_rn(STEPPER_BOTH,
-				STEPPER_FWD, 150, 400,	//Left
-				STEPPER_FWD, 150, 400);	//Right
+					STEPPER_FWD, 150, 400,	//Left
+					STEPPER_FWD, 150, 400);	//Right
 			TMRSRVC_delay(500);
 			go2ContAngle(90, 100);
 			LP = 0;
@@ -75,8 +75,8 @@ void rightFollow(void){
 			LCD_printf("Turning Right\n");
 
 			STEPPER_move_rn(STEPPER_BOTH,
-				STEPPER_FWD, 150, 400,	//Left
-				STEPPER_FWD, 150, 400);	//Right
+					STEPPER_FWD, 150, 400,	//Left
+					STEPPER_FWD, 150, 400);	//Right
 			TMRSRVC_delay(500);
 			rightIR = getRightIR();
 			if ((frontIR > ICT) && (rightIR > ICT)){
@@ -144,24 +144,24 @@ void leftFollow(void){
 				LI = 0;
 				RI = 0;
 			}
-		
+
 			LWS = KP*LP + KI*LI + base;
 			RWS = KP*RP + KI*RI + base;
-		
+
 			// Forward Movement
 			STEPPER_move_rn(STEPPER_BOTH,
-				STEPPER_FWD, LWS, 400,	//Left
-				STEPPER_FWD, RWS, 400);	//Right
-		
+					STEPPER_FWD, LWS, 400,	//Left
+					STEPPER_FWD, RWS, 400);	//Right
+
 		}else if((frontIR < ICT) && (leftIR < ICT)){
 			LCD_clear();
 			LCD_printf("Left Follow\n");
 			LCD_printf("Wall in Front\n");
 			LCD_printf("Turning Right\n");
-			
+
 			STEPPER_move_rn(STEPPER_BOTH,
-				STEPPER_FWD, 150, 400,	//Left
-				STEPPER_FWD, 150, 400);	//Right
+					STEPPER_FWD, 150, 400,	//Left
+					STEPPER_FWD, 150, 400);	//Right
 			TMRSRVC_delay(500);
 			go2ContAngle(-90, 100);
 			LP = 0;
@@ -175,8 +175,8 @@ void leftFollow(void){
 			LCD_printf("Turning Left\n");
 
 			STEPPER_move_rn(STEPPER_BOTH,
-				STEPPER_FWD, 150, 400,	//Left
-				STEPPER_FWD, 150, 400);	//Right
+					STEPPER_FWD, 150, 400,	//Left
+					STEPPER_FWD, 150, 400);	//Right
 			TMRSRVC_delay(500);
 			leftIR = getLeftIR();
 			if ((frontIR > ICT) && (leftIR > ICT)){
@@ -213,7 +213,7 @@ void centerFollow(void){
 		leftIR = getLeftIR();
 		avrageIR = (rightIR + leftIR)/2;
 		if ((rightIR - avrageIR) > tollerance_band){
-		//means left of center
+			//means left of center
 			LCD_clear();
 			LCD_printf("Center Follow\n");
 			LCD_printf("Left of\n");
@@ -224,7 +224,7 @@ void centerFollow(void){
 			LI = LI++;
 			RI = 0;
 		} else if ((avrageIR - rightIR) > (tollerance_band)) {
-		//means right of center
+			//means right of center
 			LCD_clear();
 			LCD_printf("Center Follow\n");
 			LCD_printf("Right of\n");
@@ -235,7 +235,7 @@ void centerFollow(void){
 			LI = 0;
 			RI = RI++;
 		} else {
-		//means center of center
+			//means center of center
 			LCD_clear();
 			LCD_printf("I shall\n");
 			LCD_printf("fear no\n");
@@ -248,10 +248,10 @@ void centerFollow(void){
 		}
 		LWS = KP*LP + KI*LI + base;
 		RWS = KP*RP + KI*RI + base;
-		
+
 		// Forward Movement
 		STEPPER_move_rn(STEPPER_BOTH,
-			STEPPER_FWD, LWS, 400,	//Left
-			STEPPER_FWD, RWS, 400);	//Right
+				STEPPER_FWD, LWS, 400,	//Left
+				STEPPER_FWD, RWS, 400);	//Right
 	}	
 }
