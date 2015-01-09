@@ -168,25 +168,8 @@ void CBOT_main(void)
 				}
 			}
 
-			/*
-			LCD_clear();
-			LCD_printf("SW3: Random.");
-			LCD_printf("\nSW4: Subsumption.");
-			LCD_printf("\nSW5: Back");
-			while(!ATTINY_get_SW_state(ATTINY_SW5)){ // SW5 returns to main menu
-				if(ATTINY_get_SW_state(ATTINY_SW3)){
-					while(1){
-						// Selects the random wanderer
-						Random_Wanderer();
-					}
-				}else if(ATTINY_get_SW_state(ATTINY_SW4)){
-					while(1){
-						// Selects Subsumption
-						Shy_Random_Wanderer();
-					}
-				}
-			}
-		*/}else if(ATTINY_get_SW_state(ATTINY_SW5)){
+			
+		}else if(ATTINY_get_SW_state(ATTINY_SW5)){
 			// While SW5 is not pressed...
 			go2ContAngle(-45, 100);
 			/*while(!ATTINY_get_SW_state(ATTINY_SW5)){
