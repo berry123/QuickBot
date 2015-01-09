@@ -5022,7 +5022,7 @@ void go2ContAngle(float angle, short speed){
 	float RI = 0;
 	char base = 120;
 	char KP = 40;
-	char KI = 2;
+	char KI = 1;
 	while(1){
 		frontIR = getFrontIR();
     2de4:	0e 94 02 16 	call	0x2c04	; 0x2c04 <getFrontIR>
@@ -5177,7 +5177,7 @@ void go2ContAngle(float angle, short speed){
 				LI = 0;
 				RI = 0;
 			}
-		
+
 			LWS = KP*LP + KI*LI + base;
     2ede:	20 e0       	ldi	r18, 0x00	; 0
     2ee0:	30 e0       	ldi	r19, 0x00	; 0
@@ -5194,7 +5194,7 @@ void go2ContAngle(float angle, short speed){
     2efa:	52 e4       	ldi	r21, 0x42	; 66
     2efc:	0e 94 88 1d 	call	0x3b10	; 0x3b10 <__addsf3>
 			RWS = KP*RP + KI*RI + base;
-		
+
 			// Forward Movement
 			STEPPER_move_rn(STEPPER_BOTH,
     2f00:	0e 94 5d 1e 	call	0x3cba	; 0x3cba <__fixunssfsi>
@@ -5208,7 +5208,7 @@ void go2ContAngle(float angle, short speed){
 				LI = 0;
 				RI = 0;
 			}
-		
+
 			LWS = KP*LP + KI*LI + base;
 			RWS = KP*RP + KI*RI + base;
     2f12:	20 e0       	ldi	r18, 0x00	; 0
@@ -5227,7 +5227,7 @@ void go2ContAngle(float angle, short speed){
     2f30:	40 ef       	ldi	r20, 0xF0	; 240
     2f32:	52 e4       	ldi	r21, 0x42	; 66
     2f34:	0e 94 88 1d 	call	0x3b10	; 0x3b10 <__addsf3>
-		
+
 			// Forward Movement
 			STEPPER_move_rn(STEPPER_BOTH,
     2f38:	0e 94 5d 1e 	call	0x3cba	; 0x3cba <__fixunssfsi>
@@ -5262,9 +5262,9 @@ void go2ContAngle(float angle, short speed){
     2f76:	0f be       	out	0x3f, r0	; 63
     2f78:	2d bf       	out	0x3d, r18	; 61
     2f7a:	34 cf       	rjmp	.-408    	; 0x2de4 <rightFollow+0xc>
-				STEPPER_FWD, LWS, 400,	//Left
-				STEPPER_FWD, RWS, 400);	//Right
-		
+					STEPPER_FWD, LWS, 400,	//Left
+					STEPPER_FWD, RWS, 400);	//Right
+
 		}else if((frontIR < ICT) && (rightIR < ICT)){
     2f7c:	20 e0       	ldi	r18, 0x00	; 0
     2f7e:	30 e0       	ldi	r19, 0x00	; 0
@@ -5329,8 +5329,8 @@ void go2ContAngle(float angle, short speed){
     2ff4:	62 e0       	ldi	r22, 0x02	; 2
     2ff6:	82 e0       	ldi	r24, 0x02	; 2
     2ff8:	0e 94 c8 06 	call	0xd90	; 0xd90 <STEPPER_move>
-				STEPPER_FWD, 150, 400,	//Left
-				STEPPER_FWD, 150, 400);	//Right
+					STEPPER_FWD, 150, 400,	//Left
+					STEPPER_FWD, 150, 400);	//Right
 			TMRSRVC_delay(500);
     2ffc:	84 ef       	ldi	r24, 0xF4	; 244
     2ffe:	91 e0       	ldi	r25, 0x01	; 1
@@ -5420,8 +5420,8 @@ void go2ContAngle(float angle, short speed){
     309e:	62 e0       	ldi	r22, 0x02	; 2
     30a0:	82 e0       	ldi	r24, 0x02	; 2
     30a2:	0e 94 c8 06 	call	0xd90	; 0xd90 <STEPPER_move>
-				STEPPER_FWD, 150, 400,	//Left
-				STEPPER_FWD, 150, 400);	//Right
+					STEPPER_FWD, 150, 400,	//Left
+					STEPPER_FWD, 150, 400);	//Right
 			TMRSRVC_delay(500);
     30a6:	84 ef       	ldi	r24, 0xF4	; 244
     30a8:	91 e0       	ldi	r25, 0x01	; 1
@@ -5529,7 +5529,7 @@ void go2ContAngle(float angle, short speed){
 	float RI = 0;
 	char base = 120;
 	char KP = 40;
-	char KI = 2;
+	char KI = 1;
 	while(1){
 		frontIR = getFrontIR();
     3158:	0e 94 02 16 	call	0x2c04	; 0x2c04 <getFrontIR>
@@ -5684,7 +5684,7 @@ void go2ContAngle(float angle, short speed){
 				LI = 0;
 				RI = 0;
 			}
-		
+
 			LWS = KP*LP + KI*LI + base;
     3252:	20 e0       	ldi	r18, 0x00	; 0
     3254:	30 e0       	ldi	r19, 0x00	; 0
@@ -5701,7 +5701,7 @@ void go2ContAngle(float angle, short speed){
     326e:	52 e4       	ldi	r21, 0x42	; 66
     3270:	0e 94 88 1d 	call	0x3b10	; 0x3b10 <__addsf3>
 			RWS = KP*RP + KI*RI + base;
-		
+
 			// Forward Movement
 			STEPPER_move_rn(STEPPER_BOTH,
     3274:	0e 94 5d 1e 	call	0x3cba	; 0x3cba <__fixunssfsi>
@@ -5715,7 +5715,7 @@ void go2ContAngle(float angle, short speed){
 				LI = 0;
 				RI = 0;
 			}
-		
+
 			LWS = KP*LP + KI*LI + base;
 			RWS = KP*RP + KI*RI + base;
     3286:	20 e0       	ldi	r18, 0x00	; 0
@@ -5734,7 +5734,7 @@ void go2ContAngle(float angle, short speed){
     32a4:	40 ef       	ldi	r20, 0xF0	; 240
     32a6:	52 e4       	ldi	r21, 0x42	; 66
     32a8:	0e 94 88 1d 	call	0x3b10	; 0x3b10 <__addsf3>
-		
+
 			// Forward Movement
 			STEPPER_move_rn(STEPPER_BOTH,
     32ac:	0e 94 5d 1e 	call	0x3cba	; 0x3cba <__fixunssfsi>
@@ -5769,9 +5769,9 @@ void go2ContAngle(float angle, short speed){
     32ea:	0f be       	out	0x3f, r0	; 63
     32ec:	2d bf       	out	0x3d, r18	; 61
     32ee:	34 cf       	rjmp	.-408    	; 0x3158 <leftFollow+0xc>
-				STEPPER_FWD, LWS, 400,	//Left
-				STEPPER_FWD, RWS, 400);	//Right
-		
+					STEPPER_FWD, LWS, 400,	//Left
+					STEPPER_FWD, RWS, 400);	//Right
+
 		}else if((frontIR < ICT) && (leftIR < ICT)){
     32f0:	20 e0       	ldi	r18, 0x00	; 0
     32f2:	30 e0       	ldi	r19, 0x00	; 0
@@ -5807,7 +5807,7 @@ void go2ContAngle(float angle, short speed){
     3330:	8c e7       	ldi	r24, 0x7C	; 124
     3332:	92 e0       	ldi	r25, 0x02	; 2
     3334:	0e 94 20 28 	call	0x5040	; 0x5040 <puts>
-			
+
 			STEPPER_move_rn(STEPPER_BOTH,
     3338:	1f 92       	push	r1
     333a:	1f 92       	push	r1
@@ -5836,8 +5836,8 @@ void go2ContAngle(float angle, short speed){
     3368:	62 e0       	ldi	r22, 0x02	; 2
     336a:	82 e0       	ldi	r24, 0x02	; 2
     336c:	0e 94 c8 06 	call	0xd90	; 0xd90 <STEPPER_move>
-				STEPPER_FWD, 150, 400,	//Left
-				STEPPER_FWD, 150, 400);	//Right
+					STEPPER_FWD, 150, 400,	//Left
+					STEPPER_FWD, 150, 400);	//Right
 			TMRSRVC_delay(500);
     3370:	84 ef       	ldi	r24, 0xF4	; 244
     3372:	91 e0       	ldi	r25, 0x01	; 1
@@ -5927,8 +5927,8 @@ void go2ContAngle(float angle, short speed){
     3412:	62 e0       	ldi	r22, 0x02	; 2
     3414:	82 e0       	ldi	r24, 0x02	; 2
     3416:	0e 94 c8 06 	call	0xd90	; 0xd90 <STEPPER_move>
-				STEPPER_FWD, 150, 400,	//Left
-				STEPPER_FWD, 150, 400);	//Right
+					STEPPER_FWD, 150, 400,	//Left
+					STEPPER_FWD, 150, 400);	//Right
 			TMRSRVC_delay(500);
     341a:	84 ef       	ldi	r24, 0xF4	; 244
     341c:	91 e0       	ldi	r25, 0x01	; 1
@@ -6056,7 +6056,7 @@ void centerFollow(void){
 	float RI = 0;
 	char base = 120;
 	char KP = 40;
-	char KI = 2;
+	char KI = 1;
 	char ICT = 12;
 	rightIR = getRightIR();
     34f4:	0e 94 da 15 	call	0x2bb4	; 0x2bb4 <getRightIR>
@@ -6086,7 +6086,7 @@ void centerFollow(void){
 		}
 		LWS = KP*LP + KI*LI + base;
 		RWS = KP*RP + KI*RI + base;
-		
+
 		// Forward Movement
 		STEPPER_move_rn(STEPPER_BOTH,
     3528:	22 24       	eor	r2, r2
@@ -6095,7 +6095,7 @@ void centerFollow(void){
     352e:	f0 e9       	ldi	r31, 0x90	; 144
     3530:	3f 2e       	mov	r3, r31
     3532:	f0 2d       	mov	r31, r0
-	char KI = 2;
+	char KI = 1;
 	char ICT = 12;
 	rightIR = getRightIR();
 	leftIR = getLeftIR();
@@ -6137,7 +6137,7 @@ void centerFollow(void){
     357a:	0e 94 60 1f 	call	0x3ec0	; 0x3ec0 <__gesf2>
     357e:	18 16       	cp	r1, r24
     3580:	94 f4       	brge	.+36     	; 0x35a6 <centerFollow+0xe6>
-		//means left of center
+			//means left of center
 			LCD_clear();
     3582:	0e 94 c6 03 	call	0x78c	; 0x78c <LCD_clear>
 			LCD_printf("Center Follow\n");
@@ -6173,7 +6173,7 @@ void centerFollow(void){
     35b8:	0e 94 60 1f 	call	0x3ec0	; 0x3ec0 <__gesf2>
     35bc:	18 16       	cp	r1, r24
     35be:	e4 f4       	brge	.+56     	; 0x35f8 <centerFollow+0x138>
-		//means right of center
+			//means right of center
 			LCD_clear();
     35c0:	0e 94 c6 03 	call	0x78c	; 0x78c <LCD_clear>
 			LCD_printf("Center Follow\n");
@@ -6214,7 +6214,7 @@ void centerFollow(void){
 			LI = 0;
 			RI = RI++;
 		} else {
-		//means center of center
+			//means center of center
 			LCD_clear();
     35f8:	0e 94 c6 03 	call	0x78c	; 0x78c <LCD_clear>
 			LCD_printf("I shall\n");
@@ -6265,7 +6265,7 @@ void centerFollow(void){
     363e:	52 e4       	ldi	r21, 0x42	; 66
     3640:	0e 94 88 1d 	call	0x3b10	; 0x3b10 <__addsf3>
 		RWS = KP*RP + KI*RI + base;
-		
+
 		// Forward Movement
 		STEPPER_move_rn(STEPPER_BOTH,
     3644:	0e 94 5d 1e 	call	0x3cba	; 0x3cba <__fixunssfsi>
@@ -6300,7 +6300,7 @@ void centerFollow(void){
     3678:	40 ef       	ldi	r20, 0xF0	; 240
     367a:	52 e4       	ldi	r21, 0x42	; 66
     367c:	0e 94 88 1d 	call	0x3b10	; 0x3b10 <__addsf3>
-		
+
 		// Forward Movement
 		STEPPER_move_rn(STEPPER_BOTH,
     3680:	0e 94 5d 1e 	call	0x3cba	; 0x3cba <__fixunssfsi>
@@ -6327,7 +6327,7 @@ void centerFollow(void){
     36ac:	82 e0       	ldi	r24, 0x02	; 2
     36ae:	0e 94 c8 06 	call	0xd90	; 0xd90 <STEPPER_move>
 	char KP = 40;
-	char KI = 2;
+	char KI = 1;
 	char ICT = 12;
 	rightIR = getRightIR();
 	leftIR = getLeftIR();
@@ -6360,8 +6360,8 @@ void centerFollow(void){
     36e8:	25 cf       	rjmp	.-438    	; 0x3534 <centerFollow+0x74>
 		// Forward Movement
 		STEPPER_move_rn(STEPPER_BOTH,
-			STEPPER_FWD, LWS, 400,	//Left
-			STEPPER_FWD, RWS, 400);	//Right
+				STEPPER_FWD, LWS, 400,	//Left
+				STEPPER_FWD, RWS, 400);	//Right
 	}	
 }
     36ea:	28 96       	adiw	r28, 0x08	; 8
@@ -6776,8 +6776,8 @@ void centerFollow(void){
     39c8:	62 e0       	ldi	r22, 0x02	; 2
     39ca:	82 e0       	ldi	r24, 0x02	; 2
     39cc:	0e 94 c8 06 	call	0xd90	; 0xd90 <STEPPER_move>
-						STEPPER_FWD, 0, 400,	//Left
-						STEPPER_FWD, 0, 400);	//Right
+							STEPPER_FWD, 0, 400,	//Left
+							STEPPER_FWD, 0, 400);	//Right
 					go2ContAngle(45, 100);
     39d0:	44 e6       	ldi	r20, 0x64	; 100
     39d2:	50 e0       	ldi	r21, 0x00	; 0
