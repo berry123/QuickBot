@@ -5021,8 +5021,8 @@ void go2ContAngle(float angle, short speed){
     2de2:	f0 2d       	mov	r31, r0
 	float RI = 0;
 	char base = 120;
-	char KP = 20;
-	char KI = 4;
+	char KP = 40;
+	char KI = 2;
 	while(1){
 		frontIR = getFrontIR();
     2de4:	0e 94 02 16 	call	0x2c04	; 0x2c04 <getFrontIR>
@@ -5181,8 +5181,8 @@ void go2ContAngle(float angle, short speed){
 			LWS = KP*LP + KI*LI + base;
     2ede:	20 e0       	ldi	r18, 0x00	; 0
     2ee0:	30 e0       	ldi	r19, 0x00	; 0
-    2ee2:	40 ea       	ldi	r20, 0xA0	; 160
-    2ee4:	51 e4       	ldi	r21, 0x41	; 65
+    2ee2:	40 e2       	ldi	r20, 0x20	; 32
+    2ee4:	52 e4       	ldi	r21, 0x42	; 66
     2ee6:	0e 94 6b 1f 	call	0x3ed6	; 0x3ed6 <__mulsf3>
     2eea:	20 e0       	ldi	r18, 0x00	; 0
     2eec:	30 e0       	ldi	r19, 0x00	; 0
@@ -5213,8 +5213,8 @@ void go2ContAngle(float angle, short speed){
 			RWS = KP*RP + KI*RI + base;
     2f12:	20 e0       	ldi	r18, 0x00	; 0
     2f14:	30 e0       	ldi	r19, 0x00	; 0
-    2f16:	40 ea       	ldi	r20, 0xA0	; 160
-    2f18:	51 e4       	ldi	r21, 0x41	; 65
+    2f16:	40 e2       	ldi	r20, 0x20	; 32
+    2f18:	52 e4       	ldi	r21, 0x42	; 66
     2f1a:	c7 01       	movw	r24, r14
     2f1c:	b6 01       	movw	r22, r12
     2f1e:	0e 94 6b 1f 	call	0x3ed6	; 0x3ed6 <__mulsf3>
@@ -5528,8 +5528,8 @@ void go2ContAngle(float angle, short speed){
     3156:	f0 2d       	mov	r31, r0
 	float RI = 0;
 	char base = 120;
-	char KP = 20;
-	char KI = 4;
+	char KP = 40;
+	char KI = 2;
 	while(1){
 		frontIR = getFrontIR();
     3158:	0e 94 02 16 	call	0x2c04	; 0x2c04 <getFrontIR>
@@ -5688,8 +5688,8 @@ void go2ContAngle(float angle, short speed){
 			LWS = KP*LP + KI*LI + base;
     3252:	20 e0       	ldi	r18, 0x00	; 0
     3254:	30 e0       	ldi	r19, 0x00	; 0
-    3256:	40 ea       	ldi	r20, 0xA0	; 160
-    3258:	51 e4       	ldi	r21, 0x41	; 65
+    3256:	40 e2       	ldi	r20, 0x20	; 32
+    3258:	52 e4       	ldi	r21, 0x42	; 66
     325a:	0e 94 6b 1f 	call	0x3ed6	; 0x3ed6 <__mulsf3>
     325e:	20 e0       	ldi	r18, 0x00	; 0
     3260:	30 e0       	ldi	r19, 0x00	; 0
@@ -5720,8 +5720,8 @@ void go2ContAngle(float angle, short speed){
 			RWS = KP*RP + KI*RI + base;
     3286:	20 e0       	ldi	r18, 0x00	; 0
     3288:	30 e0       	ldi	r19, 0x00	; 0
-    328a:	40 ea       	ldi	r20, 0xA0	; 160
-    328c:	51 e4       	ldi	r21, 0x41	; 65
+    328a:	40 e2       	ldi	r20, 0x20	; 32
+    328c:	52 e4       	ldi	r21, 0x42	; 66
     328e:	c7 01       	movw	r24, r14
     3290:	b6 01       	movw	r22, r12
     3292:	0e 94 6b 1f 	call	0x3ed6	; 0x3ed6 <__mulsf3>
@@ -6055,8 +6055,8 @@ void centerFollow(void){
     34f2:	cd bf       	out	0x3d, r28	; 61
 	float RI = 0;
 	char base = 120;
-	char KP = 20;
-	char KI = 4;
+	char KP = 40;
+	char KI = 2;
 	char ICT = 12;
 	rightIR = getRightIR();
     34f4:	0e 94 da 15 	call	0x2bb4	; 0x2bb4 <getRightIR>
@@ -6095,7 +6095,7 @@ void centerFollow(void){
     352e:	f0 e9       	ldi	r31, 0x90	; 144
     3530:	3f 2e       	mov	r3, r31
     3532:	f0 2d       	mov	r31, r0
-	char KI = 4;
+	char KI = 2;
 	char ICT = 12;
 	rightIR = getRightIR();
 	leftIR = getLeftIR();
@@ -6250,8 +6250,8 @@ void centerFollow(void){
 		LWS = KP*LP + KI*LI + base;
     361e:	20 e0       	ldi	r18, 0x00	; 0
     3620:	30 e0       	ldi	r19, 0x00	; 0
-    3622:	40 ea       	ldi	r20, 0xA0	; 160
-    3624:	51 e4       	ldi	r21, 0x41	; 65
+    3622:	40 e2       	ldi	r20, 0x20	; 32
+    3624:	52 e4       	ldi	r21, 0x42	; 66
     3626:	c7 01       	movw	r24, r14
     3628:	b6 01       	movw	r22, r12
     362a:	0e 94 6b 1f 	call	0x3ed6	; 0x3ed6 <__mulsf3>
@@ -6286,8 +6286,8 @@ void centerFollow(void){
 		RWS = KP*RP + KI*RI + base;
     365a:	20 e0       	ldi	r18, 0x00	; 0
     365c:	30 e0       	ldi	r19, 0x00	; 0
-    365e:	40 ea       	ldi	r20, 0xA0	; 160
-    3660:	51 e4       	ldi	r21, 0x41	; 65
+    365e:	40 e2       	ldi	r20, 0x20	; 32
+    3660:	52 e4       	ldi	r21, 0x42	; 66
     3662:	c5 01       	movw	r24, r10
     3664:	b4 01       	movw	r22, r8
     3666:	0e 94 6b 1f 	call	0x3ed6	; 0x3ed6 <__mulsf3>
@@ -6326,8 +6326,8 @@ void centerFollow(void){
     36aa:	62 e0       	ldi	r22, 0x02	; 2
     36ac:	82 e0       	ldi	r24, 0x02	; 2
     36ae:	0e 94 c8 06 	call	0xd90	; 0xd90 <STEPPER_move>
-	char KP = 20;
-	char KI = 4;
+	char KP = 40;
+	char KI = 2;
 	char ICT = 12;
 	rightIR = getRightIR();
 	leftIR = getLeftIR();
@@ -6394,11 +6394,11 @@ void centerFollow(void){
 	char ICT = 10;
 	char IsWall = 0;
 	float frontIR, rightIR, leftIR;
-	
+
 	// Opening LCD subsystem management.
 	LCD_open();
     371c:	0e 94 e3 03 	call	0x7c6	; 0x7c6 <LCD_open>
-	
+
 	// This information is printed on the LCD display in case this initial setup takes longer.
 	LCD_printf("Setting up...");
     3720:	81 ed       	ldi	r24, 0xD1	; 209
@@ -6406,14 +6406,14 @@ void centerFollow(void){
     3724:	9f 93       	push	r25
     3726:	8f 93       	push	r24
     3728:	0e 94 0c 28 	call	0x5018	; 0x5018 <printf>
-	
+
 	// Subsystem open state variable information.
 	SUBSYS_OPENSTAT openTiny;
-	
+
 	// Opening ATTINY subsystem management and storing returning value in openTiny that is associated to the struct SUBSYS_OPENSTAT_TYPE.
 	openTiny = ATTINY_open();
     372c:	0e 94 27 0a 	call	0x144e	; 0x144e <ATTINY_open>
-	
+
 	// If the state struct from openTiny is different from the expected value, an error occurs.
 	if (openTiny.state != SUBSYS_OPEN){
     3730:	0f 90       	pop	r0
@@ -6432,7 +6432,7 @@ void centerFollow(void){
     3748:	0f 90       	pop	r0
     374a:	0f 90       	pop	r0
 	}
-	
+
 	SPKR_open(SPKR_BEEP_MODE);		// Open the speaker in beep mode
     374c:	81 e0       	ldi	r24, 0x01	; 1
     374e:	0e 94 b1 05 	call	0xb62	; 0xb62 <SPKR_open>
@@ -6443,7 +6443,7 @@ void centerFollow(void){
     3758:	0e 94 b2 03 	call	0x764	; 0x764 <ADC_set_VREF>
 	STEPPER_open();					// Open Stepper module.
     375c:	0e 94 6f 07 	call	0xede	; 0xede <STEPPER_open>
-	
+
 	// After the initial setup, a "Ready!" message is displayed on the second line of the LCD display.
 	LCD_printf("\nReady!");
     3760:	8a ef       	ldi	r24, 0xFA	; 250
@@ -6453,7 +6453,7 @@ void centerFollow(void){
     3768:	0e 94 0c 28 	call	0x5018	; 0x5018 <printf>
 	LCD_clear();
     376c:	0e 94 c6 03 	call	0x78c	; 0x78c <LCD_clear>
-	
+
 	STEPPER_set_mode(STEPPER_BOTH, STEPPER_NORMAL_MODE);
     3770:	60 e0       	ldi	r22, 0x00	; 0
     3772:	82 e0       	ldi	r24, 0x02	; 2
@@ -6462,8 +6462,8 @@ void centerFollow(void){
     377a:	0f 90       	pop	r0
 
 	// While loop that keeps the micro controller running begins here:
-    while(1)
-    {
+	while(1)
+	{
 		// Main menu:
 		LCD_clear();
     377c:	0e 94 c6 03 	call	0x78c	; 0x78c <LCD_clear>
@@ -6479,7 +6479,7 @@ void centerFollow(void){
     3790:	84 e2       	ldi	r24, 0x24	; 36
     3792:	93 e0       	ldi	r25, 0x03	; 3
     3794:	0e 94 20 28 	call	0x5040	; 0x5040 <puts>
-		
+
 		// Press SW3 to select one of the kids.
 		if (ATTINY_get_SW_state(ATTINY_SW3)){
     3798:	80 e0       	ldi	r24, 0x00	; 0
@@ -6602,8 +6602,8 @@ void centerFollow(void){
     3880:	62 e0       	ldi	r22, 0x02	; 2
     3882:	82 e0       	ldi	r24, 0x02	; 2
     3884:	0e 94 c8 06 	call	0xd90	; 0xd90 <STEPPER_move>
-						STEPPER_FWD, 150, 400,	//Left
-						STEPPER_FWD, 150, 400);	//Right
+							STEPPER_FWD, 150, 400,	//Left
+							STEPPER_FWD, 150, 400);	//Right
 					TMRSRVC_delay(500);
     3888:	84 ef       	ldi	r24, 0xF4	; 244
     388a:	91 e0       	ldi	r25, 0x01	; 1
@@ -6786,6 +6786,7 @@ void centerFollow(void){
     39d8:	84 e3       	ldi	r24, 0x34	; 52
     39da:	92 e4       	ldi	r25, 0x42	; 66
     39dc:	0e 94 2a 16 	call	0x2c54	; 0x2c54 <go2ContAngle>
+
 					frontIR = getFrontIR();
     39e0:	0e 94 02 16 	call	0x2c04	; 0x2c04 <getFrontIR>
 					if (frontIR < ICT){
@@ -6849,8 +6850,8 @@ void centerFollow(void){
     3a42:	62 e0       	ldi	r22, 0x02	; 2
     3a44:	82 e0       	ldi	r24, 0x02	; 2
     3a46:	0e 94 c8 06 	call	0xd90	; 0xd90 <STEPPER_move>
-							STEPPER_FWD, 150, 400,	//Left
-							STEPPER_FWD, 150, 400);	//Right
+								STEPPER_FWD, 150, 400,	//Left
+								STEPPER_FWD, 150, 400);	//Right
 						TMRSRVC_delay(500);
     3a4a:	84 ef       	ldi	r24, 0xF4	; 244
     3a4c:	91 e0       	ldi	r25, 0x01	; 1
@@ -6901,33 +6902,34 @@ void centerFollow(void){
 							rightFollow();
     3aa2:	0e 94 ec 16 	call	0x2dd8	; 0x2dd8 <rightFollow>
 						}					
-				} } else {
-					LCD_clear();
+
+					} }else {
+						LCD_clear();
     3aa6:	0e 94 c6 03 	call	0x78c	; 0x78c <LCD_clear>
-					LCD_printf("Random\n");
+						LCD_printf("Random\n");
     3aaa:	8d e4       	ldi	r24, 0x4D	; 77
     3aac:	93 e0       	ldi	r25, 0x03	; 3
     3aae:	0e 94 20 28 	call	0x5040	; 0x5040 <puts>
-					LCD_printf("Wanderer\n");
+						LCD_printf("Wanderer\n");
     3ab2:	84 e5       	ldi	r24, 0x54	; 84
     3ab4:	93 e0       	ldi	r25, 0x03	; 3
     3ab6:	0e 94 20 28 	call	0x5040	; 0x5040 <puts>
 
-					Random_Wanderer();
+						Random_Wanderer();
     3aba:	0e 94 64 15 	call	0x2ac8	; 0x2ac8 <Random_Wanderer>
     3abe:	25 cf       	rjmp	.-438    	; 0x390a <CBOT_main+0x1ee>
+					}
 				}
-			}
 
-			
-		}else if(ATTINY_get_SW_state(ATTINY_SW5)){
+
+			}else if(ATTINY_get_SW_state(ATTINY_SW5)){
     3ac0:	82 e0       	ldi	r24, 0x02	; 2
     3ac2:	0e 94 d9 09 	call	0x13b2	; 0x13b2 <ATTINY_get_SW_state>
     3ac6:	88 23       	and	r24, r24
     3ac8:	09 f4       	brne	.+2      	; 0x3acc <CBOT_main+0x3b0>
     3aca:	58 ce       	rjmp	.-848    	; 0x377c <CBOT_main+0x60>
-			// While SW5 is not pressed...
-			go2ContAngle(-45, 100);
+				// While SW5 is not pressed...
+				go2ContAngle(-45, 100);
     3acc:	44 e6       	ldi	r20, 0x64	; 100
     3ace:	50 e0       	ldi	r21, 0x00	; 0
     3ad0:	60 e0       	ldi	r22, 0x00	; 0
