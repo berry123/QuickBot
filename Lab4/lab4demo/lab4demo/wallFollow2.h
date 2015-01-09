@@ -3,11 +3,15 @@ void rightFollow(void){
 	char higherLimit = 5.25;
 	char ICT = 12;
 	float LP, RP, LWS, RWS, frontIR, rightIR, leftIR;
+	float oLWS = 0;
+	float oRWS = 0;
 	float LI = 0;
 	float RI = 0;
 	char base = 120;
 	char KP = 10;
 	char KI = 1;
+	char KD = 0;
+
 	while(1){
 		frontIR = getFrontIR();
 		rightIR = getRightIR();
@@ -45,13 +49,16 @@ void rightFollow(void){
 				RI = 0;
 			}
 
-			LWS = KP*LP + KI*LI + base;
-			RWS = KP*RP + KI*RI + base;
+			LWS = KP*LP + KI*LI + KD*oLWS + base;
+			RWS = KP*RP + KI*RI + KD*oRWS + base;
 
 			// Forward Movement
 			STEPPER_move_rn(STEPPER_BOTH,
 					STEPPER_FWD, LWS, 400,	//Left
 					STEPPER_FWD, RWS, 400);	//Right
+
+			oLWS = LWS;
+			oRWS = RWS;
 
 		}else if((frontIR < ICT) && (rightIR < ICT)){
 			LCD_clear();
@@ -103,11 +110,15 @@ void leftFollow(void){
 	char higherLimit = 5.25;
 	char ICT = 12;
 	float LP, RP, LWS, RWS, frontIR, rightIR, leftIR;
+	float oLWS = 0;
+	float oRWS = 0;
 	float LI = 0;
 	float RI = 0;
 	char base = 120;
 	char KP = 10;
 	char KI = 1;
+	char KD = 0;
+
 	while(1){
 		frontIR = getFrontIR();
 		rightIR = getRightIR();
@@ -145,13 +156,16 @@ void leftFollow(void){
 				RI = 0;
 			}
 
-			LWS = KP*LP + KI*LI + base;
-			RWS = KP*RP + KI*RI + base;
+			LWS = KP*LP + KI*LI + KD*oLWS + base;
+			RWS = KP*RP + KI*RI + KD*oRWS + base;
 
 			// Forward Movement
 			STEPPER_move_rn(STEPPER_BOTH,
 					STEPPER_FWD, LWS, 400,	//Left
 					STEPPER_FWD, RWS, 400);	//Right
+
+			oLWS = LWS;
+			oRWS = RWS;
 
 		}else if((frontIR < ICT) && (leftIR < ICT)){
 			LCD_clear();
@@ -200,12 +214,16 @@ void leftFollow(void){
 void centerFollow(void){
 	char tollerance_band = 0.5;
 	float LP, RP, LWS, RWS, frontIR, rightIR, leftIR, avrageIR;
+	float oLWS = 0;
+	float oRWS = 0;
 	float LI = 0;
 	float RI = 0;
 	char base = 120;
 	char KP = 10;
 	char KI = 1;
 	char ICT = 12;
+	char KD = 0;
+
 	rightIR = getRightIR();
 	leftIR = getLeftIR();
 	while ((leftIR < ICT) && (rightIR < ICT)){
@@ -246,12 +264,15 @@ void centerFollow(void){
 			LI = 0;
 			RI = 0;
 		}
-		LWS = KP*LP + KI*LI + base;
-		RWS = KP*RP + KI*RI + base;
+		LWS = KP*LP + KI*LI + KD*oLWS + base;
+		RWS = KP*RP + KI*RI + KD*oRWS + base;
 
 		// Forward Movement
 		STEPPER_move_rn(STEPPER_BOTH,
 				STEPPER_FWD, LWS, 400,	//Left
 				STEPPER_FWD, RWS, 400);	//Right
+
+		oLWS = LWS;
+		oRWS = RWS;
 	}	
 }
