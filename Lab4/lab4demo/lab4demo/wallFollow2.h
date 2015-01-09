@@ -1,6 +1,6 @@
 void rightFollow(void){
-	char lowerLimit = 4.75;
-	char higherLimit = 5.25;
+	char lowerLimit = 5;
+	char higherLimit = 5;
 	char ICT = 12;
 	float LP, RP, LWS, RWS, frontIR, rightIR, leftIR;
 	float oLWS = 0;
@@ -108,8 +108,8 @@ void rightFollow(void){
 }
 
 void leftFollow(void){
-	char lowerLimit = 4.75;
-	char higherLimit = 5.25;
+	char lowerLimit = 5;
+	char higherLimit = 5;
 	char ICT = 12;
 	float LP, RP, LWS, RWS, frontIR, rightIR, leftIR;
 	float oLWS = 0;
@@ -216,7 +216,7 @@ void leftFollow(void){
 	}
 }
 void centerFollow(void){
-	char tollerance_band = 0.5;
+	char tollerance_band = 0;
 	float LP, RP, LWS, RWS, frontIR, rightIR, leftIR, avrageIR;
 	float oLWS = 0;
 	float oRWS = 0;
