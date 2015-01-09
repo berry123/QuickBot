@@ -6,7 +6,7 @@ void rightFollow(void){
 	float LI = 0;
 	float RI = 0;
 	char base = 120;
-	char KP = 40;
+	char KP = 10;
 	char KI = 1;
 	while(1){
 		frontIR = getFrontIR();
@@ -106,7 +106,7 @@ void leftFollow(void){
 	float LI = 0;
 	float RI = 0;
 	char base = 120;
-	char KP = 40;
+	char KP = 10;
 	char KI = 1;
 	while(1){
 		frontIR = getFrontIR();
@@ -203,7 +203,7 @@ void centerFollow(void){
 	float LI = 0;
 	float RI = 0;
 	char base = 120;
-	char KP = 40;
+	char KP = 10;
 	char KI = 1;
 	char ICT = 12;
 	rightIR = getRightIR();
