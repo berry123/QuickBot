@@ -95,11 +95,11 @@ void CBOT_main(void) {
 					leftIR = getLeftIR();
 					if (leftIR > rightIR){
 						//turn right
-						go2angle(-90);
+						go2ContAngle(-90, 100);
 						leftFollow();
 					}else {
 						//turn left
-						go2angle(90);
+						go2ContAngle(90, 100);
 						rightFollow();
 					}
 				} else {
@@ -123,19 +123,25 @@ void CBOT_main(void) {
 					leftFollow();
 				} else if (frontIR < ICT) {
 					STEPPER_move_rn(STEPPER_BOTH,
+<<<<<<< HEAD
+						STEPPER_FWD, 0, 400,	//Left
+						STEPPER_FWD, 0, 400);	//Right
+					go2ContAngle(45, 100);
+=======
 							STEPPER_FWD, 0, 400,	//Left
 							STEPPER_FWD, 0, 400);	//Right
 					go2angle(45);
+>>>>>>> origin/master
 					frontIR = getFrontIR();
 					if (frontIR < ICT){
 						IsWall = IsWall++;
 					}
-					go2angle(-90);
+					go2ContAngle(-90, 100);
 					frontIR = getFrontIR();
 					if (frontIR < ICT){
 						IsWall = IsWall++;
 					}
-					go2angle(45);
+					go2ContAngle(45, 100);
 					if (IsWall > 0){
 						go2point(5,0);
 					} else {
@@ -151,11 +157,11 @@ void CBOT_main(void) {
 						leftIR = getLeftIR();
 						if (leftIR > rightIR){
 							//turn right
-							go2angle(-90);
+							go2ContAngle(-90, 100);
 							leftFollow();
 						}else {
 							//turn left
-							go2angle(90);
+							go2ContAngle(90, 100);
 							rightFollow();
 						}					
 
