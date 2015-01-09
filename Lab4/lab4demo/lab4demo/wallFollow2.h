@@ -80,7 +80,7 @@ void rightFollow(void){
 			TMRSRVC_delay(500);
 			rightIR = getRightIR();
 			if ((frontIR > ICT) && (rightIR > ICT)){
-				go2angle(-90);
+				go2ContAngle(-90, 100);
 				STEPPER_move_rn(STEPPER_BOTH,
 						STEPPER_FWD, 150, 400,	//Left
 						STEPPER_FWD, 150, 400);	//Right

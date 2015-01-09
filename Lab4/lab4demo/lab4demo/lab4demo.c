@@ -23,8 +23,7 @@
 //void shy();
 
 // Main function
-void CBOT_main(void)
-{
+void CBOT_main(void) {
 	// local main variables:
 	signed char cox = 0;
 	signed char coy = 0;
@@ -159,6 +158,7 @@ void CBOT_main(void)
 							go2angle(90);
 							rightFollow();
 						}					
+
 					} else {
 						LCD_clear();
 						LCD_printf("Random\n");
