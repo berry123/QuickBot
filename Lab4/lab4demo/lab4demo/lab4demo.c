@@ -31,46 +31,46 @@ void CBOT_main(void)
 	char ICT = 10;
 	char IsWall = 0;
 	float frontIR, rightIR, leftIR;
-	
+
 	// Opening LCD subsystem management.
 	LCD_open();
-	
+
 	// This information is printed on the LCD display in case this initial setup takes longer.
 	LCD_printf("Setting up...");
-	
+
 	// Subsystem open state variable information.
 	SUBSYS_OPENSTAT openTiny;
-	
+
 	// Opening ATTINY subsystem management and storing returning value in openTiny that is associated to the struct SUBSYS_OPENSTAT_TYPE.
 	openTiny = ATTINY_open();
-	
+
 	// If the state struct from openTiny is different from the expected value, an error occurs.
 	if (openTiny.state != SUBSYS_OPEN){
 		LCD_clear();
 		// The error is then displayed.
 		LCD_printf("Error when opening ATTINY!");
 	}
-	
+
 	SPKR_open(SPKR_BEEP_MODE);		// Open the speaker in beep mode
 	ADC_open();						// Open the ADC module
 	ADC_set_VREF( ADC_VREF_AVCC );	// Set the Voltage Reference first so VREF=5V.
 	STEPPER_open();					// Open Stepper module.
-	
+
 	// After the initial setup, a "Ready!" message is displayed on the second line of the LCD display.
 	LCD_printf("\nReady!");
 	LCD_clear();
-	
+
 	STEPPER_set_mode(STEPPER_BOTH, STEPPER_NORMAL_MODE);
 
 	// While loop that keeps the micro controller running begins here:
-    while(1)
-    {
+	while(1)
+	{
 		// Main menu:
 		LCD_clear();
 		LCD_printf("SW3: Wall Follow\n");
 		LCD_printf("SW4: AvoidFollow\n");
 		LCD_printf("SW5: Target Follow\n");
-		
+
 		// Press SW3 to select one of the kids.
 		if (ATTINY_get_SW_state(ATTINY_SW3)){
 			while(1){
@@ -89,8 +89,8 @@ void CBOT_main(void)
 					LCD_printf("\nthen Follow");
 
 					STEPPER_move_rn(STEPPER_BOTH,
-						STEPPER_FWD, 150, 400,	//Left
-						STEPPER_FWD, 150, 400);	//Right
+							STEPPER_FWD, 150, 400,	//Left
+							STEPPER_FWD, 150, 400);	//Right
 					TMRSRVC_delay(500);
 					rightIR = getRightIR();
 					leftIR = getLeftIR();
@@ -124,8 +124,8 @@ void CBOT_main(void)
 					leftFollow();
 				} else if (frontIR < ICT) {
 					STEPPER_move_rn(STEPPER_BOTH,
-						STEPPER_FWD, 0, 400,	//Left
-						STEPPER_FWD, 0, 400);	//Right
+							STEPPER_FWD, 0, 400,	//Left
+							STEPPER_FWD, 0, 400);	//Right
 					go2angle(45);
 					frontIR = getFrontIR();
 					if (frontIR < ICT){
@@ -145,8 +145,8 @@ void CBOT_main(void)
 						LCD_printf("\nthen Follow");
 
 						STEPPER_move_rn(STEPPER_BOTH,
-							STEPPER_FWD, 150, 400,	//Left
-							STEPPER_FWD, 150, 400);	//Right
+								STEPPER_FWD, 150, 400,	//Left
+								STEPPER_FWD, 150, 400);	//Right
 						TMRSRVC_delay(500);
 						rightIR = getRightIR();
 						leftIR = getLeftIR();
@@ -159,128 +159,21 @@ void CBOT_main(void)
 							go2angle(90);
 							rightFollow();
 						}					
-				} else {
-					LCD_clear();
-					LCD_printf("Random\n");
-					LCD_printf("Wanderer\n");
+					} else {
+						LCD_clear();
+						LCD_printf("Random\n");
+						LCD_printf("Wanderer\n");
 
-					Random_Wanderer();
+						Random_Wanderer();
+					}
 				}
-			}
 
-			
-		}else if(ATTINY_get_SW_state(ATTINY_SW5)){
-			// While SW5 is not pressed...
-			go2ContAngle(-45, 100);
-			/*while(!ATTINY_get_SW_state(ATTINY_SW5)){
-				LCD_clear();
-				LCD_printf("( %d , %d )", cox, coy); // Displays the angle selection.
-				LCD_printf("\nSW3 + | SW4 - \nSW5 To y");
-				// If SW3 is pressed, the coordinate x is incremented.
-				if(ATTINY_get_SW_state(ATTINY_SW3)){
-					cox++;
-					// If the x value is > 5, it goes back to -5.
-					if (cox > 5){
-						cox = -5;
-					}
-					// If SW4 is pressed, the coordinate x is decremented.
-					}else if(ATTINY_get_SW_state(ATTINY_SW4)){
-					cox--;
-					// If the x value is < -5, it goes back to 5.
-					if(cox < -5){
-						cox = 5;
-					}
-				}
+
+			}else if(ATTINY_get_SW_state(ATTINY_SW5)){
+				// While SW5 is not pressed...
+				go2ContAngle(-45, 100);
+
 			}
-			// After choosing the value of the coordinate x, the user must choose the value of the coordinate y:
-			// While SW5 is not pressed...
-			while(!ATTINY_get_SW_state(ATTINY_SW5)){
-				LCD_clear();
-				LCD_printf("( %d , %d )", cox, coy);
-				LCD_printf("\nSW3 + | SW4 - \nSW5 Enter");
-				// If SW3 is pressed, the coordinate y is incremented.
-				if(ATTINY_get_SW_state(ATTINY_SW3)){
-					coy++;
-					// If the x value is > 5, it goes back to -5.
-					if (coy > 5){
-						coy = -5;
-					}
-					// If SW4 is pressed, the coordinate y is decremented.
-					}else if(ATTINY_get_SW_state(ATTINY_SW4)){
-						coy--;
-					// If the x value is < -5, it goes back to 5
-					if(coy < -5){
-						coy = 5;
-					}
-				}
-			}
-			// Calls go to goal point function.
-			go2Point(cox,coy);
-			// Clears the variables up.
-			cox = 0;
-			coy = 0;
-			LCD_clear();*/
+			// Keeps running.
 		}
-		// Keeps running.
-    }
-}
-
-
-// Function for the aggressive kid.
-/*void aggressive(){
-	
-	float frontIR = 0;
-	
-	// Obtains the front IR sensor reading
-	frontIR = getFrontIR();
-	
-	//LCD_printf("%f", frontIR);
-	//LCD_clear();
-	
-	// If front IR sensor reads values larger or equal to five, move forward else stop. 
-	if(frontIR >= 5){
-		STEPPER_move_rn(STEPPER_BOTH,
-			STEPPER_FWD, 200, 400,	//Left
-			STEPPER_FWD, 200, 400);	//Right
-	}else{
-		STEPPER_stop(STEPPER_BOTH, STEPPER_BRK_OFF);
-		LCD_clear();
-		LCD_printf("RAWR!");
 	}
-}*/
-
-// Function for the shy kid.
-/*void shy(){
-	char sensLimit = 5;
-	char TS;
-	float frontIR = 0;
-	float backIR = 0;
-	float rightIR = 0;
-	float leftIR = 0;
-	char FSS;
-	char BSS;
-	char RSS;
-	char LSS;
-	
-	
-	// Reads the sensors.
-	frontIR = getFrontIR();
-	backIR = getBackIR();
-	rightIR = getRightIR();
-	leftIR = getLeftIR();
-
-	LCD_clear();
-	LCD_printf("%f, %f, %f, %f", frontIR, backIR, rightIR, leftIR);
-
-	// Checks which of the sensors are being read
-	FSS = (sensLimit > frontIR);
-	BSS = (sensLimit > backIR);
-	RSS = (sensLimit > rightIR);
-	LSS = (sensLimit > leftIR);
-
-	// Makes the sum for switch case in Movement_Selector_Executor()
-	TS = FSS + BSS + RSS + LSS;
-		
-	// Calls the Movement_Selector_Executor
-	Movement_Selector_Excecutor(FSS, BSS, RSS, LSS, TS);
-}*/
