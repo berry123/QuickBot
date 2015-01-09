@@ -190,7 +190,7 @@ void go2ContAngle(float angle, short speed){
 	if(angle > 0){
 		
 		//angle = angle * (-1);
-		angle = (1000*angle)/45;
+		angle = (800*angle)/45;
 		LCD_clear();
 		LCD_printf("%f", angle);
 	
@@ -200,7 +200,7 @@ void go2ContAngle(float angle, short speed){
 		TMRSRVC_delay(angle);
 	}else{
 		angle = angle * (-1);
-		angle = (1000*angle)/45;
+		angle = (800*angle)/45;
 		LCD_clear();
 		LCD_printf("%f", angle);
 	
