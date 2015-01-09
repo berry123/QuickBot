@@ -10,7 +10,7 @@ void rightFollow(void){
 	char base = 120;
 	char KP = 7;
 	char KI = 0.5;
-	char KD = 0;
+	char KD = 0.1;
 
 	while(1){
 		frontIR = getFrontIR();
@@ -49,8 +49,10 @@ void rightFollow(void){
 				RI = 0;
 			}
 
-			LWS = KP*LP + KI*LI + KD*oLWS + base;
-			RWS = KP*RP + KI*RI + KD*oRWS + base;
+			LWS = KP*LP + KI*LI + base;
+			RWS = KP*RP + KI*RI + base;
+			LWS = LWS + KD*(oLWS-LWS);
+			RWS = RWS + KD*(oRWS-RWS);
 
 			// Forward Movement
 			STEPPER_move_rn(STEPPER_BOTH,
@@ -117,7 +119,7 @@ void leftFollow(void){
 	char base = 120;
 	char KP = 7;
 	char KI = 0.5;
-	char KD = 0;
+	char KD = 0.1;
 
 	while(1){
 		frontIR = getFrontIR();
@@ -156,8 +158,10 @@ void leftFollow(void){
 				RI = 0;
 			}
 
-			LWS = KP*LP + KI*LI + KD*oLWS + base;
-			RWS = KP*RP + KI*RI + KD*oRWS + base;
+			LWS = KP*LP + KI*LI + base;
+			RWS = KP*RP + KI*RI + base;
+			LWS = LWS + KD*(oLWS-LWS);
+			RWS = RWS + KD*(oRWS-RWS);
 
 			// Forward Movement
 			STEPPER_move_rn(STEPPER_BOTH,
@@ -222,7 +226,7 @@ void centerFollow(void){
 	char KP = 7;
 	char KI = 0.5;
 	char ICT = 12;
-	char KD = 0;
+	char KD = 0.1;
 
 	rightIR = getRightIR();
 	leftIR = getLeftIR();
@@ -266,6 +270,8 @@ void centerFollow(void){
 		}
 		LWS = KP*LP + KI*LI + KD*oLWS + base;
 		RWS = KP*RP + KI*RI + KD*oRWS + base;
+		LWS = LWS + KD*(oLWS-LWS);
+		RWS = RWS + KD*(oRWS-RWS);
 
 		// Forward Movement
 		STEPPER_move_rn(STEPPER_BOTH,
