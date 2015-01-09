@@ -159,7 +159,7 @@ void CBOT_main(void)
 							go2angle(90);
 							rightFollow();
 						}					
-				} else {
+				} } else {
 					LCD_clear();
 					LCD_printf("Random\n");
 					LCD_printf("Wanderer\n");
