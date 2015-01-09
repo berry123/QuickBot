@@ -160,7 +160,7 @@ void CBOT_main(void) {
 							rightFollow();
 						}					
 
-					} else {
+					} }else {
 						LCD_clear();
 						LCD_printf("Random\n");
 						LCD_printf("Wanderer\n");
