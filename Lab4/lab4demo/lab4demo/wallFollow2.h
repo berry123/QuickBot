@@ -51,6 +51,10 @@ void rightFollow(void){
 
 			LWS = KP*LP + KI*LI + base;
 			RWS = KP*RP + KI*RI + base;
+			if (oLWS == 0){
+				oLWS = LWS;
+				oRWS = RWS;
+			}
 			LWS = LWS + KD*(oLWS-LWS);
 			RWS = RWS + KD*(oRWS-RWS);
 
@@ -160,6 +164,10 @@ void leftFollow(void){
 
 			LWS = KP*LP + KI*LI + base;
 			RWS = KP*RP + KI*RI + base;
+			if (oLWS == 0){
+				oLWS = LWS;
+				oRWS = RWS;
+			}
 			LWS = LWS + KD*(oLWS-LWS);
 			RWS = RWS + KD*(oRWS-RWS);
 
@@ -270,6 +278,10 @@ void centerFollow(void){
 		}
 		LWS = KP*LP + KI*LI + KD*oLWS + base;
 		RWS = KP*RP + KI*RI + KD*oRWS + base;
+		if (oLWS == 0){
+			oLWS = LWS;
+			oRWS = RWS;
+		}
 		LWS = LWS + KD*(oLWS-LWS);
 		RWS = RWS + KD*(oRWS-RWS);
 
