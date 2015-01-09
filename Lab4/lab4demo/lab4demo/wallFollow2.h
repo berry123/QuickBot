@@ -63,7 +63,7 @@ void rightFollow(void){
 				STEPPER_FWD, 150, 400,	//Left
 				STEPPER_FWD, 150, 400);	//Right
 			TMRSRVC_delay(500);
-			go2angle(90);
+			go2ContAngle(90, 100);
 			LP = 0;
 			RP = 0;
 			LI = 0;
@@ -163,7 +163,7 @@ void leftFollow(void){
 				STEPPER_FWD, 150, 400,	//Left
 				STEPPER_FWD, 150, 400);	//Right
 			TMRSRVC_delay(500);
-			go2angle(-90);
+			go2ContAngle(-90, 100);
 			LP = 0;
 			RP = 0;
 			LI = 0;
@@ -180,7 +180,7 @@ void leftFollow(void){
 			TMRSRVC_delay(500);
 			leftIR = getLeftIR();
 			if ((frontIR > ICT) && (leftIR > ICT)){
-				go2angle(90);
+				go2ContAngle(90, 100);
 				STEPPER_move_rn(STEPPER_BOTH,
 						STEPPER_FWD, 150, 400,	//Left
 						STEPPER_FWD, 150, 400);	//Right
