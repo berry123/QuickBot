@@ -10,7 +10,7 @@ void Forward_Move(){
 	STEPPER_move_rn(STEPPER_BOTH,
 		STEPPER_FWD, 200, 400,	//Left
 		STEPPER_FWD, 200, 400);	//Right
-	TMRSRVC_delay(1000); //2 Sec duration
+	TMRSRVC_delay(1000); // 1 Sec duration
 	STEPPER_stop(STEPPER_BOTH, STEPPER_BRK_OFF);
 	LCD_clear();
 	LCD_printf("Moving Forward...");
@@ -21,7 +21,7 @@ void Backward_Move(){
 	STEPPER_move_rn(STEPPER_BOTH,
 		STEPPER_REV, 200, 400,	//Left
 		STEPPER_REV, 200, 400);	//Right
-	TMRSRVC_delay(1000); //2 Sec duration
+	TMRSRVC_delay(1000); // 1 Sec duration
 	STEPPER_stop(STEPPER_BOTH, STEPPER_BRK_OFF);
 	LCD_clear();
 	LCD_printf("Moving Backward...");
@@ -36,7 +36,7 @@ void Hard_Right(){
 	STEPPER_move_rn(STEPPER_BOTH,
 		STEPPER_FWD, 200, 400,	//Left
 		STEPPER_FWD, 200, 400);	//Right
-	TMRSRVC_delay(1000); //2 Sec duration
+	TMRSRVC_delay(1000); // 1 Sec duration
 	STEPPER_stop(STEPPER_BOTH, STEPPER_BRK_OFF);
 	LCD_clear();
 	LCD_printf("Hard Right...");
@@ -51,7 +51,7 @@ void Hard_Left(){
 	STEPPER_move_rn(STEPPER_BOTH,
 		STEPPER_FWD, 200, 400,	//Left
 		STEPPER_FWD, 200, 400);	//Right
-	TMRSRVC_delay(1000); //2 Sec duration
+	TMRSRVC_delay(1000); // 1 Sec duration
 	STEPPER_stop(STEPPER_BOTH, STEPPER_BRK_OFF);
 	LCD_clear();
 	LCD_printf("Hard Left...");
@@ -62,7 +62,7 @@ void Soft_Forward_Right(){
 	STEPPER_move_rn(STEPPER_BOTH,
 		STEPPER_FWD, 200, 400,	//Left
 		STEPPER_FWD, 100, 400);	//Right
-	TMRSRVC_delay(1000); //2 Sec duration
+	TMRSRVC_delay(1000); // 1 Sec duration
 	STEPPER_stop(STEPPER_BOTH, STEPPER_BRK_OFF);
 	LCD_clear();
 	LCD_printf("Soft Forward Right...");
@@ -73,7 +73,7 @@ void Soft_Forward_Left(){
 	STEPPER_move_rn(STEPPER_BOTH,
 		STEPPER_FWD, 100, 400,	//Left
 		STEPPER_FWD, 200, 400);	//Right
-	TMRSRVC_delay(1000); //2 Sec duration
+	TMRSRVC_delay(1000); // 1 Sec duration
 	STEPPER_stop(STEPPER_BOTH, STEPPER_BRK_OFF);
 	LCD_clear();
 	LCD_printf("Soft Forward Left...");
@@ -84,7 +84,7 @@ void Soft_Backward_Right(){
 	STEPPER_move_rn(STEPPER_BOTH,
 		STEPPER_REV, 200, 400,	//Left
 		STEPPER_REV, 100, 400);	//Right
-	TMRSRVC_delay(1000); //2 Sec duration
+	TMRSRVC_delay(1000); // 1 Sec duration
 	STEPPER_stop(STEPPER_BOTH, STEPPER_BRK_OFF);
 	LCD_clear();
 	LCD_printf("Soft Backward Right...");
@@ -95,7 +95,7 @@ void Soft_Backward_Left(){
 	STEPPER_move_rn(STEPPER_BOTH,
 		STEPPER_REV, 100, 400,	//Left
 		STEPPER_REV, 200, 400);	//Right
-	TMRSRVC_delay(1000); //2 Sec duration
+	TMRSRVC_delay(1000); // 1 Sec duration
 	STEPPER_stop(STEPPER_BOTH, STEPPER_BRK_OFF);
 	LCD_clear();
 	LCD_printf("Soft Backward Left...");
