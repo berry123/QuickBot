@@ -414,7 +414,7 @@ void rightStepFollow(void){
 	}
 }
 
-void leftFollow(void){
+void leftStepFollow(void){
 	char lowerLimit = 4.75;
 	char higherLimit = 5.25;
 	char ICT = 12;
