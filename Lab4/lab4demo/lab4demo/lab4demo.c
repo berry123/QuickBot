@@ -167,7 +167,54 @@ void CBOT_main(void) {
 
 			}else if(ATTINY_get_SW_state(ATTINY_SW5)){
 				// While SW5 is not pressed...
-				go2ContAngle(-45, 100);
+				while(!ATTINY_get_SW_state(ATTINY_SW5)){
+					LCD_clear();
+					LCD_printf("( %d , %d )", cox, coy); // Displays the angle selection.
+					LCD_printf("\nSW3 + | SW4 - \nSW5 To y");
+					// If SW3 is pressed, the coordinate x is incremented.
+					if(ATTINY_get_SW_state(ATTINY_SW3)){
+						cox++;
+						// If the x value is > 5, it goes back to -5.
+						if (cox > 20){
+							cox = -20;
+						}
+						// If SW4 is pressed, the coordinate x is decremented.
+						}else if(ATTINY_get_SW_state(ATTINY_SW4)){
+						cox--;
+						// If the x value is < -5, it goes back to 5.
+						if(cox < -20){
+							cox = 20;
+						}
+					}
+				}
+				// After choosing the value of the coordinate x, the user must choose the value of the coordinate y:
+				// While SW5 is not pressed...
+				while(!ATTINY_get_SW_state(ATTINY_SW5)){
+					LCD_clear();
+					LCD_printf("( %d , %d )", cox, coy);
+					LCD_printf("\nSW3 + | SW4 - \nSW5 Enter");
+					// If SW3 is pressed, the coordinate y is incremented.
+					if(ATTINY_get_SW_state(ATTINY_SW3)){
+						coy++;
+						// If the x value is > 5, it goes back to -5.
+						if (coy > 20){
+							coy = -20;
+						}
+						// If SW4 is pressed, the coordinate y is decremented.
+						}else if(ATTINY_get_SW_state(ATTINY_SW4)){
+						coy--;
+						// If the x value is < -5, it goes back to 5
+						if(coy < -20){
+							coy = 20;
+						}
+					}
+				}
+				// Calls go to goal point function.
+				go2Point(cox,coy);
+				// Clears the variables up.
+				cox = 0;
+				coy = 0;
+				LCD_clear();
 
 			}
 			// Keeps running.

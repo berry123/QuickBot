@@ -6,8 +6,8 @@
 
 
 // Global variables:
-signed char xo = 0;
-signed char yo = 0;
+float xo = 0;
+float yo = 0;
 short thetao = 0;
 
 // Moves the robot forward for a given number of steps.
