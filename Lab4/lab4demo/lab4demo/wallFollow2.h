@@ -9,7 +9,7 @@ void rightFollow(void){
 	float RI = 0;
 	char base = 120;
 	char KP = 1;
-	char KI = 0;
+	char KI = 0.25;
 	char KD = 0;
 
 	while(1){
@@ -122,7 +122,7 @@ void leftFollow(void){
 	float RI = 0;
 	char base = 120;
 	char KP = 1;
-	char KI = 0;
+	char KI = 0.25;
 	char KD = 0;
 
 	while(1){
@@ -232,7 +232,7 @@ void centerFollow(void){
 	float RI = 0;
 	char base = 120;
 	char KP = 1;
-	char KI = 0;
+	char KI = 0.25;
 	char ICT = 12;
 	char KD = 0;
 
