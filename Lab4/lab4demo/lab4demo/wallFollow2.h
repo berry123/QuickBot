@@ -362,9 +362,9 @@ void rightStepFollow(void){
 			RWS = RWS + KD*(oRWS-RWS);
 
 			// Forward Movement
-			STEPPER_move_rn(STEPPER_BOTH,
-					STEPPER_FWD, LWS, 400,	//Left
-					STEPPER_FWD, RWS, 400);	//Right
+			STEPPER_move_stwt(STEPPER_BOTH,
+				STEPPER_FWD, 200, 200, 400, STEPPER_BRK_OFF,	//Left wheel
+				STEPPER_FWD, 200, 200, 400, STEPPER_BRK_OFF);	// Right wheel
 
 			oLWS = LWS;
 			oRWS = RWS;
