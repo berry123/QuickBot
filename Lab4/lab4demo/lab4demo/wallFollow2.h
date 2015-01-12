@@ -64,7 +64,7 @@ void rightFollow(void){
 			LWS = LWS + KD*(oLWS-LWS); // Derivative component
 			RWS = RWS + KD*(oRWS-RWS);
 
-			STEPPER_move_rn(STEPPER_BOTH, // Forward Movement
+			STEPPER_move_rn(STEPPER_BOTH, // Forward Movement based on input speeds
 					STEPPER_FWD, LWS, 400,	//Left
 					STEPPER_FWD, RWS, 400);	//Right
 
@@ -127,6 +127,9 @@ void leftFollow(void){
 	float LI = 0;
 	float RI = 0;
 	char base = 120;
+	
+	// Gains
+	
 	char KP = 1.5;
 	char KI = 0.75;
 	char KD = 0;
@@ -179,7 +182,7 @@ void leftFollow(void){
 			LWS = LWS + KD*(oLWS-LWS); // Derivative component
 			RWS = RWS + KD*(oRWS-RWS);
 
-			STEPPER_move_rn(STEPPER_BOTH, // Forward Movement
+			STEPPER_move_rn(STEPPER_BOTH, // Forward Movement based on input speeds
 					STEPPER_FWD, LWS, 400,	//Left
 					STEPPER_FWD, RWS, 400);	//Right
 
@@ -231,21 +234,25 @@ void leftFollow(void){
 	}
 }
 void centerFollow(void){
+	// Code that powers the center follower
 	char tollerance_band = 0;
 	float LP, RP, LWS, RWS, frontIR, rightIR, leftIR, avrageIR;
 	float oLWS = 0;
 	float oRWS = 0;
 	float LI = 0;
 	float RI = 0;
+	char ICT = 12;
 	char base = 120;
+	
+	// Gains
+	
 	char KP = 1.5;
 	char KI = 0.75;
-	char ICT = 12;
 	char KD = 0;
 
 	rightIR = getRightIR();
 	leftIR = getLeftIR();
-	while ((leftIR < ICT) && (rightIR < ICT)){
+	while ((leftIR < ICT) && (rightIR < ICT)){ // If between two walls
 		rightIR = getRightIR();
 		leftIR = getLeftIR();
 		avrageIR = (rightIR + leftIR)/2;
@@ -283,17 +290,19 @@ void centerFollow(void){
 			LI = 0;
 			RI = 0;
 		}
-		LWS = KP*LP + KI*LI + KD*oLWS + base;
+
+		// PID lopp
+				
+		LWS = KP*LP + KI*LI + KD*oLWS + base; // Proportinal and Integral Control
 		RWS = KP*RP + KI*RI + KD*oRWS + base;
-		if (oLWS == 0){
+		if (oLWS == 0){ // For first case
 			oLWS = LWS;
 			oRWS = RWS;
 		}
-		LWS = LWS + KD*(oLWS-LWS);
+		LWS = LWS + KD*(oLWS-LWS); // Derivative Control
 		RWS = RWS + KD*(oRWS-RWS);
 
-		// Forward Movement
-		STEPPER_move_rn(STEPPER_BOTH,
+		STEPPER_move_rn(STEPPER_BOTH, // Forward Movement based on input speeds
 				STEPPER_FWD, LWS, 400,	//Left
 				STEPPER_FWD, RWS, 400);	//Right
 
