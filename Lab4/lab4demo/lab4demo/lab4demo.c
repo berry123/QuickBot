@@ -210,7 +210,7 @@ void CBOT_main(void) {
 					}
 				}
 				// Calls go to goal point function.
-				go2Point(cox,coy);
+				go2Goal(cox,coy);
 				// Clears the variables up.
 				cox = 0;
 				coy = 0;

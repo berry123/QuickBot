@@ -1,7 +1,7 @@
 
 void go2Goal(signed char x, signed char y){
-	float angle, deltax, deltay, frontIR, rightIR, leftIR, leftFrontIR, rightFrontIR, distance, targetX, targetY, toGoalX, toGoalY;
-	int deltaTheta, theta, originalAngle, currAngle;
+	float deltax, deltay, frontIR, rightIR, leftIR;
+	int currAngle;
 	short stepSize = 100;
 	char goal = 0;
 	x = x*12;
@@ -9,23 +9,23 @@ void go2Goal(signed char x, signed char y){
 	
 	deltax = x - xo;
 	deltay = y - yo;
-	targetX = deltax;
-	targetY = deltaY;
+	//targetX = deltax;
+	//targetY = deltaY;
 	currAngle = 0;
 	
 	//theta = atan2(deltay,deltax) * (180/M_PI);
 	//deltaTheta = theta - thetao;
 	
 	// Calculating the length of the vector.
-	distance = sqrt((deltax*deltax)+(deltay*deltay)); // this is the main vector
+	//distance = sqrt((deltax*deltax)+(deltay*deltay)); // this is the main vector
 	
 	// Converting it into steps.
-	steps = distance/0.108;
+	//steps = distance/0.108;
 	
 	// Call for go to angle function.
 	//go2Angle(deltaTheta);
 	// Stores the previous angle
-	orignalAngle = deltaTheta;
+	//orignalAngle = deltaTheta;
 	
 	while(goal == 0){ // Condition where the goal is not met.
 		frontIR = getFrontIR();
