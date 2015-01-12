@@ -1,6 +1,6 @@
 void rightFollow(void){
-	char lowerLimit = 5;
-	char higherLimit = 5;
+	char lowerLimit = 4.75;
+	char higherLimit = 5.25;
 	char ICT = 12;
 	float LP, RP, LWS, RWS, frontIR, rightIR, leftIR;
 	float oLWS = 0;
@@ -8,9 +8,9 @@ void rightFollow(void){
 	float LI = 0;
 	float RI = 0;
 	char base = 120;
-	char KP = 1;
-	char KI = 0.25;
-	char KD = 0;
+	char KP = 2;
+	char KI = 0.5;
+	char KD = 3;
 
 	while(1){
 		frontIR = getFrontIR();
@@ -112,8 +112,8 @@ void rightFollow(void){
 }
 
 void leftFollow(void){
-	char lowerLimit = 5;
-	char higherLimit = 5;
+	char lowerLimit = 4.75;
+	char higherLimit = 5.25;
 	char ICT = 12;
 	float LP, RP, LWS, RWS, frontIR, rightIR, leftIR;
 	float oLWS = 0;
@@ -121,9 +121,9 @@ void leftFollow(void){
 	float LI = 0;
 	float RI = 0;
 	char base = 120;
-	char KP = 1;
-	char KI = 0.25;
-	char KD = 0;
+	char KP = 2;
+	char KI = 0.5;
+	char KD = 3;
 
 	while(1){
 		frontIR = getFrontIR();
@@ -232,9 +232,9 @@ void centerFollow(void){
 	float RI = 0;
 	char base = 120;
 	char KP = 2;
-	char KI = 0.25;
+	char KI = 0.5;
 	char ICT = 12;
-	char KD = 0;
+	char KD = 3;
 
 	rightIR = getRightIR();
 	leftIR = getLeftIR();
