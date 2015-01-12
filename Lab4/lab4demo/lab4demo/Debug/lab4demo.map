@@ -344,9 +344,11 @@ Discarded input sections
  .text.go2Point
                 0x00000000      0x2fa lab4demo.o
  .text.rightStepFollow
-                0x00000000      0x370 lab4demo.o
+                0x00000000      0x3fc lab4demo.o
  .text.leftStepFollow
-                0x00000000      0x428 lab4demo.o
+                0x00000000      0x426 lab4demo.o
+ .text.centerStepFollow
+                0x00000000      0x35a lab4demo.o
  .bss.thetao    0x00000000        0x2 lab4demo.o
  .bss.yo        0x00000000        0x1 lab4demo.o
  .bss.xo        0x00000000        0x1 lab4demo.o
@@ -1616,38 +1618,38 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000       0xf0
+.debug_aranges  0x00000000       0xf8
  *(.debug_aranges)
  .debug_aranges
-                0x00000000       0xf0 lab4demo.o
+                0x00000000       0xf8 lab4demo.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x3044
+.debug_info     0x00000000     0x36be
  *(.debug_info .gnu.linkonce.wi.*)
- .debug_info    0x00000000     0x3044 lab4demo.o
+ .debug_info    0x00000000     0x36be lab4demo.o
 
-.debug_abbrev   0x00000000      0x38f
+.debug_abbrev   0x00000000      0x364
  *(.debug_abbrev)
- .debug_abbrev  0x00000000      0x38f lab4demo.o
+ .debug_abbrev  0x00000000      0x364 lab4demo.o
 
-.debug_line     0x00000000      0x693
+.debug_line     0x00000000      0x6ea
  *(.debug_line .debug_line.* .debug_line_end)
- .debug_line    0x00000000      0x693 lab4demo.o
+ .debug_line    0x00000000      0x6ea lab4demo.o
 
-.debug_frame    0x00000000      0x8b8
+.debug_frame    0x00000000      0x8bc
  *(.debug_frame)
- .debug_frame   0x00000000      0x8b8 lab4demo.o
+ .debug_frame   0x00000000      0x8bc lab4demo.o
 
-.debug_str      0x00000000      0x977
+.debug_str      0x00000000      0x988
  *(.debug_str)
- .debug_str     0x00000000      0x977 lab4demo.o
-                                0x9cb (size before relaxing)
+ .debug_str     0x00000000      0x988 lab4demo.o
+                                0x9dc (size before relaxing)
 
-.debug_loc      0x00000000     0x321e
+.debug_loc      0x00000000     0x3809
  *(.debug_loc)
- .debug_loc     0x00000000     0x321e lab4demo.o
+ .debug_loc     0x00000000     0x3809 lab4demo.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -1667,9 +1669,9 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x00000000       0xe0
+.debug_ranges   0x00000000       0xe8
  *(.debug_ranges)
- .debug_ranges  0x00000000       0xe0 lab4demo.o
+ .debug_ranges  0x00000000       0xe8 lab4demo.o
 
 .debug_macro
  *(.debug_macro)
