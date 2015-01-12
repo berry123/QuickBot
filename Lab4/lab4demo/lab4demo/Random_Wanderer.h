@@ -16,7 +16,7 @@ void Random_Wanderer(){
 	STEPPER_move_rn(STEPPER_BOTH,
 		STEPPER_FWD, LeftWheelSpeed, 400,	//Left
 		STEPPER_FWD, RightWheelSpeed, 400);	//Right
-	TMRSRVC_delay(500); //5 Sec duration
+	TMRSRVC_delay(500); // 0.5 Sec duration
 	}
 
 // Subsumption function
@@ -31,6 +31,6 @@ void Shy_Random_Wanderer(){
 	STEPPER_move_rn(STEPPER_BOTH,
 		STEPPER_FWD, LeftWheelSpeed, 400,	//Left
 		STEPPER_FWD, RightWheelSpeed, 400);	//Right
-	TMRSRVC_delay(500); //5 Sec duration
+	TMRSRVC_delay(500); // 0.5 Sec duration
 	shy();
 }
