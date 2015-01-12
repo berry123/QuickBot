@@ -15,12 +15,7 @@
 #include "Random_Wanderer.h"	// Where both the random wanderer and the random wanderer that is affected by sensor readings are defined.
 #include "IRlib.h"				// IR sensor reading functions.
 #include "goToPoint.h"			// Go to point functions.
-//#include "wallFollow.h"
-#include "wallFollow2.h"
-
-// Used function prototypes.
-//void aggressive();
-//void shy();
+#include "wallFollow2.h"		// Functions that power the wall following procedures
 
 // Main function
 void CBOT_main(void) {
