@@ -375,11 +375,11 @@ void rightStepFollow(void){
 			LCD_printf("Wall in Front\n");
 			LCD_printf("Turning Left\n");
 
-			STEPPER_move_rn(STEPPER_BOTH,
-					STEPPER_FWD, 150, 400,	//Left
-					STEPPER_FWD, 150, 400);	//Right
-			TMRSRVC_delay(500);
-			go2ContAngle(-90, 100);
+			STEPPER_move_stwt(STEPPER_BOTH,
+					STEPPER_FWD, 200, 150, 400,	//Left
+					STEPPER_FWD, 200, 150, 400);	//Right
+			//TMRSRVC_delay(500);
+			go2Angle(90);
 			LP = 0;
 			RP = 0;
 			LI = 0;
@@ -396,10 +396,10 @@ void rightStepFollow(void){
 			TMRSRVC_delay(500);
 			rightIR = getRightIR();
 			if ((frontIR > ICT) && (rightIR > ICT)){
-				go2ContAngle(90, 100);
-				STEPPER_move_rn(STEPPER_BOTH,
-						STEPPER_FWD, 150, 400,	//Left
-						STEPPER_FWD, 150, 400);	//Right
+				go2Angle(90);
+				STEPPER_move_stwt(STEPPER_BOTH,
+						STEPPER_FWD, 200, 150, 400,	//Left
+						STEPPER_FWD, 200, 150, 400);	//Right
 				rightIR = getRightIR();
 				while(rightIR > ICT){
 					TMRSRVC_delay(100);
