@@ -231,7 +231,7 @@ void centerFollow(void){
 	float LI = 0;
 	float RI = 0;
 	char base = 120;
-	char KP = 1;
+	char KP = 2;
 	char KI = 0.25;
 	char ICT = 12;
 	char KD = 0;
