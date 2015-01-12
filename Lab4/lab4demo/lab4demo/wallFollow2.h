@@ -509,7 +509,7 @@ void leftStepFollow(void){
 			TMRSRVC_delay(500);
 			leftIR = getLeftIR();
 			if ((frontIR > ICT) && (leftIR > ICT)){
-				go2ContAngle(90);
+				go2Angle(90);
 				STEPPER_move_stwt(STEPPER_BOTH,
 						STEPPER_FWD, 200, 150, 400, STEPPER_BRK_OFF,	//Left
 						STEPPER_FWD, 200, 150, 400, STEPPER_BRK_OFF);	//Right
@@ -591,7 +591,7 @@ void centerStepFollow(void){
 
 		// Forward Movement
 		STEPPER_move_stwt(STEPPER_BOTH,
-				STEPPER_FWD, 200, LWS, 400, STEPPER_BRK_OFF	//Left
+				STEPPER_FWD, 200, LWS, 400, STEPPER_BRK_OFF,	//Left
 				STEPPER_FWD, 200, RWS, 400, STEPPER_BRK_OFF);	//Right
 
 		oLWS = LWS;

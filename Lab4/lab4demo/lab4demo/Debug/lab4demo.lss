@@ -11,21 +11,21 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
   3 .comment      0000005c  00000000  00000000  000056fc  2**0
                   CONTENTS, READONLY
-  4 .debug_aranges 000000f0  00000000  00000000  00005758  2**0
+  4 .debug_aranges 000000f8  00000000  00000000  00005758  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   00003044  00000000  00000000  00005848  2**0
+  5 .debug_info   000036be  00000000  00000000  00005850  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_abbrev 0000038f  00000000  00000000  0000888c  2**0
+  6 .debug_abbrev 00000364  00000000  00000000  00008f0e  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   00000693  00000000  00000000  00008c1b  2**0
+  7 .debug_line   000006ea  00000000  00000000  00009272  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_frame  000008b8  00000000  00000000  000092b0  2**2
+  8 .debug_frame  000008bc  00000000  00000000  0000995c  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    00000977  00000000  00000000  00009b68  2**0
+  9 .debug_str    00000988  00000000  00000000  0000a218  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    0000321e  00000000  00000000  0000a4df  2**0
+ 10 .debug_loc    00003809  00000000  00000000  0000aba0  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 000000e0  00000000  00000000  0000d6fd  2**0
+ 11 .debug_ranges 000000e8  00000000  00000000  0000e3a9  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -5038,7 +5038,7 @@ void rightFollow(void){
     2df2:	1d 82       	std	Y+5, r1	; 0x05
     2df4:	1c 82       	std	Y+4, r1	; 0x04
 	char KP = 3;
-	char KI = 0.85;
+	char KI = 0.75;
 	char KD = 0;
 
 	while(1){
@@ -5647,7 +5647,7 @@ void leftFollow(void){
     321a:	1d 82       	std	Y+5, r1	; 0x05
     321c:	1c 82       	std	Y+4, r1	; 0x04
 	char KP = 3;
-	char KI = 0.85;
+	char KI = 0.75;
 	char KD = 0;
 
 	while(1){
@@ -6255,7 +6255,7 @@ void centerFollow(void){
     3658:	0f be       	out	0x3f, r0	; 63
     365a:	cd bf       	out	0x3d, r28	; 61
 	char KP = 3;
-	char KI = 0.85;
+	char KI = 0.75;
 	char ICT = 12;
 	char KD = 0;
 
