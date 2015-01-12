@@ -1,4 +1,5 @@
 void rightFollow(void){
+	// code that powers the right wall following routine
 	char lowerLimit = 4.75;
 	char higherLimit = 5.25;
 	char ICT = 12;
@@ -8,6 +9,9 @@ void rightFollow(void){
 	float LI = 0;
 	float RI = 0;
 	char base = 120;
+	
+	// Gains
+	
 	char KP = 1.5;
 	char KI = 0.75;
 	char KD = 0;
@@ -16,8 +20,8 @@ void rightFollow(void){
 		frontIR = getFrontIR();
 		rightIR = getRightIR();
 		leftIR = getLeftIR();
-		if((frontIR > ICT) && (rightIR < ICT)){
-			if (rightIR < lowerLimit){
+		if((frontIR > ICT) && (rightIR < ICT)){ // Condition for simple wall following
+			if (rightIR < lowerLimit){ // Too close to wall
 				LCD_clear();
 				LCD_printf("Right Follow\n");
 				LCD_printf("Inside Target\n");
@@ -27,7 +31,7 @@ void rightFollow(void){
 				RP = lowerLimit - rightIR;
 				LI = 0;
 				RI = RI++;
-			}else if(rightIR > higherLimit){
+			}else if(rightIR > higherLimit){ // Too far from wall
 				LCD_clear();
 				LCD_printf("Right Follow\n");
 				LCD_printf("Outside Target\n");
@@ -37,7 +41,7 @@ void rightFollow(void){
 				RP = 0;
 				LI = LI++;
 				RI = 0;
-			}else{
+			}else{ // Proper range from wall
 				LCD_clear();
 				LCD_printf("Right Follow\n");
 				LCD_printf("At Target\n");
@@ -48,58 +52,59 @@ void rightFollow(void){
 				LI = 0;
 				RI = 0;
 			}
-
-			LWS = KP*LP + KI*LI + base;
+			
+			// PID lopp
+			
+			LWS = KP*LP + KI*LI + base; // Proportinal and Integral
 			RWS = KP*RP + KI*RI + base;
-			if (oLWS == 0){
+			if (oLWS == 0){ // Case to prevent weird stuff on first run
 				oLWS = LWS;
 				oRWS = RWS;
 			}
-			LWS = LWS + KD*(oLWS-LWS);
+			LWS = LWS + KD*(oLWS-LWS); // Derivative component
 			RWS = RWS + KD*(oRWS-RWS);
 
-			// Forward Movement
-			STEPPER_move_rn(STEPPER_BOTH,
+			STEPPER_move_rn(STEPPER_BOTH, // Forward Movement
 					STEPPER_FWD, LWS, 400,	//Left
 					STEPPER_FWD, RWS, 400);	//Right
 
-			oLWS = LWS;
+			oLWS = LWS; // Remember previous speeds for derivative component
 			oRWS = RWS;
 
-		}else if((frontIR < ICT) && (rightIR < ICT)){
+		}else if((frontIR < ICT) && (rightIR < ICT)){ // Condition for if wall is in front
 			LCD_clear();
 			LCD_printf("Right Follow\n");
 			LCD_printf("Wall in Front\n");
 			LCD_printf("Turning Left\n");
-
-			STEPPER_move_rn(STEPPER_BOTH,
+			
+			STEPPER_move_rn(STEPPER_BOTH, // Forward movement
 					STEPPER_FWD, 150, 400,	//Left
 					STEPPER_FWD, 150, 400);	//Right
-			TMRSRVC_delay(500);
-			go2ContAngle(-90, 100);
+			TMRSRVC_delay(500); // 0.5 sec delay
+			go2ContAngle(-90, 100); // Left 90 Turn
 			LP = 0;
 			RP = 0;
 			LI = 0;
 			RI = 0;
-		}else if((frontIR > ICT) && (rightIR > ICT)){
+		}else if((frontIR > ICT) && (rightIR > ICT)){ // Condition for is no wall to follow or in front
 			LCD_clear();
 			LCD_printf("Right Follow\n");
 			LCD_printf("Lack of Wall\n");
 			LCD_printf("Turning Right\n");
-
-			STEPPER_move_rn(STEPPER_BOTH,
+			
+			STEPPER_move_rn(STEPPER_BOTH, // Forward movement
 					STEPPER_FWD, 150, 400,	//Left
 					STEPPER_FWD, 150, 400);	//Right
-			TMRSRVC_delay(500);
+			TMRSRVC_delay(500); // 0.5 Sec delay
 			rightIR = getRightIR();
 			if ((frontIR > ICT) && (rightIR > ICT)){
-				go2ContAngle(90, 100);
-				STEPPER_move_rn(STEPPER_BOTH,
+				go2ContAngle(90, 100); // Right 90 Turn
+				STEPPER_move_rn(STEPPER_BOTH, // Forward movement
 						STEPPER_FWD, 150, 400,	//Left
 						STEPPER_FWD, 150, 400);	//Right
 				rightIR = getRightIR();
 				while(rightIR > ICT){
-					TMRSRVC_delay(100);
+					TMRSRVC_delay(100); // 0.1 sec delay
 					rightIR = getRightIR();
 				}
 				LP = 0;
@@ -112,6 +117,7 @@ void rightFollow(void){
 }
 
 void leftFollow(void){
+	// code that powers the left wall following routine
 	char lowerLimit = 4.75;
 	char higherLimit = 5.25;
 	char ICT = 12;
@@ -129,8 +135,8 @@ void leftFollow(void){
 		frontIR = getFrontIR();
 		rightIR = getRightIR();
 		leftIR = getLeftIR();
-		if((frontIR > ICT) && (leftIR < ICT)){
-			if (leftIR < lowerLimit){
+		if((frontIR > ICT) && (leftIR < ICT)){ // Condition for simple wall following
+			if (leftIR < lowerLimit){ // Too close to wall
 				LCD_clear();
 				LCD_printf("Left Follow\n");
 				LCD_printf("Inside Target\n");
@@ -140,7 +146,7 @@ void leftFollow(void){
 				RP = 0;
 				LI = LI++;
 				RI = 0;
-			}else if(leftIR > higherLimit){
+			}else if(leftIR > higherLimit){ // Too far from wall
 				LCD_clear();
 				LCD_printf("Left Follow\n");
 				LCD_printf("Outside Target\n");
@@ -150,7 +156,7 @@ void leftFollow(void){
 				RP = leftIR - higherLimit;
 				LI = 0;
 				RI = RI++;
-			}else{
+			}else{ // Proper range from wall
 				LCD_clear();
 				LCD_printf("Left Follow\n");
 				LCD_printf("At Target\n");
@@ -162,57 +168,58 @@ void leftFollow(void){
 				RI = 0;
 			}
 
-			LWS = KP*LP + KI*LI + base;
+			// PID lopp
+									
+			LWS = KP*LP + KI*LI + base; // Proportinal and Integral
 			RWS = KP*RP + KI*RI + base;
-			if (oLWS == 0){
+			if (oLWS == 0){ // Case to prevent weird stuff on first run
 				oLWS = LWS;
 				oRWS = RWS;
 			}
-			LWS = LWS + KD*(oLWS-LWS);
+			LWS = LWS + KD*(oLWS-LWS); // Derivative component
 			RWS = RWS + KD*(oRWS-RWS);
 
-			// Forward Movement
-			STEPPER_move_rn(STEPPER_BOTH,
+			STEPPER_move_rn(STEPPER_BOTH, // Forward Movement
 					STEPPER_FWD, LWS, 400,	//Left
 					STEPPER_FWD, RWS, 400);	//Right
 
-			oLWS = LWS;
+			oLWS = LWS; // Remember previous speeds for derivative component
 			oRWS = RWS;
 
-		}else if((frontIR < ICT) && (leftIR < ICT)){
+		}else if((frontIR < ICT) && (leftIR < ICT)){ // Condition for if wall is in front
 			LCD_clear();
 			LCD_printf("Left Follow\n");
 			LCD_printf("Wall in Front\n");
 			LCD_printf("Turning Right\n");
 
-			STEPPER_move_rn(STEPPER_BOTH,
+			STEPPER_move_rn(STEPPER_BOTH, // Forward movement
 					STEPPER_FWD, 150, 400,	//Left
 					STEPPER_FWD, 150, 400);	//Right
-			TMRSRVC_delay(500);
-			go2ContAngle(90, 100);
+			TMRSRVC_delay(500); // 0.5 sec delay
+			go2ContAngle(90, 100); // Right 90 Turn
 			LP = 0;
 			RP = 0;
 			LI = 0;
 			RI = 0;	
-		}else if((frontIR > ICT) && (leftIR > ICT)){
+		}else if((frontIR > ICT) && (leftIR > ICT)){ // Condition for is no wall to follow or in front
 			LCD_clear();
 			LCD_printf("Left Follow\n");
 			LCD_printf("Lack of Wall\n");
 			LCD_printf("Turning Left\n");
 
-			STEPPER_move_rn(STEPPER_BOTH,
+			STEPPER_move_rn(STEPPER_BOTH, // Forward movement
 					STEPPER_FWD, 150, 400,	//Left
 					STEPPER_FWD, 150, 400);	//Right
-			TMRSRVC_delay(500);
+			TMRSRVC_delay(500); // 0.5 sec delay
 			leftIR = getLeftIR();
 			if ((frontIR > ICT) && (leftIR > ICT)){
-				go2ContAngle(-90, 100);
-				STEPPER_move_rn(STEPPER_BOTH,
+				go2ContAngle(-90, 100); // Left 90 Turn
+				STEPPER_move_rn(STEPPER_BOTH, // Forward movement
 						STEPPER_FWD, 150, 400,	//Left
 						STEPPER_FWD, 150, 400);	//Right
 				leftIR = getLeftIR();
 				while(leftIR > ICT){
-					TMRSRVC_delay(100);
+					TMRSRVC_delay(100); // 0.1 sec delay
 					leftIR = getLeftIR();
 				}
 				LP = 0;
