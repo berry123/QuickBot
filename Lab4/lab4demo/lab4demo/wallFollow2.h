@@ -8,7 +8,7 @@ void rightFollow(void){
 	float LI = 0;
 	float RI = 0;
 	char base = 120;
-	char KP = 3;
+	char KP = 1.5;
 	char KI = 0.75;
 	char KD = 0;
 
@@ -121,7 +121,7 @@ void leftFollow(void){
 	float LI = 0;
 	float RI = 0;
 	char base = 120;
-	char KP = 3;
+	char KP = 1.5;
 	char KI = 0.75;
 	char KD = 0;
 
@@ -231,7 +231,7 @@ void centerFollow(void){
 	float LI = 0;
 	float RI = 0;
 	char base = 120;
-	char KP = 3;
+	char KP = 1.5;
 	char KI = 0.75;
 	char ICT = 12;
 	char KD = 0;
@@ -424,7 +424,7 @@ void leftStepFollow(void){
 	float LI = 0;
 	float RI = 0;
 	char base = 120;
-	char KP = 3;
+	char KP = 1.5;
 	char KI = 0.75;
 	char KD = 0;
 
@@ -535,7 +535,7 @@ void centerStepFollow(void){
 	float LI = 0;
 	float RI = 0;
 	char base = 120;
-	char KP = 3;
+	char KP = 1.5;
 	char KI = 0.85;
 	char ICT = 12;
 	char KD = 0;
