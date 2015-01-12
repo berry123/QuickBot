@@ -2,6 +2,7 @@
 void go2Goal(signed char x, signed char y){
 	float angle, deltax, deltay, frontIR, rightIR, leftIR, leftFrontIR, rightFrontIR, distance, targetX, targetY, toGoalX, toGoalY;
 	int deltaTheta, theta, originalAngle, currAngle;
+	short stepSize = 100;
 	char goal = 0;
 	x = x*12;
 	y = y*12;
@@ -10,9 +11,10 @@ void go2Goal(signed char x, signed char y){
 	deltay = y - yo;
 	targetX = deltax;
 	targetY = deltaY;
+	currAngle = 0;
 	
-	theta = atan2(deltay,deltax) * (180/M_PI);
-	deltaTheta = theta - thetao;
+	//theta = atan2(deltay,deltax) * (180/M_PI);
+	//deltaTheta = theta - thetao;
 	
 	// Calculating the length of the vector.
 	distance = sqrt((deltax*deltax)+(deltay*deltay)); // this is the main vector
@@ -21,7 +23,7 @@ void go2Goal(signed char x, signed char y){
 	steps = distance/0.108;
 	
 	// Call for go to angle function.
-	go2Angle(deltaTheta);
+	//go2Angle(deltaTheta);
 	// Stores the previous angle
 	orignalAngle = deltaTheta;
 	
@@ -32,45 +34,52 @@ void go2Goal(signed char x, signed char y){
 		// Remember to use: currAngle = currAngle + originalAngle;
 		
 		if(frontIR > 6){
-			moveForward(100,200);
+			moveForward(stepSize,200);
 			
-			if(currAngle != originalAngle){
-				// Calculates estimation:
-				deltax = deltax -(100*0.108)*sin(currAngle);
-				deltay = deltay -(100*0.108)*cos(currAngle);
-								
-				if(deltax == 0 && deltay == 0){
-					goal = 1;
+			if(currAngle != 0 || currAngle != 360 || currAngle != -360 || currAngle != 180 || currAngle != -180){
+				// Working on the Y axis:
+				if(currAngle > 0){// Pointing towards the goal
+					deltay = deltay - stepSize*0.108;
+				}else{ // Pointing away from the goal.
+					deltay = deltay + stepSize*0.108;
 				}
 				
 			}else{
-				distance = distance - (100*0.108);
-				deltax = distance*sin(currAngle);
-				deltay = distance*cos(currAngle);
+				// Working on the X axis assuming its towards 0 degrees:
+				if(currAngle >= 0){// Pointing towards goal
+					deltax = deltax - stepSize*0.108;
+				}else{// Pointing away from goal.
+					deltax = deltax + stepSize*0.108;
+				}
+				
 			}
 			
 		}else{
-			toGoalX = targetX - deltax*sin(currAngle);
-			toGoalY = targetY - deltay*cos(currAngle);
-			
-			if(toGoalX > (targetX/2)){
-				if(toGoalY > (targetY/2)){
-					// Turn oppsite direction to the target
-					// Follow any of the walls towards the target.
+			if(rightIR < leftIR){
+				if(deltay >= 0){
+					currAngle = currAngle + 90;
+					go2Angle(currAngle);
+					// Right wall follow.
 				}else{
-					// Turn towards the target.
-					// Stick to any wall towards the target.
+					currAngle = currAngle - 90;
+					go2Angle(currAngle);
+					// Left wall follow.
 				}
 			}else{
-				if(toGoalY > (targetY/2)){
-					// Turn towards the direction of the target
-					// Follow any of the walls towards the target.
+				if(deltay >= 0){
+					currAngle = currAngle - 90;
+					go2Angle(currAngle);
+					// Left wall follow
 				}else{
-					// Turn towards the direction of the target
-					// Follow any of the walls towards the target and away from it.
+					currAngle = currAngle + 90;
+					go2Angle(currAngle);
+					// Right wall follow
 				}
 			}
-			
+		}
+		
+		if(deltax==0 && deltay==0){ // Might need to set a tolerance
+			goal = 1;
 		}
 	}
 	
