@@ -67,37 +67,37 @@ void CBOT_main(void) {
 
 		// Press SW3 to select one of the kids.
 		if (ATTINY_get_SW_state(ATTINY_SW3)){
-			while(1){
+			while(1){ // Logic that determins what conditions the robot starts at and what to demo
 				frontIR = getFrontIR();
 				rightIR = getRightIR();
 				leftIR = getLeftIR();
-				if ((leftIR < ICT) && (rightIR < ICT)) {
+				if ((leftIR < ICT) && (rightIR < ICT)) { // near both walls so use center follow
 					centerFollow();
-				} else if (rightIR < ICT){
+				} else if (rightIR < ICT){ // Walls to the right so follows on the right side
 					rightFollow();
-				} else if (leftIR < ICT) {
+				} else if (leftIR < ICT) { // Walls to the left so follows on the left side
 					leftFollow();
-				} else if (frontIR < ICT) {
+				} else if (frontIR < ICT) { // Sees something to the front of it
 					LCD_clear();
 					LCD_printf("Forward,");
 					LCD_printf("\nthen Follow");
 
-					STEPPER_move_rn(STEPPER_BOTH,
+					STEPPER_move_rn(STEPPER_BOTH, // Move a tad forward to get closer to the wall
 							STEPPER_FWD, 150, 400,	//Left
 							STEPPER_FWD, 150, 400);	//Right
-					TMRSRVC_delay(500);
+					TMRSRVC_delay(500); // 0.5 sec delay
 					rightIR = getRightIR();
 					leftIR = getLeftIR();
-					if (leftIR > rightIR){
+					if (leftIR > rightIR){ // determins what side the robot is closer to the wall. Essentialy random when perpendicular
 						//turn right
-						go2ContAngle(-90, 100);
+						go2ContAngle(-90, 100); // Left 90 turn
 						leftFollow();
 					}else {
 						//turn left
-						go2ContAngle(90, 100);
+						go2ContAngle(90, 100); // Right 90 turn
 						rightFollow();
 					}
-				} else {
+				} else { // If sensors don't detect anything, random wanderer is engaged
 					LCD_clear();
 					LCD_printf("Random\n");
 					LCD_printf("Wanderer\n");
@@ -110,31 +110,31 @@ void CBOT_main(void) {
 				frontIR = getFrontIR();
 				rightIR = getRightIR();
 				leftIR = getLeftIR();
-				if ((leftIR < ICT) && (rightIR < ICT)) {
+				if ((leftIR < ICT) && (rightIR < ICT)) { // near both walls so use center follow
 					centerFollow();
-				} else if (rightIR < ICT){
+				} else if (rightIR < ICT){ // Walls to the right so follows on the right side
 					rightFollow();
-				} else if (leftIR < ICT) {
+				} else if (leftIR < ICT) { // Walls to the left so follows on the left side
 					leftFollow();
-				} else if (frontIR < ICT) {
-					STEPPER_move_rn(STEPPER_BOTH,
+				} else if (frontIR < ICT) { // Sees something to the front of it
+					STEPPER_move_rn(STEPPER_BOTH, // Move a tad forward to get closer to the wall
 							STEPPER_FWD, 0, 400,	//Left
 							STEPPER_FWD, 0, 400);	//Right
-					go2ContAngle(45, 100);
+					go2ContAngle(45, 100); // Right 45 degree turn
 
 					frontIR = getFrontIR();
-					if (frontIR < ICT){
+					if (frontIR < ICT){ // test if object or wall
 						IsWall = IsWall++;
 					}
-					go2ContAngle(-90, 100);
+					go2ContAngle(-90, 100); // Left 90 degree turn
 					frontIR = getFrontIR();
-					if (frontIR < ICT){
+					if (frontIR < ICT){  // test if object or wall
 						IsWall = IsWall++;
 					}
-					go2ContAngle(45, 100);
-					if (IsWall > 0){
+					go2ContAngle(45, 100); // Right 45 degree turn
+					if (IsWall > 0){ // avoid object
 						go2point(5,0);
-					} else {
+					} else { // follow the wall
 						LCD_clear();
 						LCD_printf("Forward,");
 						LCD_printf("\nthen Follow");
@@ -142,20 +142,20 @@ void CBOT_main(void) {
 						STEPPER_move_rn(STEPPER_BOTH,
 								STEPPER_FWD, 150, 400,	//Left
 								STEPPER_FWD, 150, 400);	//Right
-						TMRSRVC_delay(500);
+						TMRSRVC_delay(500); // 0.5 sec delay
 						rightIR = getRightIR();
 						leftIR = getLeftIR();
 						if (leftIR > rightIR){
-							//turn right
+							//turn 90 degree right
 							go2ContAngle(-90, 100);
 							leftFollow();
 						}else {
-							//turn left
+							//turn 90 degree left
 							go2ContAngle(90, 100);
 							rightFollow();
 						}					
 
-					} }else {
+					} }else { // If sensors don't detect anything, random wanderer is engaged
 						LCD_clear();
 						LCD_printf("Random\n");
 						LCD_printf("Wanderer\n");
