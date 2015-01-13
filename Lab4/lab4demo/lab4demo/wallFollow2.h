@@ -9,9 +9,9 @@ void rightFollow(void){
 	float LI = 0;
 	float RI = 0;
 	char base = 120;
-	
+
 	// Gains
-	
+
 	char KP = 1.5;
 	char KI = 0.75;
 	char KD = 0;
@@ -52,9 +52,9 @@ void rightFollow(void){
 				LI = 0;
 				RI = 0;
 			}
-			
+
 			// PID lopp
-			
+
 			LWS = KP*LP + KI*LI + base; // Proportinal and Integral
 			RWS = KP*RP + KI*RI + base;
 			if (oLWS == 0){ // Case to prevent weird stuff on first run
@@ -76,7 +76,7 @@ void rightFollow(void){
 			LCD_printf("Right Follow\n");
 			LCD_printf("Wall in Front\n");
 			LCD_printf("Turning Left\n");
-			
+
 			STEPPER_move_rn(STEPPER_BOTH, // Forward movement
 					STEPPER_FWD, 150, 400,	//Left
 					STEPPER_FWD, 150, 400);	//Right
@@ -91,7 +91,7 @@ void rightFollow(void){
 			LCD_printf("Right Follow\n");
 			LCD_printf("Lack of Wall\n");
 			LCD_printf("Turning Right\n");
-			
+
 			STEPPER_move_rn(STEPPER_BOTH, // Forward movement
 					STEPPER_FWD, 150, 400,	//Left
 					STEPPER_FWD, 150, 400);	//Right
@@ -127,9 +127,9 @@ void leftFollow(void){
 	float LI = 0;
 	float RI = 0;
 	char base = 120;
-	
+
 	// Gains
-	
+
 	char KP = 1.5;
 	char KI = 0.75;
 	char KD = 0;
@@ -172,7 +172,7 @@ void leftFollow(void){
 			}
 
 			// PID lopp
-									
+
 			LWS = KP*LP + KI*LI + base; // Proportinal and Integral
 			RWS = KP*RP + KI*RI + base;
 			if (oLWS == 0){ // Case to prevent weird stuff on first run
@@ -243,9 +243,9 @@ void centerFollow(void){
 	float RI = 0;
 	char ICT = 12;
 	char base = 120;
-	
+
 	// Gains
-	
+
 	char KP = 1.5;
 	char KI = 0.75;
 	char KD = 0;
@@ -292,7 +292,7 @@ void centerFollow(void){
 		}
 
 		// PID lopp
-				
+
 		LWS = KP*LP + KI*LI + KD*oLWS + base; // Proportinal and Integral Control
 		RWS = KP*RP + KI*RI + KD*oRWS + base;
 		if (oLWS == 0){ // For first case
@@ -317,11 +317,11 @@ void centerFollow(void){
 //
 //
 
-void rightStepFollow(float *X,float *Y,float X_tar,float Y_tar){
+void rightStepFollow(float* X, float* Y, float* orientation, float X_tar, float Y_tar){
 	char lowerLimit = 5;
 	char higherLimit = 5;
 	char ICT = 12;
-	float LP, RP, LWS, RWS, frontIR, rightIR, leftIR;
+	float LP, RP, LWS, RWS, frontIR, rightIR, leftIR, cur_Angle;
 	float oLWS = 0;
 	float oRWS = 0;
 	float LI = 0;
@@ -377,13 +377,15 @@ void rightStepFollow(float *X,float *Y,float X_tar,float Y_tar){
 			LWS = LWS + KD*(oLWS-LWS);
 			RWS = RWS + KD*(oRWS-RWS);
 
-			// Forward Movement
-			STEPPER_move_stwt(STEPPER_BOTH,
-				STEPPER_FWD, 200, LWS, 400, STEPPER_BRK_OFF,	//Left wheel
-				STEPPER_FWD, 200, RWS, 400, STEPPER_BRK_OFF);	// Right wheel
+			pseudo_Stepper_Step(RWS, LWS, 0.1);	// (Right Wheel Speed, Left Wheel Speed, Duration)
 
 			oLWS = LWS;
 			oRWS = RWS;
+
+			// Computations for position
+			*X = cos((*orientation))*((RWS+LWS)*0.1*0.108/2) + (*X);
+			*Y = sin((*orientation))*((RWS+LWS)*0.1*0.108/2) + (*Y);	
+			//
 
 		}else if((frontIR < ICT) && (rightIR < ICT)){
 			LCD_clear();
@@ -391,11 +393,25 @@ void rightStepFollow(float *X,float *Y,float X_tar,float Y_tar){
 			LCD_printf("Wall in Front\n");
 			LCD_printf("Turning Left\n");
 
-			STEPPER_move_stwt(STEPPER_BOTH,
-					STEPPER_FWD, 200, 150, 400, STEPPER_BRK_OFF,	//Left
-					STEPPER_FWD, 200, 150, 400, STEPPER_BRK_OFF);	//Right
-			//TMRSRVC_delay(500);
-			go2Angle(90);
+			pseudo_Stepper_Step(150, 150, 0.5);	// (Right Wheel Speed, Left Wheel Speed, Duration)
+
+			cur_Angle = Tar_vs_Cur_Angle(X_tar, Y_tar, *X, *Y);
+
+			if ((cur_Angle >= (*orientation))&&(cur_Angle <= ((*orientation)+90))){
+				go2Angle(cur_Angle-(*orientation)); // + is left, - is right
+				break_condition = 1;
+
+				//Update Orientation
+				*orientation = cur_Angle;
+				//
+
+			}else{
+				go2Angle(90); // + is left, - is right
+
+				//Update Orientation
+				*orientation = (*orientation) + 90;
+				//
+			}
 			LP = 0;
 			RP = 0;
 			LI = 0;
@@ -406,35 +422,56 @@ void rightStepFollow(float *X,float *Y,float X_tar,float Y_tar){
 			LCD_printf("Lack of Wall\n");
 			LCD_printf("Turning Right\n");
 
-			STEPPER_move_rn(STEPPER_BOTH,
-					STEPPER_FWD, 150, 400,	//Left
-					STEPPER_FWD, 150, 400);	//Right
-			TMRSRVC_delay(500);
+			pseudo_Stepper_Step(150, 150, 0.5);	// (Right Wheel Speed, Left Wheel Speed, Duration)
+
+			// Computations for position
+			*X = cos((*orientation))*(75*0.108) + (*X);
+			*Y = sin((*orientation))*(75*0.108) + (*Y);	
+			//
+
 			rightIR = getRightIR();
 			if ((frontIR > ICT) && (rightIR > ICT)){
-				go2Angle(90);
-				STEPPER_move_stwt(STEPPER_BOTH,
-						STEPPER_FWD, 200, 150, 400, STEPPER_BRK_OFF,	//Left
-						STEPPER_FWD, 200, 150, 400, STEPPER_BRK_OFF);	//Right
-				rightIR = getRightIR();
-				while(rightIR > ICT){
-					TMRSRVC_delay(100);
+				cur_Angle = Tar_vs_Cur_Angle(X_tar, Y_tar, *X, *Y);
+
+				if ((cur_Angle >= (*orientation)-90)&&(cur_Angle <= ((*orientation)))){
+					go2Angle(cur_Angle-(*orientation)); // + is left, - is right
+					break_condition = 1;
+
+					//Update Orientation
+					*orientation = cur_Angle;
+					//
+
+				}else{
+					go2Angle(-90); // + is left, - is right
+
+					//Update Orientation
+					*orientation = (*orientation) - 90;
+					//
+
 					rightIR = getRightIR();
+					while(rightIR > ICT){
+						pseudo_Stepper_Step(150, 150, 0.1);	// (Right Wheel Speed, Left Wheel Speed, Duration)
+						// Computations for position
+						*X = cos((*orientation))*(15*0.108) + (*X);
+						*Y = sin((*orientation))*(15*0.108) + (*Y);	
+						//
+						rightIR = getRightIR();
+					}
+					LP = 0;
+					RP = 0;
+					LI = 0;
+					RI = 0;	
 				}
-				LP = 0;
-				RP = 0;
-				LI = 0;
-				RI = 0;	
 			}
 		}
 	}
 }
 
-void leftStepFollow(float *X,float *Y,float X_tar,float Y_tar){
+void leftStepFollow(float *X, float *Y, float* orientation, float X_tar, float Y_tar){
 	char lowerLimit = 4.75;
 	char higherLimit = 5.25;
 	char ICT = 12;
-	float LP, RP, LWS, RWS, frontIR, rightIR, leftIR;
+	float LP, RP, LWS, RWS, frontIR, rightIR, leftIR, cur_Angle;
 	float oLWS = 0;
 	float oRWS = 0;
 	float LI = 0;
@@ -443,8 +480,9 @@ void leftStepFollow(float *X,float *Y,float X_tar,float Y_tar){
 	char KP = 1.5;
 	char KI = 0.75;
 	char KD = 0;
+	char break_condition = 0;
 
-	while(1){
+	while(break_condition == 0){
 		frontIR = getFrontIR();
 		rightIR = getRightIR();
 		leftIR = getLeftIR();
@@ -490,13 +528,15 @@ void leftStepFollow(float *X,float *Y,float X_tar,float Y_tar){
 			LWS = LWS + KD*(oLWS-LWS);
 			RWS = RWS + KD*(oRWS-RWS);
 
-			// Forward Movement
-			STEPPER_move_stwt(STEPPER_BOTH,
-					STEPPER_FWD, 200, LWS, 400, STEPPER_BRK_OFF,	//Left
-					STEPPER_FWD, 200, RWS, 400, STEPPER_BRK_OFF);	//Right
+			pseudo_Stepper_Step(RWS, LWS, 0.1);	// (Right Wheel Speed, Left Wheel Speed, Duration)
 
 			oLWS = LWS;
 			oRWS = RWS;
+
+			// Computations for position
+			*X = cos((*orientation))*((RWS+LWS)*0.1*0.108/2) + (*X);
+			*Y = sin((*orientation))*((RWS+LWS)*0.1*0.108/2) + (*Y);	
+			//
 
 		}else if((frontIR < ICT) && (leftIR < ICT)){
 			LCD_clear();
@@ -504,11 +544,30 @@ void leftStepFollow(float *X,float *Y,float X_tar,float Y_tar){
 			LCD_printf("Wall in Front\n");
 			LCD_printf("Turning Right\n");
 
-			STEPPER_move_rn(STEPPER_BOTH,
-					STEPPER_FWD, 150, 400,	//Left
-					STEPPER_FWD, 150, 400);	//Right
-			TMRSRVC_delay(500);
-			go2ContAngle(90, 100);
+
+			pseudo_Stepper_Step(150, 150, 0.5);	// (Right Wheel Speed, Left Wheel Speed, Duration)
+
+			// Computations for position
+			*X = cos((*orientation))*(75*0.108) + (*X);
+			*Y = sin((*orientation))*(75*0.108) + (*Y);	
+			//
+			cur_Angle = Tar_vs_Cur_Angle(X_tar, Y_tar, *X, *Y);
+
+			if ((cur_Angle >= (*orientation)-90)&&(cur_Angle <= ((*orientation)))){
+				go2Angle(cur_Angle-(*orientation)); // + is left, - is right
+				break_condition = 1;
+
+				//Update Orientation
+				*orientation = cur_Angle;
+				//
+
+			}else{
+				go2Angle(-90); // + is left, - is right
+
+				//Update Orientation
+				*orientation = (*orientation) - 90;
+				//
+			}
 			LP = 0;
 			RP = 0;
 			LI = 0;
@@ -519,98 +578,47 @@ void leftStepFollow(float *X,float *Y,float X_tar,float Y_tar){
 			LCD_printf("Lack of Wall\n");
 			LCD_printf("Turning Left\n");
 
-			STEPPER_move_stwt(STEPPER_BOTH,
-					STEPPER_FWD, 200, 150, 400, STEPPER_BRK_OFF,	//Left
-					STEPPER_FWD, 200, 150, 400, STEPPER_BRK_OFF);	//Right
-			TMRSRVC_delay(500);
+			pseudo_Stepper_Step(150, 150, 0.5);	// (Right Wheel Speed, Left Wheel Speed, Duration)
+
+			// Computations for position
+			*X = cos((*orientation))*(75*0.108) + (*X);
+			*Y = sin((*orientation))*(75*0.108) + (*Y);	
+			//
+
 			leftIR = getLeftIR();
 			if ((frontIR > ICT) && (leftIR > ICT)){
-				go2Angle(90);
-				STEPPER_move_stwt(STEPPER_BOTH,
-						STEPPER_FWD, 200, 150, 400, STEPPER_BRK_OFF,	//Left
-						STEPPER_FWD, 200, 150, 400, STEPPER_BRK_OFF);	//Right
-				leftIR = getLeftIR();
-				while(leftIR > ICT){
-					TMRSRVC_delay(100);
+				cur_Angle = Tar_vs_Cur_Angle(X_tar, Y_tar, *X, *Y);
+
+				if ((cur_Angle >= (*orientation))&&(cur_Angle <= ((*orientation)+90))){
+					go2Angle(cur_Angle-(*orientation)); // + is left, - is right
+					break_condition = 1;
+
+					//Update Orientation
+					*orientation = cur_Angle;
+					//
+
+				}else{
+					go2Angle(90); // + is left, - is right
+
+					//Update Orientation
+					*orientation = (*orientation) + 90;
+					//
+
 					leftIR = getLeftIR();
+					while(leftIR > ICT){
+						pseudo_Stepper_Step(150, 150, 0.1);	// (Right Wheel Speed, Left Wheel Speed, Duration)
+						// Computations for position
+						*X = cos((*orientation))*(15*0.108) + (*X);
+						*Y = sin((*orientation))*(15*0.108) + (*Y);	
+						//
+						leftIR = getLeftIR();
+					}
+					LP = 0;
+					RP = 0;
+					LI = 0;
+					RI = 0;	
 				}
-				LP = 0;
-				RP = 0;
-				LI = 0;
-				RI = 0;	
 			}
 		}
 	}
-}
-
-void centerStepFollow(void){
-	char tollerance_band = 0;
-	float LP, RP, LWS, RWS, frontIR, rightIR, leftIR, avrageIR;
-	float oLWS = 0;
-	float oRWS = 0;
-	float LI = 0;
-	float RI = 0;
-	char base = 120;
-	char KP = 1.5;
-	char KI = 0.85;
-	char ICT = 12;
-	char KD = 0;
-
-	rightIR = getRightIR();
-	leftIR = getLeftIR();
-	while ((leftIR < ICT) && (rightIR < ICT)){
-		rightIR = getRightIR();
-		leftIR = getLeftIR();
-		avrageIR = (rightIR + leftIR)/2;
-		if ((rightIR - avrageIR) > tollerance_band){
-			//means left of center
-			LCD_clear();
-			LCD_printf("Center Follow\n");
-			LCD_printf("Left of\n");
-			LCD_printf("Center\n");
-
-			LP = rightIR - avrageIR;
-			RP = 0;
-			LI = LI++;
-			RI = 0;
-		} else if ((avrageIR - rightIR) > (tollerance_band)) {
-			//means right of center
-			LCD_clear();
-			LCD_printf("Center Follow\n");
-			LCD_printf("Right of\n");
-			LCD_printf("Center\n");
-
-			LP = 0;
-			RP = leftIR - avrageIR;
-			LI = 0;
-			RI = RI++;
-		} else {
-			//means center of center
-			LCD_clear();
-			LCD_printf("I shall\n");
-			LCD_printf("fear no\n");
-			LCD_printf("evil\n");
-
-			LP = 0;
-			RP = 0;
-			LI = 0;
-			RI = 0;
-		}
-		LWS = KP*LP + KI*LI + KD*oLWS + base;
-		RWS = KP*RP + KI*RI + KD*oRWS + base;
-		if (oLWS == 0){
-			oLWS = LWS;
-			oRWS = RWS;
-		}
-		LWS = LWS + KD*(oLWS-LWS);
-		RWS = RWS + KD*(oRWS-RWS);
-
-		// Forward Movement
-		STEPPER_move_stwt(STEPPER_BOTH,
-				STEPPER_FWD, 200, LWS, 400, STEPPER_BRK_OFF,	//Left
-				STEPPER_FWD, 200, RWS, 400, STEPPER_BRK_OFF);	//Right
-
-		oLWS = LWS;
-		oRWS = RWS;
-	}	
 }
