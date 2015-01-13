@@ -317,7 +317,7 @@ void centerFollow(void){
 //
 //
 
-void rightStepFollow(float* X, float* Y, float* orientation, float X_tar, float Y_tar){
+void rightStepFollow(float* X, float* Y, float* orientation, float X_tar, float Y_tar){// Feed the addresses of X, Y and current orientation
 	char lowerLimit = 5;
 	char higherLimit = 5;
 	char ICT = 12;
@@ -330,8 +330,9 @@ void rightStepFollow(float* X, float* Y, float* orientation, float X_tar, float 
 	char KP = 1;
 	char KI = 0;
 	char KD = 0;
+	char break_condition = 0;
 
-	while(1){
+	while(break_condition == 0){
 		frontIR = getFrontIR();
 		rightIR = getRightIR();
 		leftIR = getLeftIR();
