@@ -1,6 +1,6 @@
 
 void go2Goal(signed char x, signed char y){
-	float deltax, deltay, frontIR, rightIR, leftIR;
+	float deltax, deltay, frontIR, rightIR, leftIR, targetX, targetY;
 	int currAngle;
 	short stepSize = 100;
 	char goal = 0;
@@ -9,8 +9,8 @@ void go2Goal(signed char x, signed char y){
 	
 	deltax = x - xo;
 	deltay = y - yo;
-	//targetX = deltax;
-	//targetY = deltaY;
+	targetX = deltax;
+	targetY = deltaY;
 	currAngle = 0;
 	
 	//theta = atan2(deltay,deltax) * (180/M_PI);
@@ -59,21 +59,21 @@ void go2Goal(signed char x, signed char y){
 				if(deltay >= 0){
 					currAngle = currAngle + 90;
 					go2Angle(currAngle);
-					// Right wall follow.
+					rightStepFollow(&deltax, &deltay, &currAngle, targetX, targetY);
 				}else{
 					currAngle = currAngle - 90;
 					go2Angle(currAngle);
-					// Left wall follow.
+					leftStepFollow(&deltax, &deltay, &currAngle, targetX, targetY);
 				}
 			}else{
 				if(deltay >= 0){
 					currAngle = currAngle - 90;
 					go2Angle(currAngle);
-					// Left wall follow
+					leftStepFollow(&deltax, &deltay, &currAngle, targetX, targetY);
 				}else{
 					currAngle = currAngle + 90;
 					go2Angle(currAngle);
-					// Right wall follow
+					rightStepFollow(&deltax, &deltay, &currAngle, targetX, targetY);
 				}
 			}
 		}
