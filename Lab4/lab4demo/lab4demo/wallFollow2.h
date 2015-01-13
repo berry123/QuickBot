@@ -317,7 +317,7 @@ void centerFollow(void){
 //
 //
 
-float rightStepFollow(X,Y,X_tar,Y_tar){
+void rightStepFollow(float *X,float *Y,float X_tar,float Y_tar){
 	char lowerLimit = 5;
 	char higherLimit = 5;
 	char ICT = 12;
@@ -430,7 +430,7 @@ float rightStepFollow(X,Y,X_tar,Y_tar){
 	}
 }
 
-float leftStepFollow(X,Y,X_tar,Y_tar){
+void leftStepFollow(float *X,float *Y,float X_tar,float Y_tar){
 	char lowerLimit = 4.75;
 	char higherLimit = 5.25;
 	char ICT = 12;
