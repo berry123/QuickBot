@@ -17,6 +17,10 @@
 #include "IRlib.h"				// IR sensor reading functions.
 #include "goToPoint.h"			// Go to point functions.
 #include "wallFollow2.h"		// Functions that power the wall following procedures
+<<<<<<< HEAD
+=======
+#include "scrap.h"
+>>>>>>> origin/master
 #include "Going2Goal.h"
 
 // Main function
