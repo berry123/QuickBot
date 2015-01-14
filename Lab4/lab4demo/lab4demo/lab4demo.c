@@ -11,6 +11,7 @@
 #include <math.h>
 #include "capi324v221.h"
 #include "Capek_Movements.h"	// Free Running functions for each type of movement.
+#include "Improved_Stepper_Move.h"
 //#include "Movement_Selector.h"	// Sensor reading logic function.
 #include "Random_Wanderer.h"	// Where both the random wanderer and the random wanderer that is affected by sensor readings are defined.
 #include "IRlib.h"				// IR sensor reading functions.

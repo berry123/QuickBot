@@ -10,7 +10,7 @@ void go2Goal(signed char x, signed char y){
 	deltax = x - xo;
 	deltay = y - yo;
 	targetX = deltax;
-	targetY = deltaY;
+	targetY = deltay;
 	currAngle = 0;
 	
 	//theta = atan2(deltay,deltax) * (180/M_PI);

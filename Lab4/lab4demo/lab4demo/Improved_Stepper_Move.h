@@ -8,6 +8,6 @@ void Tar_vs_Cur_Angle(int Tar_X, int Tar_Y, int X, int Y){
 	int deltaX, deltaY, Angle;
 	deltaX = X - Tar_X;
 	deltaY = Y - Tar_Y;
-	Angle = atan2(deltaY,deltaX)*180/PI_M;
+	Angle = atan2(deltaY,deltaX)*180/M_PI;
 	return Angle;
 }
