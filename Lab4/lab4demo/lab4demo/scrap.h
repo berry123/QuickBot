@@ -90,10 +90,11 @@ void go2Goal(signed char x, signed char y){
 			}
 		}
 		
-		if((deltax <= 3 && deltay <= 3) || (deltax >= -3 && deltay >= -3) || (deltax <= 3 && deltay >= -3) || (deltax >= -3 && deltay <= 3)){ // Might need to set a tolerance
+		if((deltax <= 0.25 && deltay <= 0.25) || (deltax >= -0.25 && deltay >= -0.25) || (deltax <= 0.25 && deltay >= -0.25) || (deltax >= -0.25 && deltay <= 0.25)){ // Might need to set a tolerance
 			goal = 1;
 			LCD_clear();
-			LCD_printf("Reached goal mofo!");
+			LCD_printf("Reached goal mofo!... not?");
+			TMRSRVC_delay(5000);
 		}
 	}
 	
