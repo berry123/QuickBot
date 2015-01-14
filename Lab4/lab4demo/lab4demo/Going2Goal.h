@@ -3,7 +3,7 @@ void goes2goal(float Tar_X, float Tar_Y){
 	float cur_Y = 0;
 	float delta_X, delta_Y;
 	char x_or_y = 1;
-	float tollarance = 3;
+	float tollarance = 0.25;
 	float orientation = 0;
 	float s_tol = 7;
 	float frontIR, leftIR, rightIR;
@@ -15,9 +15,9 @@ void goes2goal(float Tar_X, float Tar_Y){
 	delta_Y = Tar_Y - cur_Y;
 
 	while((delta_X >= tollarance) || (delta_X <= (-tollarance)) || (delta_Y >= tollarance) || (delta_Y <= (-tollarance))){
-		LCD_clear();
+		/*LCD_clear();
 		LCD_printf("Gets in a while loop.");
-		TMRSRVC_delay(5000);
+		TMRSRVC_delay(5000);*/
 		frontIR = getFrontIR();
 		if(frontIR < s_tol){
 			leftIR = getLeftIR();
