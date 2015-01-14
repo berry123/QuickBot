@@ -395,8 +395,13 @@ void rightStepFollow(float* X, float* Y, float* orientation, float X_tar, float 
 			LCD_printf("Wall in Front\n");
 			LCD_printf("Turning Left\n");
 
-			pseudo_Stepper_Step(150, 150, 0.5);	// (Right Wheel Speed, Left Wheel Speed, Duration)
+			pseudo_Stepper_Step(150, 150, 1);	// (Right Wheel Speed, Left Wheel Speed, Duration)
 
+			// Computations for position
+						*X = cos((*orientation))*(150*0.108) + (*X);
+						*Y = sin((*orientation))*(150*0.108) + (*Y);	
+						//
+			
 			cur_Angle = Tar_vs_Cur_Angle(X_tar, Y_tar, *X, *Y);
 
 			if ((cur_Angle >= (*orientation))&&(cur_Angle <= ((*orientation)+90))){
@@ -424,11 +429,11 @@ void rightStepFollow(float* X, float* Y, float* orientation, float X_tar, float 
 			LCD_printf("Lack of Wall\n");
 			LCD_printf("Turning Right\n");
 
-			pseudo_Stepper_Step(150, 150, 0.5);	// (Right Wheel Speed, Left Wheel Speed, Duration)
+			pseudo_Stepper_Step(150, 150, 1);	// (Right Wheel Speed, Left Wheel Speed, Duration)
 
 			// Computations for position
-			*X = cos((*orientation))*(75*0.108) + (*X);
-			*Y = sin((*orientation))*(75*0.108) + (*Y);	
+			*X = cos((*orientation))*(150*0.108) + (*X);
+			*Y = sin((*orientation))*(150*0.108) + (*Y);	
 			//
 
 			rightIR = getRightIR();
@@ -552,11 +557,11 @@ void leftStepFollow(float *X, float *Y, float* orientation, float X_tar, float Y
 			LCD_printf("Wall in Front\n");
 			LCD_printf("Turning Right\n");
 
-			pseudo_Stepper_Step(150, 150, 0.5);	// (Right Wheel Speed, Left Wheel Speed, Duration)
+			pseudo_Stepper_Step(150, 150, 1);	// (Right Wheel Speed, Left Wheel Speed, Duration)
 
 			// Computations for position
-			*X = cos((*orientation))*(75*0.108) + (*X);
-			*Y = sin((*orientation))*(75*0.108) + (*Y);	
+			*X = cos((*orientation))*(150*0.108) + (*X);
+			*Y = sin((*orientation))*(150*0.108) + (*Y);	
 			//
 			cur_Angle = Tar_vs_Cur_Angle(X_tar, Y_tar, *X, *Y);
 
@@ -585,11 +590,11 @@ void leftStepFollow(float *X, float *Y, float* orientation, float X_tar, float Y
 			LCD_printf("Lack of Wall\n");
 			LCD_printf("Turning Left\n");
 
-			pseudo_Stepper_Step(150, 150, 0.5);	// (Right Wheel Speed, Left Wheel Speed, Duration)
+			pseudo_Stepper_Step(150, 150, 1);	// (Right Wheel Speed, Left Wheel Speed, Duration)
 
 			// Computations for position
-			*X = cos((*orientation))*(75*0.108) + (*X);
-			*Y = sin((*orientation))*(75*0.108) + (*Y);	
+			*X = cos((*orientation))*(150*0.108) + (*X);
+			*Y = sin((*orientation))*(150*0.108) + (*Y);	
 			//
 
 			leftIR = getLeftIR();
