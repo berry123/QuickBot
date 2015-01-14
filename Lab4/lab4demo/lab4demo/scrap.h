@@ -91,7 +91,7 @@ void go2Goal(signed char x, signed char y){
 			}
 		}
 		
-		if((deltax >= (targetX-tollarance)) && (deltax <= (targetX+tollarance)) && deltay >= (targetY-tollarance)) && (deltay <= (targetY+tollarance))){ // Might need to set a tolerance
+		if((deltax >= (targetX-tollarance)) && (deltax <= (targetX+tollarance)) && (deltay >= (targetY-tollarance)) && (deltay <= (targetY+tollarance))){ // Might need to set a tolerance
 			goal = 1;
 			LCD_clear();
 			LCD_printf("Reached goal mofo!... not?");
