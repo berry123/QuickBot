@@ -14,6 +14,10 @@ void go2Goal(signed char x, signed char y){
 	targetY = deltay;
 	currAngle = 0;
 	
+	LCD_clear();
+	LCD_printf("%f\n%f", targetX, targetY);
+	TMRSRVC_delay(5000);
+	
 	//theta = atan2(deltay,deltax) * (180/M_PI);
 	//deltaTheta = theta - thetao;
 	
@@ -91,7 +95,7 @@ void go2Goal(signed char x, signed char y){
 			}
 		}
 		
-		if((deltax >= (targetX-tollarance)) && (deltax <= (targetX+tollarance)) && deltay >= (targetY-tollarance)) && (deltay <= (targetY+tollarance))){ // Might need to set a tolerance
+		if(((deltax >= (targetX-tollarance)) && (deltax <= (targetX+tollarance)) && deltay >= (targetY-tollarance)) && (deltay <= (targetY+tollarance))){ // Might need to set a tolerance
 			goal = 1;
 			LCD_clear();
 			LCD_printf("Reached goal mofo!... not?");
