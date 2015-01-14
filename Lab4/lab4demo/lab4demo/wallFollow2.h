@@ -377,6 +377,7 @@ void rightStepFollow(float* X, float* Y, float* orientation, float X_tar, float 
 			}
 			LWS = LWS + KD*(oLWS-LWS);
 			RWS = RWS + KD*(oRWS-RWS);
+			
 
 			pseudo_Stepper_Step(RWS, LWS, 0.1);	// (Right Wheel Speed, Left Wheel Speed, Duration)
 
@@ -451,6 +452,7 @@ void rightStepFollow(float* X, float* Y, float* orientation, float X_tar, float 
 
 					rightIR = getRightIR();
 					while(rightIR > ICT){
+						
 						pseudo_Stepper_Step(150, 150, 0.1);	// (Right Wheel Speed, Left Wheel Speed, Duration)
 						// Computations for position
 						*X = cos((*orientation))*(15*0.108) + (*X);
@@ -482,6 +484,11 @@ void leftStepFollow(float *X, float *Y, float* orientation, float X_tar, float Y
 	char KI = 0.75;
 	char KD = 0;
 	char break_condition = 0;
+	
+	/*LCD_clear();
+	TMRSRVC_delay(2000);
+	LCD_printf("%f", *Y);
+	TMRSRVC_delay(2000);*/
 
 	while(break_condition == 0){
 		frontIR = getFrontIR();
@@ -545,7 +552,6 @@ void leftStepFollow(float *X, float *Y, float* orientation, float X_tar, float Y
 			LCD_printf("Wall in Front\n");
 			LCD_printf("Turning Right\n");
 
-
 			pseudo_Stepper_Step(150, 150, 0.5);	// (Right Wheel Speed, Left Wheel Speed, Duration)
 
 			// Computations for position
@@ -607,6 +613,7 @@ void leftStepFollow(float *X, float *Y, float* orientation, float X_tar, float Y
 
 					leftIR = getLeftIR();
 					while(leftIR > ICT){
+						
 						pseudo_Stepper_Step(150, 150, 0.1);	// (Right Wheel Speed, Left Wheel Speed, Duration)
 						// Computations for position
 						*X = cos((*orientation))*(15*0.108) + (*X);

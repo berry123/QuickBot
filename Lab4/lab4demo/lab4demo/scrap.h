@@ -59,22 +59,32 @@ void go2Goal(signed char x, signed char y){
 				if(deltay >= 0){
 					currAngle = currAngle + 90;
 					go2Angle(currAngle);
+					/*LCD_clear();
+					LCD_printf("%f", deltax);
+					TMRSRVC_delay(2000);*/
 					rightStepFollow(&deltax, &deltay, &currAngle, targetX, targetY);
-					LCD_clear();
-					LCD_printf("%d, %d", &deltax, deltax);
 				}else{
 					currAngle = currAngle - 90;
 					go2Angle(currAngle);
+					/*LCD_clear();
+					LCD_printf("%f", deltax);
+					TMRSRVC_delay(2000);*/
 					leftStepFollow(&deltax, &deltay, &currAngle, targetX, targetY);
 				}
 			}else{
 				if(deltay >= 0){
 					currAngle = currAngle - 90;
 					go2Angle(currAngle);
+					/*LCD_clear();
+					LCD_printf("%f", deltax);
+					TMRSRVC_delay(2000);*/
 					leftStepFollow(&deltax, &deltay, &currAngle, targetX, targetY);
 				}else{
 					currAngle = currAngle + 90;
 					go2Angle(currAngle);
+					/*LCD_clear();
+					LCD_printf("%f", deltax);
+					TMRSRVC_delay(2000);*/
 					rightStepFollow(&deltax, &deltay, &currAngle, targetX, targetY);
 				}
 			}
