@@ -20,12 +20,20 @@ void goes2goal(float Tar_X, float Tar_Y){
 			leftIR = getLeftIR();
 			rightIR = getRightIR();
 			if(rightIR < leftIR){
+				
+				LCD_clear();
+				LCD_printf("Right Follow\n");
+				
 				go2Angle(90); // + is left, - is right
 				//Update Orientation
 				orientation = orientation + 90;
 
 				rightStepFollow(&cur_X, &cur_Y, &orientation, Tar_X, Tar_Y);
 			} else {
+				
+				LCD_clear();
+				LCD_printf("Left Follow\n");
+				
 				go2Angle(-90); // + is left, - is right
 				//Update Orientation
 				orientation = orientation - 90;
@@ -34,6 +42,10 @@ void goes2goal(float Tar_X, float Tar_Y){
 			}
 
 		} else { 
+
+			LCD_clear();
+			LCD_printf("Forward Move\n");
+			
 			pseudo_Stepper_Step(150, 150, 0.5);	// (Right Wheel Speed, Left Wheel Speed, Duration)			
 			// Computations for position
 			cur_X = cos(orientation)*(75*0.108) + cur_X;
@@ -43,4 +55,7 @@ void goes2goal(float Tar_X, float Tar_Y){
 		delta_X = Tar_X - cur_X;
 		delta_Y = Tar_Y - cur_Y;
 	}
+
+	LCD_clear();
+	LCD_printf("Loop Broke\n");
 }
