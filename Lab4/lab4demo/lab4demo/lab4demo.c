@@ -18,6 +18,7 @@
 #include "goToPoint.h"			// Go to point functions.
 #include "wallFollow2.h"		// Functions that power the wall following procedures
 #include "scrap.h"
+#include "Going2Goal.h"
 
 // Main function
 void CBOT_main(void) {
