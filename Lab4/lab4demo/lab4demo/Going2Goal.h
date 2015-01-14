@@ -14,7 +14,7 @@ void goes2goal(float Tar_X, float Tar_Y){
 	delta_X = Tar_X - cur_X;
 	delta_Y = Tar_Y - cur_Y;
 
-	while((delta_X >= tollarance) && (delta_X <= (-tollarance)) && (delta_Y >= tollarance) && (delta_Y <= (-tollarance))){
+	while((delta_X >= tollarance) || (delta_X <= (-tollarance)) || (delta_Y >= tollarance) || (delta_Y <= (-tollarance))){
 		LCD_clear();
 		LCD_printf("Gets in a while loop.");
 		TMRSRVC_delay(5000);
