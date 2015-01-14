@@ -61,4 +61,6 @@ void goes2goal(float Tar_X, float Tar_Y){
 
 	LCD_clear();
 	LCD_printf("Loop Broke\n");
+
+	TMRSRVC_delay(10000);
 }
