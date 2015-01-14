@@ -6,6 +6,7 @@ void go2Goal(signed char x, signed char y){
 	char goal = 0;
 	x = x*12;
 	y = y*12;
+	char tollarance = 0.25;
 	
 	deltax = x - xo;
 	deltay = y - yo;
@@ -90,7 +91,7 @@ void go2Goal(signed char x, signed char y){
 			}
 		}
 		
-		if((deltax <= 0.25 && deltay <= 0.25) || (deltax >= -0.25 && deltay >= -0.25) || (deltax <= 0.25 && deltay >= -0.25) || (deltax >= -0.25 && deltay <= 0.25)){ // Might need to set a tolerance
+		if((deltax >= (targetX-tollarance)) && (deltax <= (targetX+tollarance)) && deltay >= (targetY-tollarance)) && (deltay <= (targetY+tollarance))){ // Might need to set a tolerance
 			goal = 1;
 			LCD_clear();
 			LCD_printf("Reached goal mofo!... not?");
