@@ -331,6 +331,15 @@ void rightStepFollow(float* X, float* Y, float* orientation, float X_tar, float 
 	char KI = 0;
 	char KD = 0;
 	char break_condition = 0;
+	char Xaxis, Yaxis;
+	
+	if((*orientation > 0 && *orientation < 180) || (*orientation < 0 && *orientation > -180)){
+			Xaxis = 0;
+			Yaxis = 1;
+	}else{
+		Xaxis = 1;
+		Yaxis = 0;
+	}
 
 	while(break_condition == 0){
 		frontIR = getFrontIR();
@@ -417,7 +426,16 @@ void rightStepFollow(float* X, float* Y, float* orientation, float X_tar, float 
 
 				//Update Orientation
 				*orientation = (*orientation) + 90;
-				//
+				
+				if(Xaxis == 1){
+					Xaxis = 0;
+					Yaxis = 1;
+				}else{
+					Xaxis = 1;
+					Yaxis = 0;
+					break;
+				}
+				
 			}
 			LP = 0;
 			RP = 0;
@@ -454,6 +472,15 @@ void rightStepFollow(float* X, float* Y, float* orientation, float X_tar, float 
 					//Update Orientation
 					*orientation = (*orientation) - 90;
 					//
+					
+					if(Xaxis == 1){
+						Xaxis = 0;
+						Yaxis = 1;
+					}else{
+						Xaxis = 1;
+						Yaxis = 0;
+						break;
+					}
 
 					rightIR = getRightIR();
 					while(rightIR > ICT){
@@ -489,6 +516,15 @@ void leftStepFollow(float *X, float *Y, float* orientation, float X_tar, float Y
 	char KI = 0.75;
 	char KD = 0;
 	char break_condition = 0;
+	char Xaxis, Yaxis;
+	
+	if((*orientation > 0 && *orientation < 180) || (*orientation < 0 && *orientation > -180)){
+		Xaxis = 0;
+		Yaxis = 1;
+	}else{
+		Xaxis = 1;
+		Yaxis = 0;
+	}
 	
 	/*LCD_clear();
 	TMRSRVC_delay(2000);
@@ -578,7 +614,15 @@ void leftStepFollow(float *X, float *Y, float* orientation, float X_tar, float Y
 
 				//Update Orientation
 				*orientation = (*orientation) - 90;
-				//
+				
+				if(Xaxis == 1){
+					Xaxis = 0;
+					Yaxis = 1;
+				}else{
+					Xaxis = 1;
+					Yaxis = 0;
+					break;
+				}
 			}
 			LP = 0;
 			RP = 0;
@@ -614,7 +658,16 @@ void leftStepFollow(float *X, float *Y, float* orientation, float X_tar, float Y
 
 					//Update Orientation
 					*orientation = (*orientation) + 90;
-					//
+					
+					if(Xaxis == 1){
+						Xaxis = 0;
+						Yaxis = 1;
+					}else{
+						Xaxis = 1;
+						Yaxis = 0;
+						break;
+					}
+					
 
 					leftIR = getLeftIR();
 					while(leftIR > ICT){
