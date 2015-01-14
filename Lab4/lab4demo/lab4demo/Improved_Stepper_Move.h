@@ -4,7 +4,7 @@ void pseudo_Stepper_Step(int Right_Wheel_Speed, int Left_Wheel_Speed, int Durati
 			STEPPER_FWD, Right_Wheel_Speed*Duration, Right_Wheel_Speed, 400, STEPPER_BRK_OFF);	// Right wheel
 }
 
-void Tar_vs_Cur_Angle(int Tar_X, int Tar_Y, int X, int Y){
+float Tar_vs_Cur_Angle(int Tar_X, int Tar_Y, int X, int Y){
 	int deltaX, deltaY, Angle;
 	deltaX = X - Tar_X;
 	deltaY = Y - Tar_Y;

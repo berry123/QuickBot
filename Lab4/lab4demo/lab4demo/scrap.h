@@ -60,6 +60,8 @@ void go2Goal(signed char x, signed char y){
 					currAngle = currAngle + 90;
 					go2Angle(currAngle);
 					rightStepFollow(&deltax, &deltay, &currAngle, targetX, targetY);
+					LCD_clear();
+					LCD_printf("%d, %d", &deltax, deltax);
 				}else{
 					currAngle = currAngle - 90;
 					go2Angle(currAngle);
