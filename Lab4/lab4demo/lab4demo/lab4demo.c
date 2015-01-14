@@ -17,7 +17,7 @@
 #include "IRlib.h"				// IR sensor reading functions.
 #include "goToPoint.h"			// Go to point functions.
 #include "wallFollow2.h"		// Functions that power the wall following procedures
-#include "scrap.h"
+#include "Going2Goal.h"
 
 // Main function
 void CBOT_main(void) {
@@ -212,7 +212,7 @@ void CBOT_main(void) {
 					}
 				}
 				// Calls go to goal point function.
-				goes2Goal(cox,coy);
+				goes2goal(cox,coy);
 				//go2Goal(cox,coy);
 				// Clears the variables up.
 				cox = 0;
