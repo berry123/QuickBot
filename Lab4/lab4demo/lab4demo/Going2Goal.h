@@ -1,12 +1,13 @@
 void goes2goal(float Tar_X, float Tar_Y){
 	float cur_X = 0;
 	float cur_Y = 0;
-	float delta_X, delta_Y;
+	float delta_X, delta_Y, tmp;
 	char x_or_y = 1;
 	float tollarance = 0.25;
 	float orientation = 0;
 	float s_tol = 7;
 	float frontIR, leftIR, rightIR;
+	char count = 0;
 
 	Tar_X = Tar_X*12;
 	Tar_Y = Tar_Y*12;
@@ -43,6 +44,12 @@ void goes2goal(float Tar_X, float Tar_Y){
 				
 				leftStepFollow(&cur_X, &cur_Y, &orientation, Tar_X, Tar_Y);
 			}
+			/*count++;
+			if(count==2){
+				tmp = cur_Y;
+				cur_Y = cur_X;
+				cur_X = tmp;
+			}*/
 
 		} else { 
 
