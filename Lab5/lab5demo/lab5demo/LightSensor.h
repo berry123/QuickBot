@@ -1,32 +1,47 @@
 #define RIGHT_PHOTO ADC_CHAN5
 #define LEFT_PHOTO ADC_CHAN6
 
-float getLeftLight(){
+float ALC(void){ //Ambiant Light Calibrater
+	float LeftPhoto, RightPhoto;
+	LeftPhoto = getLeftLight(0);
+	RightPhoto = getRightLight(0);
+	
+	Calibration = (LeftPhoto + RightPhoto)*5/2	
+	
+	return Calibration;
+}
 
-	float voltage, percent;
+float getLeftLight(float Calibration){
+	float voltage, adj_V;
 	ADC_SAMPLE adcsample;
 	ADC_set_VREF( ADC_VREF_AVCC );
 	ADC_set_channel( LEFT_PHOTO );
 	adcsample = ADC_sample();
-	//LCD_printf( "ADC: %i\n",adcsample);
 	voltage = adcsample * (5.0/ 1024.0 );
-	//LCD_printf( "voltage: %f\n",voltage);
-	//percent = (voltage-1.67)*60;
-	//return percent;
-	return voltage*20;
+
+	if (voltage < Calibration){
+		voltage = Calibration;
+	}
+	
+	adj_V = (voltage - Calibration)/(5 - Calibration);
+	
+	return adj_V;
 }
 
 // getRightLight() converts ADC voltage to value inverse proportional to left light
-float getRightLight(){
+float getRightLight(float Calibration){
+	float voltage, adj_V;
 	ADC_SAMPLE adcsample;
-	float voltage, percent;
 	ADC_set_VREF( ADC_VREF_AVCC );
 	ADC_set_channel( RIGHT_PHOTO );
 	adcsample = ADC_sample();
-	//LCD_printf( "ADC: %i\n",adcsample);
 	voltage = adcsample * ( 5.0 / 1024 );
-	//LCD_printf( "right: %f\n",voltage);
-	//percent = (voltage-1.67)*60;
-	//return percent;
-	return voltage*20;
+	
+	if (voltage < Calibration){
+		voltage = Calibration;
+	}
+	
+	adj_V = (voltage - Calibration)/(5 - Calibration);
+	
+	return adj_V;
 }
