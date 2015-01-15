@@ -3,7 +3,7 @@ float getLeftLight(void){
 	
 	//Sensor stuff
 	
-	Light_Percentage = Light_Calculator(V_in)
+	Light_Percentage = Light_Calculator(V_in);
 	
 	return Light_Percentage;
 }
@@ -13,7 +13,7 @@ float getRightLight(void){
 		
 		//Sensor stuff
 		
-		Light_Percentage = Light_Calculator(V_in)
+		Light_Percentage = Light_Calculator(V_in);
 		
 		return Light_Percentage;	
 }
@@ -21,7 +21,7 @@ float getRightLight(void){
 float Light_Calculator(float V_in){
 	float Light_Percentage;
 	
-	Light_Percentage = (V_in-1.667)*60
+	Light_Percentage = V_in*20;//(V_in-1.667)*60;
 	
 	return Light_Percentage;
 }
