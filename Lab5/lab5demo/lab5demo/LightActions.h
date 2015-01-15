@@ -86,7 +86,7 @@ void light_crush(void){
 	LCD_clear();
 	LCD_printf("I like you...\n");
 	LCD_printf("...but PIC's\n");
-	LCD_printf("are intimidating\n");
+	LCD_printf("scare me!\n");
 	Callibration = ALC();
 
 	while(1){
