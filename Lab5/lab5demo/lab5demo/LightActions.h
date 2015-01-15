@@ -77,15 +77,16 @@ void light_explorer(void){
 	}
 }
 
-void light_return(void){
+/*void light_return(void){
+	float Left_Light, Right_Light, Calibration;
 	while(1){
 		Left_Light = getLeftLight(0);
 		Right_Light = getRightLight(0);
-		Callibration = ALC();
+		Calibration = ALC();
 		LCD_clear();
 		LCD_printf("Left:  %f1.5\n");
 		LCD_printf("Right: %f1.5\n");
 		LCD_printf("Cal:   %f1.5\n");
 		TMRSRVC_delay(100); // 0.1 Sec duration		
 	}
-}
+}*/
