@@ -12,8 +12,8 @@ void light_fear(void){
 		Left_Light = getLeftLight(Callibration);
 		Right_Light = getRightLight(Callibration);
 		STEPPER_move_rn(STEPPER_BOTH,
-				STEPPER_BCK, (Right_Light*basespeed/100), 400,	//Left
-				STEPPER_BCK, (Left_Light*basespeed/100), 400);	//Right
+				STEPPER_REV, (Right_Light*basespeed/100), 400,	//Left
+				STEPPER_REV, (Left_Light*basespeed/100), 400);	//Right
 		TMRSRVC_delay(100); // 0.1 Sec duration
 	}
 }
@@ -25,7 +25,7 @@ void light_aggression(void){
 	LCD_clear();
 	LCD_printf("RAAAAAA...\n");
 	LCD_printf("AAAAAAA...\n");
-	LCD_printf("AAAAAAA...\n");
+	//LCD_printf("AAAAAAA...\n");
 	LCD_printf("AAAWWR\n");
 	Callibration = ALC();
 
