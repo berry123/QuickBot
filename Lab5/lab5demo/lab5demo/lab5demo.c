@@ -58,7 +58,7 @@ void CBOT_main(void)
 	while(1){
 		// Main menu:
 		LCD_printf("SW3: Parts 1 & 2");
-		LCD_printf("\nSW4: NA");
+		LCD_printf("\nSW4: Crush");
 		LCD_printf("\nSW5: NA");
 		LCD_clear();
 
@@ -137,7 +137,7 @@ void CBOT_main(void)
 					break;
 			}
 		}else if(ATTINY_get_SW_state(ATTINY_SW4)){
-			//
+			light_crush();
 		}else if(ATTINY_get_SW_state(ATTINY_SW5)){
 			//
 		}
