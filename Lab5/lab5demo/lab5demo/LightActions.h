@@ -25,7 +25,7 @@ void light_aggression(void){
 	LCD_clear();
 	LCD_printf("RAAAAAA...\n");
 	LCD_printf("AAAAAAA...\n");
-	//LCD_printf("AAAAAAA...\n");
+	LCD_printf("AAAAAAA...\n");
 	LCD_printf("AAAWWR\n");
 	Callibration = ALC();
 
@@ -79,6 +79,13 @@ void light_explorer(void){
 
 void light_return(void){
 	while(1){
-		
+		Left_Light = getLeftLight(0);
+		Right_Light = getRightLight(0);
+		Callibration = ALC();
+		LCD_clear();
+		LCD_printf("Left:  %f1.5\n");
+		LCD_printf("Right: %f1.5\n");
+		LCD_printf("Cal:   %f1.5\n");
+		TMRSRVC_delay(100); // 0.1 Sec duration		
 	}
 }
