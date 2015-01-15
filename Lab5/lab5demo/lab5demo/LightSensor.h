@@ -39,8 +39,8 @@ float getRightLight(float Calibration){
 float ALC(void){ //Ambiant Light Calibrater
 
 	float LeftPhoto, RightPhoto, Calibration;
-	LeftPhoto = getLeftLight(0.0);
-	RightPhoto = getRightLight(0.0);
+	LeftPhoto = getLeftLight(0);
+	RightPhoto = getRightLight(0);
 
 	Calibration = (LeftPhoto + RightPhoto)*5/2;
 

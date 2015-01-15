@@ -4739,14 +4739,14 @@ float ALC(void){ //Ambiant Light Calibrater
     2c1c:	ef 92       	push	r14
     2c1e:	ff 92       	push	r15
 	float LeftPhoto, RightPhoto, Calibration;
-	LeftPhoto = getLeftLight(0.0);
+	LeftPhoto = getLeftLight(0);
     2c20:	60 e0       	ldi	r22, 0x00	; 0
     2c22:	70 e0       	ldi	r23, 0x00	; 0
     2c24:	cb 01       	movw	r24, r22
     2c26:	0e 94 64 15 	call	0x2ac8	; 0x2ac8 <getLeftLight>
     2c2a:	6b 01       	movw	r12, r22
     2c2c:	7c 01       	movw	r14, r24
-	RightPhoto = getRightLight(0.0);
+	RightPhoto = getRightLight(0);
     2c2e:	60 e0       	ldi	r22, 0x00	; 0
     2c30:	70 e0       	ldi	r23, 0x00	; 0
     2c32:	cb 01       	movw	r24, r22
