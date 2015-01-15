@@ -12,8 +12,8 @@ void light_fear(void){
 		Left_Light = getLeftLight(Callibration);
 		Right_Light = getRightLight(Callibration);
 		STEPPER_move_rn(STEPPER_BOTH,
-				STEPPER_REV, (Right_Light*basespeed/100), 400,	//Left
-				STEPPER_REV, (Left_Light*basespeed/100), 400);	//Right
+				STEPPER_REV, (Right_Light*basespeed), 400,	//Left
+				STEPPER_REV, (Left_Light*basespeed), 400);	//Right
 		TMRSRVC_delay(100); // 0.1 Sec duration
 	}
 }
@@ -33,8 +33,8 @@ void light_aggression(void){
 		Left_Light = getLeftLight(Callibration);
 		Right_Light = getRightLight(Callibration);
 		STEPPER_move_rn(STEPPER_BOTH,
-				STEPPER_FWD, (Left_Light*basespeed/100), 400,	//Left
-				STEPPER_FWD, (Right_Light*basespeed/100), 400);	//Right
+				STEPPER_FWD, (Left_Light*basespeed), 400,	//Left
+				STEPPER_FWD, (Right_Light*basespeed), 400);	//Right
 		TMRSRVC_delay(100); // 0.1 Sec duration
 	}	
 }
@@ -52,8 +52,8 @@ void light_love(void){
 		Left_Light = getLeftLight(Callibration);
 		Right_Light = getRightLight(Callibration);
 		STEPPER_move_rn(STEPPER_BOTH,
-				STEPPER_FWD, ((100-Left_Light)*basespeed/100), 400,	//Left
-				STEPPER_FWD, ((100-Right_Light)*basespeed/100), 400);	//Right
+				STEPPER_FWD, ((1-Left_Light)*basespeed), 400,	//Left
+				STEPPER_FWD, ((1-Right_Light)*basespeed), 400);	//Right
 		TMRSRVC_delay(100); // 0.1 Sec duration
 	}
 }
@@ -71,8 +71,8 @@ void light_explorer(void){
 		Left_Light = getLeftLight(Callibration);
 		Right_Light = getRightLight(Callibration);
 		STEPPER_move_rn(STEPPER_BOTH,
-				STEPPER_FWD, ((100-Right_Light)*basespeed/100), 400,	//Left
-				STEPPER_FWD, ((100-Left_Light)*basespeed/100), 400);	//Right
+				STEPPER_FWD, ((1-Right_Light)*basespeed), 400,	//Left
+				STEPPER_FWD, ((1-Left_Light)*basespeed), 400);	//Right
 		TMRSRVC_delay(100); // 0.1 Sec duration
 	}
 }
