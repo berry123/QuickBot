@@ -76,3 +76,7 @@ void light_explorer(void){
 		TMRSRVC_delay(100); // 0.1 Sec duration
 	}
 }
+
+void light_return(void){
+	while(1){
+}
