@@ -42,10 +42,8 @@ void light_love(void){
 	int basespeed = 250;
 
 	LCD_clear();
-	LCD_printf("RAAAAAA...\n");
-	LCD_printf("AAAAAAA...\n");
-	LCD_printf("AAAAAAA...\n");
-	LCD_printf("AAAWWR\n");
+	LCD_printf("mmmmmmm...\n");
+	LCD_printf("light...\n");
 
 	while(1){
 		Left_Light = getLeftLight();
@@ -62,10 +60,7 @@ void light_explorer(void){
 	int basespeed = 250;
 
 	LCD_clear();
-	LCD_printf("\n");
-	LCD_printf("\n");
-	LCD_printf("AAAAAAA...\n");
-	LCD_printf("AAAWWR\n");
+	LCD_printf("Find!\n");
 
 	while(1){
 		Left_Light = getLeftLight();
