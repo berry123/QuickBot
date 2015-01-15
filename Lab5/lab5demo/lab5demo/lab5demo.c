@@ -25,187 +25,122 @@ void CBOT_main(void)
 	signed char cox = 0;
 	signed char coy = 0;
 	float rightLight, leftLight;
-	
+
 	// Opening LCD subsystem management.
 	LCD_open();
-	
+
 	// This information is printed on the LCD display in case this initial setup takes longer.
 	LCD_printf("Setting up...");
-	
+
 	// Subsystem open state variable information.
 	SUBSYS_OPENSTAT openTiny;
-	
+
 	// Opening ATTINY subsystem management and storing returning value in openTiny that is associated to the struct SUBSYS_OPENSTAT_TYPE.
 	openTiny = ATTINY_open();
-	
+
 	// If the state struct from openTiny is different from the expected value, an error occurs.
 	if (openTiny.state != SUBSYS_OPEN){
 		LCD_clear();
 		// The error is then displayed.
 		LCD_printf("Error when opening ATTINY!");
 	}
-	
+
 	SPKR_open(SPKR_BEEP_MODE);		// Open the speaker in beep mode
 	ADC_open();						// Open the ADC module
 	ADC_set_VREF( ADC_VREF_AVCC );	// Set the Voltage Reference first so VREF=5V.
 	STEPPER_open();					// Open Stepper module.
-	
+
 	// After the initial setup, a "Ready!" message is displayed on the second line of the LCD display.
 	LCD_printf("\nReady!");
 	LCD_clear();
-	
+
 	// While loop that keeps the micro controller running begins here:
-    while(1)
-    {
+	while(1){
 		// Main menu:
 		LCD_printf("SW3: Kids");
 		LCD_printf("\nSW4: Randoms");
 		LCD_printf("\nSW5: Go to goal");
 		LCD_clear();
-		
+
 		// Press SW3 to select one of the kids.
-		if (ATTINY_get_SW_state(ATTINY_SW3)){
-			while(!ATTINY_get_SW_state(ATTINY_SW5)){
+		if (ATTINY_get_SW_state(ATTINY_SW3)) {
+			while(!ATTINY_get_SW_state(ATTINY_SW5)) {
 				//LCD_clear();
 				//LCD_printf("Select Mode:"); // Displays the angle selection.
 				// If SW3 is pressed, the coordinate x is incremented.
-				if(ATTINY_get_SW_state(ATTINY_SW3)){
+				if(ATTINY_get_SW_state(ATTINY_SW3)) {
 					// If the x value is > 5, it goes back to -5.
 					cox++;
 					if(cox > 5){
 						cox = 0;
 					}
-				}else if(ATTINY_get_SW_state(ATTINY_SW4)){
+				} else if(ATTINY_get_SW_state(ATTINY_SW4)) {
 					cox--;
-					if(cox < 0){
+					if(cox < 0) {
 						cox = 5;
 					}
 				}
 				switch(cox){
-					case 1:
-						LCD_clear();
-						LCD_printf("Select Mode:"); // Displays the angle selection.
-						LCD_printf("\n1 - Fear");
-						break;
-					case 2:
-						LCD_clear();
-						LCD_printf("Select Mode:"); // Displays the angle selection.
-						LCD_printf("\n2 - Aggression");
-						break;
-					case 3:
-						LCD_clear();
-						LCD_printf("Select Mode:"); // Displays the angle selection.
-						LCD_printf("\n3 - Love");
-						break;
-					case 4:
-						LCD_clear();
-						LCD_printf("Select Mode:"); // Displays the angle selection.
-						LCD_printf("\n4 - Explorer");
-						break;
-					case 5:
-						LCD_clear();
-						LCD_printf("Select Mode:"); // Displays the angle selection.
-						LCD_printf("\n5 - Read Sensors");
-						break;
-					default:
-						LCD_clear();
-						LCD_printf("Select Mode:"); // Displays the angle selection.
-						LCD_printf("\nSW5 to Enter.");
-						break;
+				case 1:
+					LCD_clear();
+					LCD_printf("Select Mode:"); // Displays the angle selection.
+					LCD_printf("\n1 - Fear");
+					break;
+				case 2:
+					LCD_clear();
+					LCD_printf("Select Mode:"); // Displays the angle selection.
+					LCD_printf("\n2 - Aggression");
+					break;
+				case 3:
+					LCD_clear();
+					LCD_printf("Select Mode:"); // Displays the angle selection.
+					LCD_printf("\n3 - Love");
+					break;
+				case 4:
+					LCD_clear();
+					LCD_printf("Select Mode:"); // Displays the angle selection.
+					LCD_printf("\n4 - Explorer");
+					break;
+				case 5:
+					LCD_clear();
+					LCD_printf("Select Mode:"); // Displays the angle selection.
+					LCD_printf("\n5 - Read Sensors");
+					break;
+				default:
+					LCD_clear();
+					LCD_printf("Select Mode:"); // Displays the angle selection.
+					LCD_printf("\nSW5 to Enter.");
+					break;
 				}
 			}
 			switch(cox){
-				case 1:
-					light_fear();
-					break;
-				case 2:
-					light_aggression();
-					break;
-				case 3:
-					light_love();
-					break;
-				case 4:
-					light_explorer();
-					break;
-				case 5:
-					rightLight = getRightLight();
-					leftLight = getLeftLight();
-					LCD_clear();
-					LCD_printf("%f\n%f", rightLight, leftLight);
-					TMRSRVC_delay(3000);
-					break;
-				default:
-					break;
+			case 1:
+				light_fear();
+				break;
+			case 2:
+				light_aggression();
+				break;
+			case 3:
+				light_love();
+				break;
+			case 4:
+				light_explorer();
+				break;
+			case 5:
+				rightLight = getRightLight();
+				leftLight = getLeftLight();
+				LCD_clear();
+				LCD_printf("%f\n%f", rightLight, leftLight);
+				TMRSRVC_delay(3000);
+				break;
+			default:
+				break;
 			}
-				
+
 		}else if(ATTINY_get_SW_state(ATTINY_SW4)){
 			//
 		}else if(ATTINY_get_SW_state(ATTINY_SW5)){
 			//
 		}
 		// Keeps running.
-    }
-}
-
-
-/*// Function for the aggressive kid.
-void aggressive(){
-	
-	float frontIR = 0;
-	
-	// Obtains the front IR sensor reading
-	frontIR = getFrontIR();
-	
-	//LCD_printf("%f", frontIR);
-	//LCD_clear();
-	
-	// If front IR sensor reads values larger or equal to five, move forward else stop. 
-	if(frontIR >= 5){
-		STEPPER_move_rn(STEPPER_BOTH,
-			STEPPER_FWD, 200, 400,	//Left
-			STEPPER_FWD, 200, 400);	//Right
-	}else{
-		STEPPER_stop(STEPPER_BOTH, STEPPER_BRK_OFF);
-		LCD_clear();
-		LCD_printf("RAWR!");
 	}
-}
-
-// Function for the shy kid.
-void shy(){
-	char sensLimit = 5;
-	char TS;
-	float frontIR = 0;
-	float backIR = 0;
-	float rightIR = 0;
-	float leftIR = 0;
-	char FSS;
-	char BSS;
-	char RSS;
-	char LSS;
-	
-	
-	// Reads the sensors.
-	frontIR = getFrontIR();
-	backIR = getBackIR();
-	rightIR = getRightIR();
-	leftIR = getLeftIR();
-
-	LCD_clear();
-	LCD_printf("%f, %f, %f, %f", frontIR, backIR, rightIR, leftIR);
-
-	// Checks which of the sensors are being read
-	FSS = (sensLimit > frontIR);
-	BSS = (sensLimit > backIR);
-	RSS = (sensLimit > rightIR);
-	LSS = (sensLimit > leftIR);
-
-	// Makes the sum for switch case in Movement_Selector_Executor()
-	TS = FSS + BSS + RSS + LSS;
-		
-	// Calls the Movement_Selector_Executor
-	Movement_Selector_Excecutor(FSS, BSS, RSS, LSS, TS);
-}
-
-*/
-
