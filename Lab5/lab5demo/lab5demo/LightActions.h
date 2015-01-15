@@ -79,4 +79,6 @@ void light_explorer(void){
 
 void light_return(void){
 	while(1){
+		
+	}
 }
