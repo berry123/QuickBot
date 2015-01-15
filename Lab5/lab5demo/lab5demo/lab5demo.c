@@ -57,9 +57,9 @@ void CBOT_main(void)
 	// While loop that keeps the micro controller running begins here:
 	while(1){
 		// Main menu:
-		LCD_printf("SW3: Fear & Aggression");
-		LCD_printf("\nSW4: Love & Explore");
-		LCD_printf("\nSW5: Show Light values");
+		LCD_printf("SW3: Parts 1 & 2");
+		LCD_printf("\nSW4: NA");
+		LCD_printf("\nSW5: NA");
 		LCD_clear();
 
 		// Press SW3 to select one of the kids.
@@ -123,7 +123,14 @@ void CBOT_main(void)
 					light_explorer();
 					break;
 				case 5:
-					// Read sensors
+					while(1){
+						rightLight = getVRightLight();
+						leftLight = getVLeftLight();
+						LCD_clear();
+						LCD_printf("%f\n%f", rightLight, leftLight);
+						LCD_printf("\nRefresh: 100ms");
+						TMRSRVC_delay(100);
+					}
 					break;
 				default:
 					// Nothing
