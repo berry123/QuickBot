@@ -7,7 +7,7 @@ void light_fear(void){
 	LCD_printf("IT BURNS!!\n");
 	LCD_printf("IT BURNS US!!\n");
 	Callibration = ALC();
-	
+
 	while(1){
 		Left_Light = getLeftLight(Callibration);
 		Right_Light = getRightLight(Callibration);
@@ -77,6 +77,42 @@ void light_explorer(void){
 	}
 }
 
+void light_crush(void){
+	float Left_Light, Right_Light, Callibration, frontIR, rightIR, leftIR;
+	char FSS, RSS, LSS;
+	int basespeed = 250;
+	char sensLimit = 5;
+
+	LCD_clear();
+	LCD_printf("I like you...\n");
+	LCD_printf("...but PIC's\n");
+	LCD_printf("are intimidating\n");
+	Callibration = ALC();
+
+	while(1){
+		Left_Light = getLeftLight(Callibration);
+		Right_Light = getRightLight(Callibration);
+		frontIR = getFrontIR();
+		rightIR = getRightIR();
+		leftIR = getLeftIR();
+
+		FSS = (sensLimit > frontIR);
+		RSS = (sensLimit > rightIR);
+		LSS = (sensLimit > leftIR);
+
+		TS = FSS + RSS + LSS;
+
+		if (TS > 0){
+			Movement_Selector_Excecutor(FSS, 0, RSS, LSS, TS);
+		}
+
+		STEPPER_move_rn(STEPPER_BOTH,
+				STEPPER_FWD, ((1-Left_Light)*basespeed), 400,	//Left
+				STEPPER_FWD, ((1-Right_Light)*basespeed), 400);	//Right
+		TMRSRVC_delay(100); // 0.1 Sec duration
+	}
+
+}
 /*void light_return(void){
 	float Left_Light, Right_Light, Calibration;
 	while(1){
