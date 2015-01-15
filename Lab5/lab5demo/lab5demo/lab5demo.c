@@ -57,86 +57,78 @@ void CBOT_main(void)
 	// While loop that keeps the micro controller running begins here:
 	while(1){
 		// Main menu:
-		LCD_printf("SW3: Kids");
-		LCD_printf("\nSW4: Randoms");
-		LCD_printf("\nSW5: Go to goal");
+		LCD_printf("SW3: Fear & Aggression");
+		LCD_printf("\nSW4: Love & Explore");
+		LCD_printf("\nSW5: Show Light values");
 		LCD_clear();
 
 		// Press SW3 to select one of the kids.
 		if (ATTINY_get_SW_state(ATTINY_SW3)) {
-			while(!ATTINY_get_SW_state(ATTINY_SW5)) {
-				//LCD_clear();
-				//LCD_printf("Select Mode:"); // Displays the angle selection.
-				// If SW3 is pressed, the coordinate x is incremented.
-				if(ATTINY_get_SW_state(ATTINY_SW3)) {
-					// If the x value is > 5, it goes back to -5.
+			while(!ATTINY_get_SW_state(ATTINY_SW5)){
+				if(ATTINY_get_SW_state(ATTINY_SW3)){
 					cox++;
 					if(cox > 5){
 						cox = 0;
 					}
-				} else if(ATTINY_get_SW_state(ATTINY_SW4)) {
+				}else if(ATTINY_get_SW_state(ATTINY_SW4)){
 					cox--;
-					if(cox < 0) {
+					if(cox < 0){
 						cox = 5;
 					}
 				}
 				switch(cox){
-				case 1:
-					LCD_clear();
-					LCD_printf("Select Mode:"); // Displays the angle selection.
-					LCD_printf("\n1 - Fear");
-					break;
-				case 2:
-					LCD_clear();
-					LCD_printf("Select Mode:"); // Displays the angle selection.
-					LCD_printf("\n2 - Aggression");
-					break;
-				case 3:
-					LCD_clear();
-					LCD_printf("Select Mode:"); // Displays the angle selection.
-					LCD_printf("\n3 - Love");
-					break;
-				case 4:
-					LCD_clear();
-					LCD_printf("Select Mode:"); // Displays the angle selection.
-					LCD_printf("\n4 - Explorer");
-					break;
-				case 5:
-					LCD_clear();
-					LCD_printf("Select Mode:"); // Displays the angle selection.
-					LCD_printf("\n5 - Read Sensors");
-					break;
-				default:
-					LCD_clear();
-					LCD_printf("Select Mode:"); // Displays the angle selection.
-					LCD_printf("\nSW5 to Enter.");
-					break;
-				}
+					case 1:
+						LCD_clear();
+						LCD_printf("Select Mode:");
+						LCD_printf("\n1 - Fear");
+						break;
+					case 2:
+						LCD_clear();
+						LCD_printf("Select Mode:");
+						LCD_printf("\n2 - Aggression");
+						break;
+					case 3:
+						LCD_clear();
+						LCD_printf("Select Mode:");
+						LCD_printf("\n3 - Love");
+						break;
+					case 4:
+						LCD_clear();
+						LCD_printf("Select Mode:");
+						LCD_printf("\n4 - Explorer");
+						break;
+					case 5:
+						LCD_clear();
+						LCD_printf("Select Mode:");
+						LCD_printf("\n5 - Read Sensors");
+						break;
+					default:
+						LCD_clear();
+						LCD_printf("Select Mode:");
+						LCD_printf("\nMode");
+						break;	
+				}	
 			}
 			switch(cox){
-			case 1:
-				light_fear();
-				break;
-			case 2:
-				light_aggression();
-				break;
-			case 3:
-				light_love();
-				break;
-			case 4:
-				light_explorer();
-				break;
-			case 5:
-				rightLight = getRightLight();
-				leftLight = getLeftLight();
-				LCD_clear();
-				LCD_printf("%f\n%f", rightLight, leftLight);
-				TMRSRVC_delay(3000);
-				break;
-			default:
-				break;
+				case 1:
+					light_fear();
+					break;
+				case 2:
+					light_aggression();
+					break;
+				case 3:
+					light_love();
+					break;
+				case 4:
+					light_explorer();
+					break;
+				case 5:
+					// Read sensors
+					break;
+				default:
+					// Nothing
+					break;
 			}
-
 		}else if(ATTINY_get_SW_state(ATTINY_SW4)){
 			//
 		}else if(ATTINY_get_SW_state(ATTINY_SW5)){
@@ -144,3 +136,4 @@ void CBOT_main(void)
 		}
 		// Keeps running.
 	}
+}
