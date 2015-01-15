@@ -60,7 +60,8 @@ void light_explorer(void){
 	int basespeed = 250;
 
 	LCD_clear();
-	LCD_printf("Find!\n");
+	LCD_printf("Ola!\n");
+	LCD_printf("Me lamo Dora!\n");
 
 	while(1){
 		Left_Light = getLeftLight();
