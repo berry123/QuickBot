@@ -1,16 +1,6 @@
 #define RIGHT_PHOTO ADC_CHAN5
 #define LEFT_PHOTO ADC_CHAN6
 
-float ALC(void){ //Ambiant Light Calibrater
-	float LeftPhoto, RightPhoto;
-	LeftPhoto = getLeftLight(0);
-	RightPhoto = getRightLight(0);
-
-	Calibration = (LeftPhoto + RightPhoto)*5/2;
-
-	return Calibration;
-}
-
 float getLeftLight(float Calibration){
 	float voltage, adj_V;
 	ADC_SAMPLE adcsample;
@@ -44,4 +34,14 @@ float getRightLight(float Calibration){
 	adj_V = (voltage - Calibration)/(5 - Calibration);
 
 	return adj_V;
+}
+
+float ALC(void){ //Ambiant Light Calibrater
+	float LeftPhoto, RightPhoto;
+	LeftPhoto = getLeftLight(0);
+	RightPhoto = getRightLight(0);
+
+	Calibration = (LeftPhoto + RightPhoto)*5/2;
+
+	return Calibration;
 }
