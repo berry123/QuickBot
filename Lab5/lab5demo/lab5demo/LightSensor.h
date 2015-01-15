@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 #define RIGHT_PHOTO ADC_CHAN5
 #define LEFT_PHOTO ADC_CHAN6
 
