@@ -79,7 +79,7 @@ void light_explorer(void){
 
 void light_crush(void){
 	float Left_Light, Right_Light, Callibration, frontIR, rightIR, leftIR;
-	char FSS, RSS, LSS;
+	char FSS, RSS, LSS, TS;
 	int basespeed = 250;
 	char sensLimit = 5;
 
